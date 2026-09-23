@@ -32,9 +32,14 @@
   </script>
 
   <style>
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     body { background-color: #f3f4f6; }
+    summary::-webkit-details-marker { display: none; }
+    
+    /* Barra de rolagem customizada e visível */
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     
     /* Classes ativas e inativas para as abas */
     .tab-active { background-color: #ffffff; color: #1c3d52; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
@@ -51,9 +56,9 @@
     
     <!-- CABEÇALHO COM BOTÃO VOLTAR -->
     <header class="w-full bg-marinha text-white px-4 pt-10 pb-4 flex items-center justify-between shadow-md relative z-20">
-      <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-95" onclick="window.history.back()">
+      <a href="index.html" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-95">
         <span class="material-symbols-rounded text-2xl">arrow_back_ios_new</span>
-      </button>
+      </a>
       <h1 class="text-lg font-bold tracking-wide flex-1 text-center mr-10 uppercase">Controle de Voos</h1>
     </header>
 
@@ -74,21 +79,25 @@
     </div>
 
     <!-- CONTEÚDO ROLÁVEL -->
-    <div class="flex-1 overflow-y-auto no-scrollbar flex flex-col px-4 pb-24 gap-6">
+    <div class="flex-1 overflow-y-auto custom-scrollbar flex flex-col px-4 pb-24 gap-4">
 
       <!-- ==========================================
            ABA 1: CHEGADAS
            ========================================== -->
-      <div id="tab-chegadas" class="flex flex-col gap-6 pt-2">
+      <div id="tab-chegadas" class="flex flex-col gap-4 pt-2">
         
         <!-- DIA: 06/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 06 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              06 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
             <!-- Voo 1 -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Alipio Jorge</h3>
@@ -101,7 +110,7 @@
               </a>
             </div>
             <!-- Voo 2 -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">C Alte (FN) Tonini</h3>
@@ -114,7 +123,7 @@
               </a>
             </div>
             <!-- Voo 3 -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Silvio Luiz</h3>
@@ -127,16 +136,20 @@
               </a>
             </div>
           </div>
-        </div>
+        </details>
 
         <!-- DIA: 07/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 07 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              07 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
             <!-- Voo 1 -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Paulo Ferreira</h3>
@@ -149,7 +162,7 @@
               </a>
             </div>
             <!-- Voo 2 -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Vazquez</h3>
@@ -162,15 +175,20 @@
               </a>
             </div>
           </div>
-        </div>
+        </details>
 
         <!-- DIA: 08/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 08 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              08 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Sra Ana (esposa do DGN)</h3>
@@ -183,7 +201,8 @@
               </a>
             </div>
             
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 2 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Edgar</h3>
@@ -196,7 +215,8 @@
               </a>
             </div>
             
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 3 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Olsen</h3>
@@ -209,7 +229,8 @@
               </a>
             </div>
             
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 4 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">V Alte (RM1) Lima Filho</h3>
@@ -222,21 +243,27 @@
               </a>
             </div>
           </div>
-        </div>
+        </details>
+
       </div>
 
       <!-- ==========================================
            ABA 2: PARTIDAS
            ========================================== -->
-      <div id="tab-partidas" class="hidden flex-col gap-6 pt-2">
+      <div id="tab-partidas" class="hidden flex-col gap-4 pt-2">
         
         <!-- DIA: 11/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 11 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              11 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Paulo Ferreira</h3>
@@ -249,15 +276,20 @@
               </a>
             </div>
           </div>
-        </div>
+        </details>
 
         <!-- DIA: 12/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 12 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              12 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Sílvio Luiz</h3>
@@ -270,7 +302,8 @@
               </a>
             </div>
             
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 2 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Vazquez</h3>
@@ -283,7 +316,8 @@
               </a>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 3 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Edgar</h3>
@@ -296,7 +330,8 @@
               </a>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 4 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">C Alte (FN) Tonini</h3>
@@ -309,7 +344,8 @@
               </a>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 5 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq (FN) Carlos Chagas</h3>
@@ -322,15 +358,20 @@
               </a>
             </div>
           </div>
-        </div>
+        </details>
 
         <!-- DIA: 13/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 13 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              13 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Olsen</h3>
@@ -343,7 +384,8 @@
               </a>
             </div>
             
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+            <!-- Voo 2 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">V Alte (RM1) Lima Filho</h3>
@@ -356,15 +398,20 @@
               </a>
             </div>
           </div>
-        </div>
+        </details>
 
         <!-- DIA: 15/10/2026 -->
-        <div>
-          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 15 de Outubro de 2026
-          </h2>
-          <div class="flex flex-col gap-3">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <summary class="p-4 font-bold text-marinha text-[14px] flex justify-between items-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-dourado text-[20px]">calendar_month</span>
+              15 de Outubro de 2026
+            </div>
+            <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+          </summary>
+          <div class="flex flex-col gap-3 p-4 bg-gray-50/30 border-t border-gray-100">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h3 class="font-bold text-marinha text-[15px]">Alte Esq Alípio Jorge</h3>
@@ -377,14 +424,37 @@
               </button>
             </div>
           </div>
-        </div>
+        </details>
 
       </div>
 
     </div> <!-- Fim do conteúdo rolável -->
+
+    <!-- ==========================================
+         BARRA DE NAVEGAÇÃO INFERIOR
+         ========================================== -->
+    <nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 flex justify-around items-center pt-3 pb-6 px-2 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+      <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">home</span>
+        <span class="text-[10px] font-medium mt-1">Início</span>
+      </a>
+      <a href="#" class="flex flex-col items-center text-gray-400 hover:text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">calendar_today</span>
+        <span class="text-[10px] font-medium mt-1">Programação</span>
+      </a>
+      <a href="voos.html" class="flex flex-col items-center text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">flight_takeoff</span>
+        <span class="text-[10px] font-bold mt-1">Voos</span>
+      </a>
+      <a href="hospedagem.html" class="flex flex-col items-center text-gray-400 hover:text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">domain</span>
+        <span class="text-[10px] font-medium mt-1">Hospedagem</span>
+      </a>
+    </nav>
+
   </div>
 
-  <!-- Script para alternar as abas -->
+  <!-- Script para alternar as abas principais (Chegadas / Partidas) -->
   <script>
     function showTab(tabName) {
       const btnChegadas = document.getElementById('btn-chegadas');
@@ -393,17 +463,13 @@
       const tabPartidas = document.getElementById('tab-partidas');
 
       if (tabName === 'chegadas') {
-        // Atualiza botões
         btnChegadas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-active transition-all';
         btnPartidas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-inactive transition-all';
-        // Atualiza visibilidade
         tabChegadas.style.display = 'flex';
         tabPartidas.style.display = 'none';
       } else {
-        // Atualiza botões
         btnPartidas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-active transition-all';
         btnChegadas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-inactive transition-all';
-        // Atualiza visibilidade
         tabPartidas.style.display = 'flex';
         tabChegadas.style.display = 'none';
       }
