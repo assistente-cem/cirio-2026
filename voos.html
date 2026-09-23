@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voos - Círio 2026</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter (Sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols (Rounded) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            marinha: '#1c3d52',
+            dourado: '#D69E2E',
+            fundo: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    body { background-color: #f3f4f6; }
+    
+    /* Classes ativas e inativas para as abas */
+    .tab-active { background-color: #ffffff; color: #1c3d52; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .tab-inactive { color: #6b7280; }
+    .tab-inactive:hover { color: #1c3d52; }
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen font-sans py-4">
+
+  <!-- ==========================================
+       MOBILE CONTAINER
+       ========================================== -->
+  <div class="bg-fundo w-full max-w-[400px] h-[850px] max-h-[95vh] sm:rounded-[2.5rem] shadow-2xl relative flex flex-col overflow-hidden sm:border-[8px] border-gray-900">
+    
+    <!-- CABEÇALHO COM BOTÃO VOLTAR -->
+    <header class="w-full bg-marinha text-white px-4 pt-10 pb-4 flex items-center justify-between shadow-md relative z-20">
+      <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-95" onclick="window.history.back()">
+        <span class="material-symbols-rounded text-2xl">arrow_back_ios_new</span>
+      </button>
+      <h1 class="text-lg font-bold tracking-wide flex-1 text-center mr-10 uppercase">Controle de Voos</h1>
+    </header>
+
+    <!-- SELETOR DE ABAS (Chegadas / Partidas) -->
+    <div class="px-4 pt-4 pb-2 bg-fundo z-10 sticky top-0">
+      <div class="flex p-1 bg-gray-200/80 rounded-xl">
+        <button id="btn-chegadas" class="flex-1 py-2 text-sm font-bold rounded-lg tab-active transition-all" onclick="showTab('chegadas')">
+          <span class="flex items-center justify-center gap-2">
+            <span class="material-symbols-rounded text-[18px]">flight_land</span> Chegadas
+          </span>
+        </button>
+        <button id="btn-partidas" class="flex-1 py-2 text-sm font-bold rounded-lg tab-inactive transition-all" onclick="showTab('partidas')">
+          <span class="flex items-center justify-center gap-2">
+            <span class="material-symbols-rounded text-[18px]">flight_takeoff</span> Partidas
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTEÚDO ROLÁVEL -->
+    <div class="flex-1 overflow-y-auto no-scrollbar flex flex-col px-4 pb-24 gap-6">
+
+      <!-- ==========================================
+           ABA 1: CHEGADAS
+           ========================================== -->
+      <div id="tab-chegadas" class="flex flex-col gap-6 pt-2">
+        
+        <!-- DIA: 06/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 06 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Alipio Jorge</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2222</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">12:00</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2222" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            <!-- Voo 2 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">C Alte (FN) Tonini</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2006</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">12:00</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2006" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            <!-- Voo 3 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Silvio Luiz</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 1736</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">23:05</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+1736" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA: 07/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 07 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <!-- Voo 1 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Paulo Ferreira</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 1730</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">11:45</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+1730" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            <!-- Voo 2 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Vazquez</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2006</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">12:00</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2006" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA: 08/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 08 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Sra Ana (esposa do DGN)</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2008</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">02:15</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2008" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Edgar</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">LATAM • Voo 4596</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">13:20</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+LATAM+4596" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Olsen</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">TAP • Voo 47</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">21:55</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+TAP+47" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">V Alte (RM1) Lima Filho</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">LATAM • Voo 3706</p>
+                </div>
+                <div class="bg-blue-50 text-marinha px-3 py-1 rounded-lg font-bold text-[14px]">23:35</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+LATAM+3706" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           ABA 2: PARTIDAS
+           ========================================== -->
+      <div id="tab-partidas" class="hidden flex-col gap-6 pt-2">
+        
+        <!-- DIA: 11/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 11 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Paulo Ferreira</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 1731</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">17:05</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+1731" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA: 12/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 12 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Sílvio Luiz</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2009</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">03:00</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2009" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Vazquez</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 9236</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">10:45</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+9236" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Edgar</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2011</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">17:00</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2011" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">C Alte (FN) Tonini</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2011</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">17:00</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2011" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq (FN) Carlos Chagas</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 2007</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">17:05</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+2007" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA: 13/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 13 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Olsen</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">LATAM • Voo 3212</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">17:20</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+LATAM+3212" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">V Alte (RM1) Lima Filho</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo 9202</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">22:25</div>
+              </div>
+              <a href="https://www.google.com/search?q=voo+GOL+9202" target="_blank" class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-marinha transition-colors">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Rastrear voo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIA: 15/10/2026 -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[16px]">calendar_month</span> 15 de Outubro de 2026
+          </h2>
+          <div class="flex flex-col gap-3">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-bold text-marinha text-[15px]">Alte Esq Alípio Jorge</h3>
+                  <p class="text-[12px] font-semibold text-gray-500 mt-0.5">GOL • Voo XXXX</p>
+                </div>
+                <div class="bg-orange-50 text-orange-700 px-3 py-1 rounded-lg font-bold text-[14px]">17:00</div>
+              </div>
+              <button disabled class="mt-1 flex items-center justify-center gap-2 w-full py-2 bg-gray-100 border border-gray-200 rounded-xl text-[12px] font-bold text-gray-400 cursor-not-allowed">
+                <span class="material-symbols-rounded text-[16px]">radar</span> Voo a definir
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- Fim do conteúdo rolável -->
+  </div>
+
+  <!-- Script para alternar as abas -->
+  <script>
+    function showTab(tabName) {
+      const btnChegadas = document.getElementById('btn-chegadas');
+      const btnPartidas = document.getElementById('btn-partidas');
+      const tabChegadas = document.getElementById('tab-chegadas');
+      const tabPartidas = document.getElementById('tab-partidas');
+
+      if (tabName === 'chegadas') {
+        // Atualiza botões
+        btnChegadas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-active transition-all';
+        btnPartidas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-inactive transition-all';
+        // Atualiza visibilidade
+        tabChegadas.style.display = 'flex';
+        tabPartidas.style.display = 'none';
+      } else {
+        // Atualiza botões
+        btnPartidas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-active transition-all';
+        btnChegadas.className = 'flex-1 py-2 text-sm font-bold rounded-lg tab-inactive transition-all';
+        // Atualiza visibilidade
+        tabPartidas.style.display = 'flex';
+        tabChegadas.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

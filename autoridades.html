@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoridades - Círio 2026</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter (Sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols (Rounded) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            marinha: '#1c3d52',
+            dourado: '#D69E2E',
+            fundo: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    body { background-color: #f3f4f6; }
+    summary::-webkit-details-marker { display: none; }
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen font-sans py-4">
+
+  <!-- ==========================================
+       MOBILE CONTAINER
+       ========================================== -->
+  <div class="bg-fundo w-full max-w-[400px] h-[850px] max-h-[95vh] sm:rounded-[2.5rem] shadow-2xl relative flex flex-col overflow-hidden sm:border-[8px] border-gray-900">
+    
+    <!-- CABEÇALHO -->
+    <header class="w-full bg-marinha text-white px-4 pt-10 pb-4 flex items-center justify-between shadow-md relative z-20">
+      <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-95" onclick="window.history.back()">
+        <span class="material-symbols-rounded text-2xl">arrow_back_ios_new</span>
+      </button>
+      <h1 class="text-lg font-bold tracking-wide flex-1 text-center mr-10 uppercase font-sans">Autoridades</h1>
+    </header>
+
+    <!-- CONTEÚDO ROLÁVEL -->
+    <div class="flex-1 overflow-y-auto no-scrollbar flex flex-col p-4 pb-24 gap-4 font-sans">
+
+      <!-- ==========================================
+           CATEGORIA 1: ALMIRANTES DE ESQUADRA
+           ========================================== -->
+      <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden" open>
+        <summary class="p-4 font-serif italic font-bold text-marinha text-lg flex justify-between items-center cursor-pointer select-none bg-blue-50/50">
+          <div class="flex items-center gap-3">
+            <div class="relative w-6 h-6 text-dourado">
+              <span class="material-symbols-rounded absolute top-0 text-[10px] left-[8px]">star</span>
+              <span class="material-symbols-rounded absolute bottom-0 text-[10px] left-[8px]">star</span>
+              <span class="material-symbols-rounded absolute left-0 text-[10px] top-[7px]">star</span>
+              <span class="material-symbols-rounded absolute right-0 text-[10px] top-[7px]">star</span>
+            </div>
+            Almirantes de Esquadra
+          </div>
+          <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+        </summary>
+
+        <div class="flex flex-col">
+          
+          <!-- AE Olsen -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq Marcos Sampaio Olsen</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Comandante da Marinha</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Rosaly Marcella Hage Chahine</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">HT Espadarte - Suíte 1</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">directions_car</span><span class="text-gray-700">Toyota Corolla QVS-3C00</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700">
+                  <p><strong>Ass.:</strong> CC VIANA / CC (T) Caroline Branco</p>
+                  <p><strong>Ajud.:</strong> CC (T) THAÍS</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">drive_eta</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Mot.:</strong> 2°SG-MA Goulart</span>
+                  <a href="tel:21973390076" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 97339-0076</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AE Bettega -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq Arthur Fernando Bettega Corrêa</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Chefe do Estado-Maior da Armada</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Suzeli Sampaio Porto</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">directions_car</span><span class="text-gray-700">Toyota Corolla QVS-3C00</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CC (FN) Albuquerque</span>
+                  <a href="tel:21996125522" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 99612-5522</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AE Carlos Chagas -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq (FN) Carlos Chagas Vianna Braga</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Comandante da Marinha</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Carla Principe Pires C. V. Braga</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">directions_car</span><span class="text-gray-700">Toyota Corolla QVS-3C00</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ajud.:</strong> CC (FN) Marquet</span>
+                  <a href="tel:21996070083" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 99607-0083</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AE Vazquez -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq Eduardo Machado Vazquez</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Comandante de Operações Navais</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Anna Paula de A. M. Dos Santos</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CC Vitor Duarte</span>
+                  <a href="tel:21976851501" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 97685-1501</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AE Sílvio Luís -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq Sílvio Luís dos Santos</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Diretor-Geral de Navegação</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Ana Cristina Joaquim dos Santos</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do CEM-Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CT (AA) Elisiane</span>
+                  <a href="tel:21991378864" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 99137-8864</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AE Paulo César -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq Paulo César B. Ferreira</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Ch. de Operações Conjuntas - EMCFA</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Cristina Maria L. A. Henriques</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do CEM-Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CC Vitor Duarte</span>
+                  <a href="tel:21976851501" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 97685-1501</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AE Alípio Jorge -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">Alte Esq (RM1) Alípio Jorge R. da Silva</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Ex-Comandante do 4º Distrito Naval</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Nome da Esposa</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do Com4°DN</span></div>
+            </div>
+          </div>
+          
+        </div>
+      </details>
+
+      <!-- ==========================================
+           CATEGORIA 2: VICE-ALMIRANTES
+           ========================================== -->
+      <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <summary class="p-4 font-serif italic font-bold text-marinha text-lg flex justify-between items-center cursor-pointer select-none bg-blue-50/50">
+          <div class="flex items-center gap-3">
+             <div class="relative w-6 h-6 text-dourado">
+                <span class="material-symbols-rounded absolute top-0 text-[10px] left-[8px]">star</span>
+                <span class="material-symbols-rounded absolute bottom-0 text-[10px] left-[2px]">star</span>
+                <span class="material-symbols-rounded absolute bottom-0 text-[10px] right-[2px]">star</span>
+             </div>
+            Vice-Almirantes
+          </div>
+          <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+        </summary>
+
+        <div class="flex flex-col">
+          <!-- VA Taulois -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">V Alte (FN) Pedro Luiz Gueiros Taulois</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Comandante da Força de Fuzileiros</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Mirza Barros Pereira</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">HT Espadarte - Suíte 3</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CT (FN) Jheremi Vital</span>
+                  <a href="tel:21981763615" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 98176-3615</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VA Batista -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">V Alte Adriano Marcelino Batista</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Comandante do 4º Distrito Naval</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Cinthia Serrano Marino</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Funcional do Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CT Cura</span>
+                  <a href="tel:91981250005" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (91) 98125-0005</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- VA Lima Filho -->
+          <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">V Alte (RM1) Wilson P. de Lima Filho</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Diretor da ANTAQ</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Nome da Esposa</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">HT Espadarte - Suíte 4</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CT (T) Mônica</span>
+                  <a href="tel:21971065631" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 97106-5631</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ==========================================
+           CATEGORIA 3: CONTRA-ALMIRANTES
+           ========================================== -->
+      <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <summary class="p-4 font-serif italic font-bold text-marinha text-lg flex justify-between items-center cursor-pointer select-none bg-blue-50/50">
+          <div class="flex items-center gap-3">
+             <div class="relative w-6 h-6 text-dourado">
+                <span class="material-symbols-rounded absolute top-[3px] left-0 text-[11px]">star</span>
+                <span class="material-symbols-rounded absolute top-[3px] right-0 text-[11px]">star</span>
+             </div>
+            Contra-Almirantes
+          </div>
+          <span class="material-symbols-rounded transition-transform duration-300 group-open:rotate-180 text-gray-400">expand_more</span>
+        </summary>
+
+        <div class="flex flex-col">
+           <!-- CA Ozório -->
+           <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">C Alte Sérgio Blanco Ozório</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Ch. de Gabinete do Com. da Marinha</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Valeria Lourdes de Brito Ozório</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">HT Espadarte - Suíte 2</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CC (AA) Nilton Cesar</span>
+                  <a href="tel:61982720138" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (61) 98272-0138</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+           <!-- CA Bonotto (Sem esposa no PDF) -->
+           <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">C Alte (EN) Mauro Nicoloso Bonotto</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Coord. Projeto Nuclear da Marinha</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Hotel de Trânsito Veleiro</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> 1° Ten (AA) Marcus Vinícius</span>
+                  <a href="tel:11989147549" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (11) 98914-7549</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+           <!-- CA Tonini -->
+           <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">C Alte (FN) Alexandre Vasconcelos Tonini</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Comandante da Força Aeronaval</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Erica Affonso Peixoto Tonini</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Hotel de Trânsito Veleiro</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> 1º Ten (AFN) Thiago</span>
+                  <a href="tel:22998561937" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (22) 99856-1937</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- CA Luna (Sem cônjuge listado) -->
+           <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">C Alte (Md) Mônica Medeiros Luna</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Diretora do CPMM</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Hotel de Trânsito Veleiro</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> CC (AA) Gil</span>
+                  <a href="tel:21988664896" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (21) 98866-4896</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- CA Carneiro -->
+           <div class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors">
+            <h3 class="font-bold text-marinha text-[16px] leading-tight">C Alte José Fabio Carneiro da Silva</h3>
+            <p class="text-[8px] text-dourado font-bold uppercase tracking-wider mt-0.5">Ch. do Estado-Maior do Com4ºDN</p>
+            <p class="text-[12px] text-marinha font-medium mt-0.5">e Sra. Dária Glaucia Bezerra Jales</p>
+            <div class="mt-3 grid gap-2 text-[13px]">
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">bed</span><span class="text-gray-700">Resid. Func. CEM-Com4°DN</span></div>
+              <div class="flex items-start gap-2"><span class="material-symbols-rounded text-gray-400 text-[16px]">support_agent</span>
+                <div class="text-gray-700 flex flex-col">
+                  <span><strong>Ass.:</strong> 1 Ten (AA) Renato Mendes</span>
+                  <a href="tel:91982660275" class="text-blue-600 font-medium flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">call</span> (91) 98266-0275</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+    </div> <!-- Fim do conteúdo rolável -->
+  </div>
+</body>
+</html>

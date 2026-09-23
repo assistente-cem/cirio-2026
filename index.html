@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Círio 2026 - Comando do 4º Distrito Naval</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter (Sans) e Playfair Display (Serif) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols (Rounded) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            marinha: '#1c3d52',
+            dourado: '#D69E2E',
+            // Cores específicas dos cartões solicitadas
+            card1Start: '#1E3A8A', card1End: '#1c3d52', // Azul Profundo
+            card2Start: '#FF8A65', card2End: '#FF5722', // Coral/Laranja
+            card3Start: '#38B2AC', card3End: '#2C7A7B', // Verde Petróleo/Sálvia
+            card4Start: '#F6E05E', card4End: '#D69E2E', // Dourado/Mostarda
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Ocultar barra de rolagem mantendo a funcionalidade de scroll */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Fundo externo cinza para destacar o mockup mobile centralizado */
+    body { background-color: #f3f4f6; } 
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen font-sans py-4">
+
+  <!-- ==========================================
+       MOBILE CONTAINER (Simulador de Smartphone)
+       ========================================== -->
+  <div class="bg-white w-full max-w-[400px] h-[850px] max-h-[95vh] sm:rounded-[2.5rem] shadow-2xl relative flex flex-col overflow-hidden sm:border-[8px] border-gray-900">
+    
+    <!-- CONTEÚDO ROLÁVEL -->
+    <div class="flex-1 overflow-y-auto no-scrollbar flex flex-col pb-24">
+      
+      <!-- ==========================================
+           1. CABEÇALHO INSTITUCIONAL E LOGO
+           ========================================== -->
+      <header class="w-full bg-white flex flex-col">
+        
+        <!-- Topo Institucional (Alinhado à esquerda) -->
+        <div class="flex items-center px-6 pt-8 pb-4 gap-4">
+          <!-- Espaço reservado para o Brasão -->
+          <div class="w-14 h-14 flex items-center justify-center shrink-0">
+            <img src="brasao.png" alt="Brasão do 4º Distrito Naval" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.innerHTML='<span class=\'text-[10px] text-gray-400 border border-dashed border-gray-300 p-1.5 rounded text-center\'>Brasão</span>'; this.style.display='none';">
+          </div>
+          
+          <!-- Texto Institucional (Títulos e Subtítulos) -->
+          <div class="text-left flex flex-col justify-center">
+            <!-- Fonte maior: 18px -->
+            <h2 class="text-[18px] font-bold text-gray-800 uppercase tracking-widest leading-tight">
+              Comando do<br>4º Distrito Naval
+            </h2>
+            <!-- Fonte 2x menor: 9px -->
+            <p class="text-[9px] font-semibold text-gray-500 uppercase tracking-widest mt-1">
+              Guardião do Portal da Amazônia
+            </p>
+          </div>
+        </div>
+
+        <!-- Logo Oficial do Evento -->
+        <div class="px-6 pb-6 text-center mt-2">
+          <h1 class="text-[2.75rem] font-extrabold tracking-tighter text-marinha leading-none uppercase">
+            Círio
+          </h1>
+          <div class="flex items-baseline justify-center gap-2 -mt-1">
+            <span class="text-2xl font-serif italic font-bold text-dourado">de Nazaré</span>
+            <span class="text-2xl font-extrabold text-marinha">2026</span>
+          </div>
+          <p class="mt-2 text-marinha/80 font-serif italic text-lg tracking-wide">
+            "A fé que navega!"
+          </p>
+        </div>
+
+      </header>
+
+      <!-- Linha de borda divisória nítida -->
+      <hr class="w-full border-t border-gray-200">
+
+      <!-- ==========================================
+           2. GRID PRINCIPAL DE NAVEGAÇÃO (2x2)
+           ========================================== -->
+      <main class="px-6 py-8 flex-grow flex flex-col justify-center bg-white">
+        <div class="grid grid-cols-2 gap-5">
+          
+          <!-- Cartão 1: Autoridades -->
+          <a href="autoridades.html" class="bg-gradient-to-br from-card1Start to-card1End p-5 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-md hover:shadow-lg transition-all active:scale-95 text-white aspect-square border border-white/10 group">
+            <div class="relative w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span class="material-symbols-rounded absolute top-0 text-[16px]">star</span>
+              <span class="material-symbols-rounded absolute bottom-0 text-[16px]">star</span>
+              <span class="material-symbols-rounded absolute left-0 text-[16px]">star</span>
+              <span class="material-symbols-rounded absolute right-0 text-[16px]">star</span>
+            </div>
+            <span class="font-semibold text-sm tracking-wide mt-1">Autoridades</span>
+          </a>
+
+          <!-- Cartão 2: Voo -->
+          <a href="voos.html" class="bg-gradient-to-br from-card2Start to-card2End p-5 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-md hover:shadow-lg transition-all active:scale-95 text-white aspect-square border border-white/10 group">
+            <span class="material-symbols-rounded text-[2.5rem] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform">flight_takeoff</span>
+            <span class="font-semibold text-sm tracking-wide">Voo</span>
+          </a>
+
+          <!-- Cartão 3: Programação (Sem link ainda) -->
+          <a href="#" class="bg-gradient-to-br from-card3Start to-card3End p-5 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-md hover:shadow-lg transition-all active:scale-95 text-white aspect-square border border-white/10 group">
+            <span class="material-symbols-rounded text-[2.5rem] group-hover:scale-110 transition-transform">calendar_today</span>
+            <span class="font-semibold text-sm tracking-wide">Programação</span>
+          </a>
+
+          <!-- Cartão 4: Hospedagem -->
+          <a href="hospedagem.html" class="bg-gradient-to-br from-card4Start to-card4End p-5 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-md hover:shadow-lg transition-all active:scale-95 text-white aspect-square border border-white/10 group">
+            <span class="material-symbols-rounded text-[2.5rem] group-hover:scale-110 transition-transform">domain</span>
+            <span class="font-semibold text-sm tracking-wide">Hospedagem</span>
+          </a>
+
+        </div>
+      </main>
+
+    </div> <!-- Fim do conteúdo rolável -->
+
+    <!-- ==========================================
+         3. BARRA DE NAVEGAÇÃO INFERIOR
+         ========================================== -->
+    <nav class="absolute bottom-0 w-full bg-white border-t border-gray-100 flex justify-around items-center pt-3 pb-6 px-2 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+      
+      <!-- Início (Ativo neste arquivo) -->
+      <a href="index.html" class="flex flex-col items-center text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">home</span>
+        <span class="text-[10px] font-bold mt-1">Início</span>
+      </a>
+
+      <!-- Programação (Sem arquivo ainda) -->
+      <a href="#" class="flex flex-col items-center text-gray-400 hover:text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">calendar_today</span>
+        <span class="text-[10px] font-medium mt-1">Programação</span>
+      </a>
+
+      <!-- Voos -->
+      <a href="voos.html" class="flex flex-col items-center text-gray-400 hover:text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">flight_takeoff</span>
+        <span class="text-[10px] font-medium mt-1">Voos</span>
+      </a>
+
+      <!-- Hospedagem -->
+      <a href="hospedagem.html" class="flex flex-col items-center text-gray-400 hover:text-marinha transition-colors">
+        <span class="material-symbols-rounded text-[26px]">domain</span>
+        <span class="text-[10px] font-medium mt-1">Hospedagem</span>
+      </a>
+      
+    </nav>
+
+  </div>
+</body>
+</html>
