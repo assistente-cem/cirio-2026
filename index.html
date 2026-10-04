@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> PROGRAMA DE EVENTOS DO CÍRIO DE NAZARÉ 2026 </title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#002D5E', dark: '#001D3D', light: '#004085' },
+            gold: { DEFAULT: '#FFBD26', dark: '#e0a10d', light: '#ffe082' }
+          },
+          fontFamily: { 
+            sans: ['Inter', 'sans-serif'],
+            cursive: ['Dancing Script', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-header { background: rgba(0, 29, 61, 0.96); backdrop-filter: blur(12px); }
+  </style>
+</head>
+<body class="h-full bg-slate-50 font-sans text-slate-800 antialiased pb-16">
+
+  <!-- HEADER FIXO COM NAVEGAÇÃO E FILTROS -->
+  <header class="sticky top-0 z-30 glass-header border-b-2 border-gold text-white shadow-lg relative">
+    <div class="absolute top-2 right-3 z-40">
+      <span class="text-[10px] font-mono font-bold text-sky-300/80 bg-white/10 backdrop-blur-sm px-2 py-0.5 rounded-md border border-sky-400/20 shadow-xs">
+        v1.0
+      </span>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between gap-3.5">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center flex-shrink-0">
+            <img src="brasao-4dn.png" alt="Brasão 4ºDN" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <span class="text-[11px] tracking-widest font-black uppercase text-gold block leading-tight">Marinha do Brasil</span>
+            <h1 class="text-xl sm:text-3xl font-cursive text-gold tracking-wide leading-tight">Círio de Nazaré 2026</h1>
+            <p class="text-xs sm:text-sm text-slate-200 font-semibold truncate max-w-[250px] sm:max-w-none">
+              Comando do 4º Distrito Naval - Círio de Nazaré 2026
+            </p>
+          </div>
+        </div>
+        <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0 pr-2 sm:pr-6">
+          <img src="logo-cirio.png" alt="Logo Círio" class="w-full h-full object-contain">
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-navy-dark/95 border-t border-white/10 px-2 sm:px-4">
+      <div class="max-w-5xl mx-auto flex space-x-2 overflow-x-auto py-2.5 no-scrollbar" id="daysTabContainer"></div>
+    </div>
+
+    <div class="bg-navy-dark/90 border-t border-white/10 p-2 sm:p-3 shadow-inner">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-2 font-black text-gold text-xs sm:text-sm uppercase tracking-wider">
+          <i class="fa-solid fa-filter text-gold text-sm"></i>
+          <span>FILTRAR ATIVIDADES POR:</span>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 flex-grow max-w-3xl">
+          <div class="relative">
+            <select id="filterCity" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Cidades</option>
+              <option value="Belém">Belém</option>
+              <option value="Santarém">Santarém-PA</option>
+              <option value="Barcarena">Barcarena</option>
+              <option value="Icoaraci">Icoaraci</option>
+              <option value="Macapá">Macapá-AP</option>
+              <option value="Oiapoque">Oiapoque-AP</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <div class="relative">
+            <select id="filterParticipant" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Participantes</option>
+              <option value="DN-01">DN-01</option>
+              <option value="DN-02">DN-02</option>
+              <option value="Almirantes">Apenas Almirantes</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <div class="relative">
+            <select id="filterUniform" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Uniforme</option>
+              <option value="OP3">OP3</option>
+              <option value="6.6">6.6</option>
+              <option value="5.5">5.5</option>
+              <option value="Passeio">Passeio</option>
+              <option value="TFM">TFM</option>
+              <option value="Casual">Casual</option>
+              <option value="Esporte Amazônico">Esporte Amazônico</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <button onclick="clearFilters()" class="flex items-center justify-center gap-1 px-2.5 py-1.5 bg-white/10 hover:bg-red-500/20 hover:text-red-300 border border-white/20 text-slate-200 font-extrabold text-xs rounded-xl transition active:scale-95">
+            <i class="fa-solid fa-rotate-left text-[10px]"></i>
+            <span>Limpar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-5xl mx-auto px-3 sm:px-4 pt-4">
+    <section class="mb-5 bg-white rounded-2xl shadow-sm border border-slate-200/80 p-2.5 sm:p-4">
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 text-center">
+        <button onclick="openModal('modalAutoridades')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
+          <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
+            <i class="fa-solid fa-user-shield text-lg"></i>
+          </div>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Autoridades</span>
+        </button>
+        
+        <button onclick="openModal('modalAcomodacao')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
+          <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
+            <i class="fa-solid fa-hotel text-lg"></i>
+          </div>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Acomodação</span>
+        </button>
+
+        <button onclick="openModal('modalUniformes')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
+          <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
+            <i class="fa-solid fa-shirt text-lg"></i>
+          </div>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Uniformes</span>
+        </button>
+
+        <button onclick="openModal('modalViaturas')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
+          <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
+            <i class="fa-solid fa-car-side text-lg"></i>
+          </div>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Viaturas</span>
+        </button>
+
+        <button onclick="openModal('modalVoos')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-sky-50 text-sky-700 transition active:scale-95 min-h-[60px] border border-transparent hover:border-sky-200">
+          <div class="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-600 mb-1.5">
+            <i class="fa-solid fa-plane-departure text-lg"></i>
+          </div>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Voos</span>
+        </button>
+
+        <button onclick="openModal('modalContatos')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
+          <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
+            <i class="fa-solid fa-address-book text-lg"></i>
+          </div>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Telefones Úteis</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 sm:p-6 min-h-[420px]">
+      <div class="flex items-center justify-between pb-3.5 mb-5 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <h2 class="text-base sm:text-xl font-black text-navy uppercase tracking-wider" id="currentDayTitle">
+            Cronograma do Dia
+          </h2>
+        </div>
+        <span class="text-xs sm:text-sm font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full" id="eventCountBadge">
+          0 Eventos
+        </span>
+      </div>
+
+      <div class="space-y-4" id="timelineContainer"></div>
+    </section>
+  </main>
+
+  <!-- MODAL: VIATURAS E MOTORISTAS -->
+  <div id="modalViaturas" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-car-side text-gold text-lg"></i>
+          <h3 class="font-extrabold text-lg">Controle de Viaturas e Motoristas</h3>
+        </div>
+        <button onclick="closeModal('modalViaturas')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-3 bg-slate-100 border-b border-slate-200">
+        <div class="relative">
+          <input type="text" id="viaturaFilterInput" oninput="renderViaturasModal()" placeholder="Buscar por autoridade, motorista, viatura ou placa..." class="w-full bg-white text-slate-800 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-navy placeholder:text-slate-400">
+          <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-5" id="viaturasListContainer"></div>
+
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalViaturas')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: VOOS COM FILTROS E AGRUPAMENTO POR DIA E VOO -->
+  <div id="modalVoos" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-plane-departure text-gold text-lg"></i>
+          <h3 class="font-extrabold text-lg">Controle de Voos</h3>
+        </div>
+        <button onclick="closeModal('modalVoos')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-3 bg-slate-100 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div class="relative">
+          <select id="flightFilterDate" onchange="renderVoosModal()" class="w-full bg-white text-slate-800 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-navy appearance-none">
+            <option value="">Todos os Dias</option>
+            <option value="05/10/2026">05/10/2026</option>
+            <option value="06/10/2026">06/10/2026</option>
+            <option value="07/10/2026">07/10/2026</option>
+            <option value="08/10/2026">08/10/2026</option>
+            <option value="09/10/2026">09/10/2026</option>
+            <option value="11/10/2026">11/10/2026</option>
+            <option value="12/10/2026">12/10/2026</option>
+            <option value="13/10/2026">13/10/2026</option>
+            <option value="15/10/2026">15/10/2026</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+        </div>
+
+        <div class="relative">
+          <input type="text" id="flightFilterName" oninput="renderVoosModal()" placeholder="Buscar por nome da pessoa..." class="w-full bg-white text-slate-800 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-navy placeholder:text-slate-400">
+          <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-5" id="voosListContainer"></div>
+
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalVoos')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEMAIS MODAIS -->
+  <div id="modalEvent" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[85vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-calendar-check text-gold text-lg"></i>
+          <h3 class="font-extrabold text-base sm:text-lg">Detalhes da Atividade</h3>
+        </div>
+        <button onclick="closeModal('modalEvent')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 overflow-y-auto space-y-4" id="modalEventContent"></div>
+      <div class="p-4 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalEvent')" class="px-5 py-2.5 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalAutoridades" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-user-shield text-gold text-xl"></i>
+          <h3 class="font-black text-lg">Autoridades</h3>
+        </div>
+        <button onclick="closeModal('modalAutoridades')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-6" id="autoridadesListContainer"></div>
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalAutoridades')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalAcomodacao" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[85vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-hotel text-gold text-lg"></i>
+          <h3 class="font-extrabold text-lg">Controle de Hospedagem</h3>
+        </div>
+        <button onclick="closeModal('modalAcomodacao')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-3" id="hospedagemListContainer"></div>
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalAcomodacao')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalUniformes" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-shirt text-gold text-lg"></i>
+          <h3 class="font-extrabold text-lg">Uniformes e Trajes</h3>
+        </div>
+        <button onclick="closeModal('modalUniformes')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-6 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-4" id="uniformesGridContainer"></div>
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalUniformes')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalContatos" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[85vh] flex flex-col">
+      <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-address-book text-gold text-lg"></i>
+          <h3 class="font-extrabold text-lg">Telefones Úteis</h3>
+        </div>
+        <button onclick="closeModal('modalContatos')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-5" id="contatosListContainer"></div>
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
+        <button onclick="closeModal('modalContatos')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: VISUALIZADOR DE FOTO EM TAMANHO MAIOR -->
+  <div id="modalPhotoViewer" class="fixed inset-0 bg-navy-dark/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeModal('modalPhotoViewer')">
+    <div class="relative max-w-md w-full bg-white rounded-3xl p-4 shadow-2xl flex flex-col items-center border border-gold/40" onclick="event.stopPropagation()">
+      <button onclick="closeModal('modalPhotoViewer')" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-100 hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-700 font-bold transition shadow-md">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <div class="w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-navy shadow-xl mb-4 bg-slate-100 flex items-center justify-center">
+        <img id="modalPhotoViewerImg" src="" alt="Foto Autoridade" class="w-full h-full object-cover">
+      </div>
+      <h3 id="modalPhotoViewerName" class="text-lg sm:text-xl font-black text-navy text-center leading-tight"></h3>
+      <p id="modalPhotoViewerRole" class="text-xs sm:text-sm text-slate-600 font-bold text-center mt-1"></p>
+    </div>
+  </div>
+
+  <script>
+    function isCommercialFlight(flightCode) {
+      if (!flightCode) return false;
+      return !flightCode.toUpperCase().includes("FAB");
+    }
+
+    const schedule = [
+      {
+        date: "2026-10-05",
+        dayLabel: "05 OUT",
+        weekDay: "Segunda-feira",
+        events: [
+          { id: "05.01", time: "07:00", endHour: 8.0, activity: "Café da manhã", location: "Hotel Universal - Santarém", city: "Santarém", uniform: "-", participants: "ComGer e Sra Carla, DN-01, CFS-01 e comitiva", notes: "Café da manhã." },
+          { id: "05.02", time: "08:00", endHour: 8.08, activity: "Deslocamento para a CFS", location: "Capitania dos Portos de Santarém", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Deslocamento." },
+          { id: "05.03", time: "08:05", endHour: 8.25, activity: "Honras de recepção", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Recepção." },
+          { id: "05.04", time: "08:15", endHour: 9.25, activity: "Apresentação sobre o Com4°DN e temas da VAP", location: "CFS - Gabinete", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "O Com4°DN fará a apresentação." },
+          { id: "05.05", time: "09:20", endHour: 9.66, activity: "Visita às instalações da CFS", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Roteiro: Gabinete, Departamento STA, CCCAM e EPM." },
+          { id: "05.06", time: "09:40", endHour: 10.0, activity: "Honras de despedida e deslocamento para Cargill", location: "CFS para Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Despedida." },
+          { id: "05.07", time: "10:00", endHour: 11.5, activity: "Visita às instalações da Cargill", location: "Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Visita Cargill." },
+          { id: "05.08", time: "11:35", endHour: 12.33, activity: "Deslocamento para o hotel Universal", location: "Cargill para Hotel Universal", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Retorno." },
+          { id: "05.09", time: "12:20", endHour: 12.5, activity: "Check-out e deslocamento para o almoço", location: "Hotel Universal - Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Check-out." },
+          { id: "05.10", time: "12:30", endHour: 13.5, activity: "Almoço e deslocamento para o aeroporto", location: "Churrascaria Dois Irmãos", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Almoço." },
+          { id: "05.11", time: "15:20", endHour: 16.75, activity: "Regresso do AE (FN) Carlos Chagas (ComGer) para Belém (Voo GOL 1731)", location: "Aeroporto de Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, comitiva", flight: "G31731", notes: "Voo GOL 1731." },
+          { id: "05.12", time: "20:00", endHour: 22.0, activity: "Jantar", location: "Estação das Docas", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar." }
+        ]
+      },
+      {
+        date: "2026-10-06",
+        dayLabel: "06 OUT",
+        weekDay: "Terça-feira",
+        events: [
+          { id: "06.01", time: "06:00", endHour: 7.0, activity: "Corrida com a tripulação do 2º Batalhão de Operações Ribeirinhas", location: "Rua da Marinha", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02 e tripulação", notes: "Corrida de 5/10 Km na nova Rua da Marinha." },
+          { id: "06.02", time: "07:40", endHour: 8.5, activity: "Café da manhã", location: "Rancho do 2º Batalhão de Operações Ribeirinhas", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02, Tripulação do 2ºBtlOpRib e comitiva", notes: "Café." },
+          { id: "06.03", time: "08:30", endHour: 9.0, activity: "Deslocamento para residência", location: "2ºBtlOpRib para Residência Funcional", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
+          { id: "06.04", time: "09:20", endHour: 9.75, activity: "Deslocamento terrestre para o Terminal Hidroviário de Icoaraci", location: "Residência para Terminal de Icoaraci", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento terrestre." },
+          { id: "06.05", time: "09:45", endHour: 10.16, activity: "Chegada no Terminal de Icoaraci e embarque na LOpRib", location: "Terminal Hidroviário Turístico De Icoaraci", city: "Icoaraci", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN, 2ºBtlOpRib e comitiva", notes: "Embarque LOpRib." },
+          { id: "06.06", time: "10:10", endHour: 12.0, activity: "Embarque no NA PARÁ e início da Demonstração Operativa", location: "Outeiro/PA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Haverá participação do HE." },
+          { id: "06.07", time: "12:00", endHour: 13.5, activity: "Almoço a bordo do NA PARÁ", location: "Baía do Guajará", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN, 2ºBtlOpRib e comitiva", notes: "Regresso para BNVC a bordo do NA PARÁ durante o almoço." },
+          { id: "06.08", time: "12:00", endHour: 12.5, activity: "Chegada do AE Alipio Jorge e CA(FN) Tonini (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "-", participants: "CF Rafael Peixoto", flight: "G32006", notes: "Voo GOL 2006." },
+          { id: "06.09", time: "14:00", endHour: 14.66, activity: "Visita ao NASH Anna Nery", location: "GPNN", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN e comitiva", notes: "Anna Nery." },
+          { id: "06.10", time: "14:50", endHour: 15.83, activity: "Visita às instalações do Centro de Intendência da Marinha em Belém e área de cessão de uso onerosa da BNVC", location: "CeIMBe/BNVC", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Sede Administrativa, PDU, Purificatta e Rancho." },
+          { id: "06.11", time: "16:00", endHour: 17.0, activity: "Deslocamento para a residência", location: "CeIMBe para Residência Funcional", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
+          { id: "06.12", time: "17:20", endHour: 18.0, activity: "Deslocamento para Basílica Santuário de Nossa Senhora de Nazaré", location: "Residência para Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
+          { id: "06.13", time: "18:00", endHour: 20.0, activity: "Missa e cerimônia de abertura do Círio", location: "Basílica de Nazaré / Casa de Plácido", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
+          { id: "06.14", time: "20:30", endHour: 22.5, activity: "Jantar", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Jantar." }
+        ]
+      },
+      {
+        date: "2026-10-07",
+        dayLabel: "07 OUT",
+        weekDay: "Quarta-feira",
+        events: [
+          { id: "07.01", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
+          { id: "07.02", time: "07:30", endHour: 8.25, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
+          { id: "07.03", time: "08:15", endHour: 8.5, activity: "Deslocamento para o CIABA", location: "Residência para CIABA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
+          { id: "07.04", time: "08:30", endHour: 10.5, activity: "Honras de recepção e visita às instalações do CIABA", location: "CIABA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Laboratórios, Galpão de Máquinas, Diesel-Elétrica, CBINC/CAV e Simuladores." },
+          { id: "07.05", time: "10:40", endHour: 10.83, activity: "Deslocamento para o CHN-4", location: "CIABA para CHN-4", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
+          { id: "07.06", time: "10:45", endHour: 11.2, activity: "Chegada da Sra Mirza (Esposa do VA FN Taulois) (Voo LATAM 3228)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "LA3228", notes: "Voo LATAM 3228." },
+          { id: "07.07", time: "10:50", endHour: 12.0, activity: "Honras de recepção e visita às instalações do CHN-4", location: "CHN-4", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Análise de Dados, Cartografia, Pátio de Boias, Paiol, Metalurgia e Carpintaria." },
+          { id: "07.08", time: "11:45", endHour: 12.3, activity: "Chegada do AE Paulo Ferreira (CHOC) (Voo GOL 1730)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "G31730", notes: "Voo GOL 1730." },
+          { id: "07.09", time: "12:00", endHour: 12.5, activity: "Chegada da Sra Cristina (Esposa do AE Paulo Ferreira) (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "CHOC, DN-01", flight: "G32006", notes: "Voo GOL 2006." },
+          { id: "07.10", time: "12:00", endHour: 12.5, activity: "Chegada do AE Vazquez (CON) (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "G32006", notes: "Voo GOL 2006." },
+          { id: "07.11", time: "12:40", endHour: 14.0, activity: "Almoço", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Almoço." },
+          { id: "07.12", time: "14:00", endHour: 18.0, activity: "Tarde Livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
+          { id: "07.13", time: "18:30", endHour: 19.0, activity: "Deslocamento para o Com4°DN", location: "Residência para Com4ºDN", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Deslocamento." },
+          { id: "07.14", time: "19:00", endHour: 21.5, activity: "Cerimônia do Sesquicentenário da sede do Comando do 4º Distrito Naval", location: "Comando do 4° Distrito Naval", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Sesquicentenário." },
+          { id: "07.15", time: "23:35", endHour: 24.2, activity: "Chegada do AE Sílvio Luís e CA Ozório (CheGab CM) (Voo LATAM 3706)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3706", notes: "Voo LATAM 3706." }
+        ]
+      },
+      {
+        date: "2026-10-08",
+        dayLabel: "08 OUT",
+        weekDay: "Quinta-feira",
+        events: [
+          { id: "08.01", time: "02:15", endHour: 3.0, activity: "Chegada da Sra Ana (Esposa do AE Sílvio Luís) (Voo GOL 2008)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "OP3", participants: "DGN e DN-01", flight: "G32008", notes: "Voo GOL 2008." },
+          { id: "08.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
+          { id: "08.03", time: "07:30", endHour: 8.33, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
+          { id: "08.04", time: "08:20", endHour: 10.0, activity: "VAP: Viagem a Macapá", location: "Base Aérea de Belém", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DGN, DN-02 e comitiva", notes: "Viagem." },
+          { id: "08.05", time: "08:20", endHour: 8.5, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Deslocamento." },
+          { id: "08.06", time: "08:30", endHour: 9.5, activity: "Embarque na lancha e deslocamento fluvial para Barcarena", location: "GPNN", city: "Belém", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Deslocamento fluvial." },
+          { id: "08.07", time: "09:30", endHour: 11.5, activity: "Visita ao Porto de Vila do Conde e às instalações da Hidrovias do Brasil", location: "Barcarena", city: "Barcarena", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Barcarena." },
+          { id: "08.08", time: "11:30", endHour: 12.0, activity: "Retorno para o cais da praticagem", location: "Barcarena para Praticagem", city: "Barcarena", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Retorno." },
+          { id: "08.09", time: "12:00", endHour: 12.5, activity: "Chegada da Sra Valeria Ozório (Esposa do CA Ozório) (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e CheGab CM", flight: "G32006", notes: "Voo GOL 2006." },
+          { id: "08.10", time: "12:30", endHour: 14.0, activity: "Almoço", location: "Sede da Praticagem Barra do Pará", city: "Belém", uniform: "-", participants: "Almirantes", notes: "Almoço." },
+          { id: "08.11", time: "17:20", endHour: 18.0, activity: "Deslocamento para Basílica Santuário de Nossa Senhora de Nazaré", location: "Residência para Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
+          { id: "08.12", time: "18:00", endHour: 20.0, activity: "Missa de apresentação do Manto de Nossa Senhora de Nazaré", location: "Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
+          { id: "08.13", time: "20:30", endHour: 22.5, activity: "Noite árabe", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Jantar temático." },
+          { id: "08.14", time: "21:30", endHour: 21.9, activity: "Deslocamento para o aeroporto", location: "Residência para Aeroporto", city: "Belém", uniform: "-", participants: "DN-01", notes: "Deslocamento." },
+          { id: "08.15", time: "21:55", endHour: 22.5, activity: "Chegada do AE Olsen (CM) (Voo TAP 47)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "TP47", notes: "Voo TAP 47." },
+          { id: "08.16", time: "23:35", endHour: 24.2, activity: "Chegada do AE Edgar (DGMM) (Voo LATAM 3706)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "OP3", participants: "DN-01, CMG Barros", flight: "LA3706", notes: "Voo LATAM 3706." },
+          { id: "08.17", time: "23:35", endHour: 24.2, activity: "Chegada do VA(RM1) Lima Filho (Voo LATAM 3706)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, CMG Barros", flight: "LA3706", notes: "Voo LATAM 3706." }
+        ]
+      },
+      {
+        date: "2026-10-09",
+        dayLabel: "09 OUT",
+        weekDay: "Sexta-feira",
+        events: [
+          { id: "09.01", time: "00:15", endHour: 1.0, activity: "Chegada do VA(FN) Taulois (Voo LATAM 3232)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01 e BtlOpRib-01", flight: "LA3232", notes: "Voo LATAM 3232." },
+          { id: "09.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
+          { id: "09.03", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
+          { id: "09.04", time: "10:00", endHour: 10.33, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Deslocamento." },
+          { id: "09.05", time: "10:20", endHour: 11.0, activity: "Embarque na lancha e deslocamento fluvial para o restaurante Porto Combu", location: "GPNN", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Embarque lancha." },
+          { id: "09.06", time: "10:50", endHour: 11.3, activity: "Chegada do AE Bettega (CEMA) (Voo LATAM 3877)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01", flight: "LA3877", notes: "Voo LATAM 3877." },
+          { id: "09.07", time: "11:00", endHour: 16.0, activity: "Almoço", location: "Porto Combu", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Porto Combu." },
+          { id: "09.08", time: "11:55", endHour: 12.5, activity: "Chegada do CA(EN) Bonotto (Voo AZUL 4840)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "AD4840", notes: "Voo AZUL 4840." },
+          { id: "09.09", time: "13:20", endHour: 14.0, activity: "Chegada da CA(Md) Mônica Luna (Voo LATAM 4596)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "LA4596", notes: "Voo LATAM 4596." },
+          { id: "09.10", time: "16:30", endHour: 17.0, activity: "Embarque na lancha e regresso para a residência funcional e HT", location: "Porto Combu", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Regresso Combu." },
+          { id: "09.11", time: "17:00", endHour: 17.5, activity: "VAP: Pouso em Belém e deslocamento para residência funcional do Com4°DN", location: "Oiapoque x Belém", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DGN, DN-02 e comitiva", notes: "Regresso e encerramento da VAP." },
+          { id: "09.12", time: "17:30", endHour: 18.0, activity: "Chegada na residência funcional e HT", location: "Vila Naval Espadarte", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Acomodação." },
+          { id: "09.13", time: "19:30", endHour: 22.0, activity: "Noite Paraense", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+        ]
+      },
+      {
+        date: "2026-10-10",
+        dayLabel: "10 OUT",
+        weekDay: "Sábado",
+        events: [
+          { id: "10.01", time: "06:30", endHour: 6.75, activity: "Embarque no NHo Garnier Sampaio", location: "Base Naval de Val de Cães", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Embarque." },
+          { id: "10.02", time: "06:45", endHour: 7.75, activity: "Suspender do NHo Garnier Sampaio", location: "Base Naval de Val de Cães", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Navegação." },
+          { id: "10.03", time: "07:45", endHour: 8.5, activity: "Atracação em Icoaraci", location: "Icoaraci", city: "Icoaraci", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Icoaraci." },
+          { id: "10.04", time: "08:30", endHour: 9.0, activity: "Chegada da Imagem Peregrina de Nossa Senhora de Nazaré", location: "NHo Garnier Sampaio", city: "Icoaraci", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Recepção Imagem." },
+          { id: "10.05", time: "09:00", endHour: 11.0, activity: "Desatracação e Início da Romaria Fluvial", location: "NHo Garnier Sampaio", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Romaria Fluvial." },
+          { id: "10.06", time: "11:00", endHour: 12.5, activity: "Atracação do NHo Garnier Sampaio", location: "Escadinha do Cais do Porto", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Escadinha." },
+          { id: "10.07", time: "12:30", endHour: 13.5, activity: "Atracação do NHo Garnier Sampaio", location: "BNVC", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Retorno BNVC." },
+          { id: "10.08", time: "13:30", endHour: 16.0, activity: "Almoço na Residência do Sr. Carlos Nascimento", location: "Edifício Premium 92 - Apt 1201", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Almoço." },
+          { id: "10.09", time: "17:00", endHour: 19.5, activity: "Transladação do Círio de Nazaré", location: "Prédio da Diretoria do Paysandu Sport Club", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Evento facultativo." },
+          { id: "10.10", time: "20:00", endHour: 22.5, activity: "Noite italiana", location: "Clube Naval Espadarte", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+        ]
+      },
+      {
+        date: "2026-10-11",
+        dayLabel: "11 OUT",
+        weekDay: "Domingo",
+        events: [
+          { id: "11.01", time: "06:20", endHour: 6.83, activity: "Deslocamento fluvial para a CDP", location: "Trânsito Fluvial", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Deslocamento." },
+          { id: "11.02", time: "06:50", endHour: 7.0, activity: "Chegada na CDP", location: "CDP", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Chegada CDP." },
+          { id: "11.03", time: "07:00", endHour: 11.66, activity: "Círio Terrestre", location: "CDP", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Procissão do Círio." },
+          { id: "11.04", time: "11:40", endHour: 12.3, activity: "Regresso do CA(EN) Bonotto e CA(Md) Mônica Luna (Voo LATAM 3231)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "LA3231", notes: "Voo LATAM 3231." },
+          { id: "11.05", time: "12:00", endHour: 12.83, activity: "Deslocamento fluvial para a Residência", location: "CDP para Residência", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Retorno." },
+          { id: "11.06", time: "13:30", endHour: 16.0, activity: "Almoço na Residência do Sr. Kleber Menezes", location: "Edifício Premium 92 - Apt 1501", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Almoço." },
+          { id: "11.07", time: "16:00", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
+          { id: "11.08", time: "17:05", endHour: 17.75, activity: "Regresso do AE Paulo Ferreira (Voo GOL 1731)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01 e DN-02", flight: "G31731", notes: "Voo GOL 1731." },
+          { id: "11.09", time: "17:15", endHour: 17.9, activity: "Regresso do VA(FN) Taulois (Voo LATAM 3212)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3212", notes: "Voo LATAM 3212." },
+          { id: "11.10", time: "19:30", endHour: 22.0, activity: "Comida de boteco", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+        ]
+      },
+      {
+        date: "2026-10-12",
+        dayLabel: "12 OUT",
+        weekDay: "Segunda-feira",
+        events: [
+          { id: "12.01", time: "03:00", endHour: 3.8, activity: "Regresso do AE Sílvio Luís (DGN) (Voo GOL 2009)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G32009", notes: "Voo GOL 2009." },
+          { id: "12.02", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
+          { id: "12.03", time: "10:45", endHour: 11.5, activity: "Regresso do AE Vazquez (CON) (Voo GOL 9236)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G39236", notes: "Voo GOL 9236." },
+          { id: "12.04", time: "12:00", endHour: 14.0, activity: "Almoço", location: "Clube Naval Espadarte", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Almoço." },
+          { id: "12.05", time: "14:00", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
+          { id: "12.06", time: "17:00", endHour: 17.75, activity: "Regresso do AE Edgar e CA (FN) Tonini (Voo GOL 2011)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01 e DN-02", flight: "G32011", notes: "Voo GOL 2011." },
+          { id: "12.07", time: "17:05", endHour: 17.8, activity: "Regresso do AE FN Carlos Chagas (Voo GOL 2007)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G32007", notes: "Voo GOL 2007." },
+          { id: "12.08", time: "19:30", endHour: 22.0, activity: "Noite da Brasa", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+        ]
+      },
+      {
+        date: "2026-10-13",
+        dayLabel: "13 OUT",
+        weekDay: "Terça-feira",
+        events: [
+          { id: "13.01", time: "04:25", endHour: 5.2, activity: "Regresso do AE Bettega e Sra Suzeli (Voo LATAM 3705)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3705", notes: "Voo LATAM 3705." },
+          { id: "13.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
+          { id: "13.03", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
+          { id: "13.04", time: "10:30", endHour: 10.66, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02 e comitiva", notes: "Deslocamento." },
+          { id: "13.05", time: "10:40", endHour: 11.66, activity: "Visita ao NASH Anna Nery", location: "Grupamento de Patrulha Naval do Norte", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02, GPNN e comitiva", notes: "Anna Nery." },
+          { id: "13.06", time: "12:00", endHour: 13.5, activity: "Almoço", location: "Grupamento de Patrulha Naval do Norte", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02, GPNN e comitiva", notes: "Almoço." },
+          { id: "13.07", time: "13:30", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
+          { id: "13.08", time: "17:20", endHour: 18.0, activity: "Regresso do AE Olsen e CA Ozório (Voo LATAM 3212)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3212", notes: "Voo LATAM 3212." },
+          { id: "13.09", time: "22:25", endHour: 23.2, activity: "Regresso do VA(RM1) Lima Filho (Voo GOL 9202)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G39202", notes: "Voo GOL 9202." }
+        ]
+      },
+      {
+        date: "2026-10-15",
+        dayLabel: "15 OUT",
+        weekDay: "Quinta-feira",
+        events: [
+          { id: "15.01", time: "17:00", endHour: 18.0, activity: "Regresso do AE(RM1) Alípio Jorge", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", notes: "Regresso de voo." }
+        ]
+      }
+    ];
+
+    const voosPorDiaEVoo = [
+      {
+        data: "05/10/2026",
+        voos: [
+          {
+            tipo: "Partida", cia: "GOL", voo: "G31731", horario: "15:20",
+            passageiros: [
+              { pessoa: "Alte Esq (FN) Carlos Chagas", acompanhante: "Sra. Carla" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "06/10/2026",
+        voos: [
+          {
+            tipo: "Chegada", cia: "GOL", voo: "G32006", horario: "12:00",
+            passageiros: [
+              { pessoa: "Alte Esq (RM1) Alípio Jorge", acompanhante: "-" },
+              { pessoa: "C Alte (FN) Tonini", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "07/10/2026",
+        voos: [
+          {
+            tipo: "Chegada", cia: "LATAM", voo: "LA3228", horario: "10:45",
+            passageiros: [
+              { pessoa: "Sra. Mirza (Esposa do VA FN Taulois)", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "GOL", voo: "G31730", horario: "11:45",
+            passageiros: [
+              { pessoa: "Alte Esq Paulo Ferreira", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "GOL", voo: "G32006", horario: "12:00",
+            passageiros: [
+              { pessoa: "Sra. Cristina (Esposa do AE Paulo Ferreira)", acompanhante: "-" },
+              { pessoa: "Alte Esq Vazquez", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "LATAM", voo: "LA3706", horario: "23:35",
+            passageiros: [
+              { pessoa: "Alte Esq Sílvio Luís", acompanhante: "-" },
+              { pessoa: "C Alte Ozório", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "08/10/2026",
+        voos: [
+          {
+            tipo: "Chegada", cia: "GOL", voo: "G32008", horario: "02:15",
+            passageiros: [
+              { pessoa: "Sra Ana (Esposa do AE Sílvio Luís)", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "GOL", voo: "G32006", horario: "12:00",
+            passageiros: [
+              { pessoa: "Sra. Valeria Ozório (Esposa do CA Ozório)", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "TAP", voo: "TP47", horario: "21:55",
+            passageiros: [
+              { pessoa: "Alte Esq Olsen", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "LATAM", voo: "LA3706", horario: "23:35",
+            passageiros: [
+              { pessoa: "Alte Esq Edgar", acompanhante: "-" },
+              { pessoa: "V Alte (RM1) Lima Filho", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "09/10/2026",
+        voos: [
+          {
+            tipo: "Chegada", cia: "LATAM", voo: "LA3232", horario: "00:15",
+            passageiros: [
+              { pessoa: "V Alte (FN) Taulois", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "LATAM", voo: "LA3877", horario: "10:50",
+            passageiros: [
+              { pessoa: "Alte Esq Bettega", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "AZUL", voo: "AD4840", horario: "11:55",
+            passageiros: [
+              { pessoa: "C Alte (EN) Bonotto", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Chegada", cia: "LATAM", voo: "LA4596", horario: "13:20",
+            passageiros: [
+              { pessoa: "C Alte (Md) Mônica Luna", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "11/10/2026",
+        voos: [
+          {
+            tipo: "Partida", cia: "LATAM", voo: "LA3231", horario: "11:40",
+            passageiros: [
+              { pessoa: "C Alte (EN) Bonotto", acompanhante: "-" },
+              { pessoa: "C Alte (Md) Mônica Luna", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "GOL", voo: "G31731", horario: "17:05",
+            passageiros: [
+              { pessoa: "Alte Esq Paulo Ferreira", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "LATAM", voo: "LA3212", horario: "17:15",
+            passageiros: [
+              { pessoa: "V Alte (FN) Taulois", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "12/10/2026",
+        voos: [
+          {
+            tipo: "Partida", cia: "GOL", voo: "G32009", horario: "03:00",
+            passageiros: [
+              { pessoa: "Alte Esq Sílvio Luís", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "GOL", voo: "G39236", horario: "10:45",
+            passageiros: [
+              { pessoa: "Alte Esq Vazquez", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "GOL", voo: "G32011", horario: "17:00",
+            passageiros: [
+              { pessoa: "Alte Esq Edgar", acompanhante: "-" },
+              { pessoa: "C Alte (FN) Tonini", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "GOL", voo: "G32007", horario: "17:05",
+            passageiros: [
+              { pessoa: "Alte Esq (FN) Carlos Chagas", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "13/10/2026",
+        voos: [
+          {
+            tipo: "Partida", cia: "LATAM", voo: "LA3705", horario: "04:25",
+            passageiros: [
+              { pessoa: "Alte Esq Bettega", acompanhante: "Sra. Suzeli" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "LATAM", voo: "LA3212", horario: "17:20",
+            passageiros: [
+              { pessoa: "Alte Esq Olsen", acompanhante: "-" },
+              { pessoa: "C Alte Ozório", acompanhante: "-" }
+            ]
+          },
+          {
+            tipo: "Partida", cia: "GOL", voo: "G39202", horario: "22:25",
+            passageiros: [
+              { pessoa: "V Alte (RM1) Lima Filho", acompanhante: "-" }
+            ]
+          }
+        ]
+      },
+      {
+        data: "15/10/2026",
+        voos: [
+          {
+            tipo: "Partida", cia: "GOL", voo: "G3-GOL", horario: "17:00",
+            passageiros: [
+              { pessoa: "Alte Esq (RM1) Alípio Jorge", acompanhante: "-" }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const autoridadesHierarquicas = [
+      {
+        categoria: "Almirantes de Esquadra",
+        autoridades: [
+          {
+            foto: "olsen.png",
+            autoridade: "Alte Esq Marcos Sampaio Olsen",
+            cargo: "Comandante da Marinha",
+            esposa: "Sra. Rosaly Marcella Hage Chahine",
+            chegada: "08/10/2026 (Voo TAP47 às 21:55)",
+            partida: "13/10/2026 (Voo LA3212 às 17:20)",
+            estadia: "Hotel de Trânsito do Espadarte - Suíte 1",
+            viatura: "Toyota Hilux SW4 Blindada",
+            placa: "Blindada",
+            motorista: "1°SG-FN ALFAIA",
+            telMotorista: "(21) 98026-9388",
+            assistentes: [
+              { cargo: "Secretário Militar", nome: "CMG Bruno Vieira", tel: "(61) 99308-1982" },
+              { cargo: "Assistente", nome: "CC (T) Caroline Branco", tel: "(21) 99871-8613" },
+              { cargo: "Assistente", nome: "CC Viana", tel: "" },
+              { cargo: "Ajudante de Ordens", nome: "CC (T) Thaís", tel: "(21) 99806-5639" },
+              { cargo: "Ajudante de Ordens", nome: "CC (FN) Andrade", tel: "(61) 99271-5801" },
+              { cargo: "Ajudante de Ordens", nome: "CT (IM) Jerônimo", tel: "(61) 99536-1509" }
+            ]
+          },
+          {
+            foto: "bettega.png",
+            autoridade: "Alte Esq Arthur Fernando Bettega Corrêa",
+            cargo: "Chefe do Estado-Maior da Armada",
+            esposa: "Sra. Suzeli Sampaio Porto",
+            chegada: "09/10/2026 (Voo LATAM 3877 às 10:50)",
+            partida: "13/10/2026 (Voo LA3705 às 04:25)",
+            estadia: "Residência Funcional do Com4°DN",
+            viatura: "Toyota Corolla",
+            placa: "RWY-6C87",
+            motorista: "2°SG-MA GOULART",
+            telMotorista: "(21) 97339-0076",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC (AA) Amaro", tel: "(61) 99301-9332" }
+            ]
+          },
+          {
+            foto: "carlos-chagas.png",
+            autoridade: "Alte Esq (FN) Carlos Chagas Vianna Braga",
+            cargo: "Comandante-Geral do Corpo de Fuzileiros Navais",
+            esposa: "Sra. Carla Principe Pires Chagas Vianna Braga",
+            chegada: "05/10/2026 (Voo GOL 1731 às 15:20)",
+            partida: "12/10/2026 (Voo G32007 às 17:05)",
+            estadia: "Residência Funcional do Com4°DN",
+            viatura: "Toyota Corolla",
+            placa: "Oficial",
+            motorista: "2°SG-FN-MO NERIGLISSOR",
+            telMotorista: "(21) 99505-8552",
+            assistentes: [
+              { cargo: "Ajudante de Ordens", nome: "CC (FN) Marquet", tel: "(21) 99607-0083" }
+            ]
+          },
+          {
+            foto: "vazquez.png",
+            autoridade: "Alte Esq Eduardo Machado Vazquez",
+            cargo: "Comandante de Operações Navais",
+            esposa: "Sra. Anna Paula de Araújo Martins dos Santos",
+            chegada: "07/10/2026 (Voo GOL 2006 às 12:00)",
+            partida: "12/10/2026 (Voo G39236 às 10:45)",
+            estadia: "Residência Funcional do Com4°DN",
+            viatura: "Toyota Corolla",
+            placa: "SZF-4C02",
+            motorista: "1°SG-EL JHONATA",
+            telMotorista: "(61) 99196-6674",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC Vitor Duarte", tel: "(21) 97685-1501" }
+            ]
+          },
+          {
+            foto: "edgar.png",
+            autoridade: "Alte Esq Edgar Luiz Siqueira Barbosa",
+            cargo: "Diretor-Geral do Material da Marinha",
+            esposa: "Sra. Geórgia Paula Reis González Barbosa",
+            chegada: "08/10/2026 (Voo LATAM 3706 às 23:35)",
+            partida: "12/10/2026 (Voo G32011 às 17:00)",
+            estadia: "Acomodação Extra-MB",
+            viatura: "Volkswagen Virtus",
+            placa: "TXB-4G35",
+            motorista: "2°SG-CN GUILHERME",
+            telMotorista: "(21) 96939-7244",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC Rabetim", tel: "(21) 99948-7821" }
+            ]
+          },
+          {
+            foto: "silvio-luis.png",
+            autoridade: "Alte Esq Sílvio Luís dos Santos",
+            cargo: "Diretor-Geral de Navegação",
+            esposa: "Sra. Ana Cristina Joaquim dos Santos",
+            chegada: "07/10/2026 (Voo LATAM 3706 às 23:35)",
+            partida: "12/10/2026 (Voo G32009 às 03:00)",
+            estadia: "Hotel de Trânsito do Espadarte - Suíte 3",
+            viatura: "Toyota Corolla",
+            placa: "TVR 5E56",
+            motorista: "2°SG-MO FABIO MARQUES",
+            telMotorista: "(91) 98321-2152",
+            assistentes: [
+              { cargo: "Assistente", nome: "CT (AA) Elisiane", tel: "(21) 99137-8864" }
+            ]
+          },
+          {
+            foto: "paulo-ferreira.png",
+            autoridade: "Alte Esq Paulo César Bittencourt Ferreira",
+            cargo: "Chefe de Operações Conjuntas do EMCFA",
+            esposa: "Sra. Cristina Maria Loureiro Aguiar Henriques",
+            chegada: "07/10/2026 (Voo GOL 1730 às 11:45)",
+            partida: "11/10/2026 (Voo G31731 às 17:05)",
+            estadia: "Residência Funcional do CEM-Com4°DN",
+            viatura: "Toyota Corolla",
+            placa: "TVR 5E46",
+            motorista: "2°SG-FN ADIELSON",
+            telMotorista: "(21) 97958-5160",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC Guimarães Araújo", tel: "(61) 99973-6059" }
+            ]
+          },
+          {
+            foto: "alipio-jorge.png",
+            autoridade: "Alte Esq (RM1) Alípio Jorge Rodrigues da Silva",
+            cargo: "Ex-Comandante do 4º Distrito Naval",
+            esposa: "Sra. Maria Teresa Couto Silva",
+            chegada: "06/10/2026 (Voo GOL 2006 às 12:00)",
+            partida: "15/10/2026 (Voo GOL às 17:00)",
+            estadia: "Acomodação Extra-MB",
+            viatura: "Volkswagen Virtus",
+            placa: "TEQ 9C33",
+            motorista: "1°SG-AM EWERTON",
+            telMotorista: "(91) 98097-0797",
+            assistentes: []
+          }
+        ]
+      },
+      {
+        categoria: "Vice-Almirantes",
+        autoridades: [
+          {
+            foto: "taulois.png",
+            autoridade: "V Alte (FN) Pedro Luiz Gueiros Taulois",
+            cargo: "Comandante da Força de Fuzileiros da Esquadra",
+            esposa: "Sra. Mirza Barros Pereira",
+            chegada: "09/10/2026 (Voo LATAM 3232 às 00:15)",
+            partida: "11/10/2026 (Voo LA3212 às 17:15)",
+            estadia: "Residência Funcional do CEM-Com4°DN",
+            viatura: "Volkswagen Virtus",
+            placa: "TXB-4F53",
+            motorista: "2°SG-FN PONTES",
+            telMotorista: "(91) 99212-7274",
+            assistentes: [
+              { cargo: "Assistente", nome: "CT (FN) Jheremi Vital", tel: "(21) 98176-3615" }
+            ]
+          },
+          {
+            foto: "batista.png",
+            autoridade: "V Alte Adriano Marcelino Batista",
+            cargo: "Comandante do 4º Distrito Naval",
+            esposa: "Sra. Cinthia Serrano Marino",
+            chegada: "Residente / Anfitrião",
+            partida: "-",
+            estadia: "Residência Funcional do Com4°DN",
+            viatura: "Toyota Corolla",
+            placa: "RWY-6D17",
+            motorista: "SO-MG Coelho",
+            telMotorista: "(21) 99777-7668",
+            assistentes: [
+              { cargo: "Assistente", nome: "CT Cura", tel: "(91) 98125-0005" }
+            ]
+          },
+          {
+            foto: "gois.png",
+            autoridade: "V Alte (FN) Elson Luiz de Oliveira Góis",
+            cargo: "Assessor Especial Militar do Ministério da Defesa",
+            esposa: "Sra. Ângela dos Santos Côrtes Góis",
+            chegada: "A confirmar",
+            partida: "A confirmar",
+            estadia: "Hotel de Trânsito do Veleiro",
+            viatura: "Chevrolet Ônix",
+            placa: "TXB 4F53",
+            motorista: "CB-MA PESSANHA",
+            telMotorista: "(21) 98164-8513",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC (FN) Moreira", tel: "(61) 98122-7647" }
+            ]
+          },
+          {
+            foto: "lima-filho.png",
+            autoridade: "V Alte (RM1) Wilson Pereira de Lima Filho",
+            cargo: "Diretor da Agência Nacional de Transportes Aquaviários (ANTAQ)",
+            esposa: "Sra. Valéria Pereira de Lima",
+            chegada: "08/10/2026 (Voo LATAM 3706 às 23:35)",
+            partida: "13/10/2026 (Voo G39202 às 22:25)",
+            estadia: "Hotel de Trânsito do Espadarte - Suíte 4",
+            viatura: "Volkswagen Virtus",
+            placa: "TEQ 9C33",
+            motorista: "3°SG VASCONCELOS",
+            telMotorista: "(91) 98119-6614",
+            assistentes: [
+              { cargo: "Assessora", nome: "CC (T) Vanessa Fighera", tel: "(61) 98524-9888" }
+            ]
+          }
+        ]
+      },
+      {
+        categoria: "Contra-Almirantes",
+        autoridades: [
+          {
+            foto: "ozorio.png",
+            autoridade: "C Alte Sérgio Blanco Ozório",
+            cargo: "Chefe do Gabinete do Comandante da Marinha",
+            esposa: "Sra. Valéria Lourdes de Brito Ozório",
+            chegada: "07/10/2026 (Voo LATAM 3706 às 23:35)",
+            partida: "13/10/2026 (Voo LA3212 às 17:20)",
+            estadia: "Hotel de Trânsito do Espadarte - Suíte 2",
+            viatura: "Chevrolet Ônix",
+            placa: "TXB 4G35",
+            motorista: "3°SG-FR HARLEY",
+            telMotorista: "(21) 99739-2369",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC (AA) Nilton Cesar", tel: "(61) 98272-0138" }
+            ]
+          },
+          {
+            foto: "bonotto.png",
+            autoridade: "C Alte (EN) Mauro Nicoloso Bonotto",
+            cargo: "Coordenador do Projeto Nuclear da Marinha",
+            esposa: "-",
+            chegada: "09/10/2026 (Voo AZUL 4840 às 11:55)",
+            partida: "11/10/2026 (Voo LA3231 às 11:40)",
+            estadia: "Acomodação Extra-MB",
+            viatura: "Fiat Cronos",
+            placa: "TVY 2A35",
+            motorista: "CB FRANCO",
+            telMotorista: "(91) 98292-2334",
+            assistentes: [
+              { cargo: "Assistente", nome: "1° Ten (AA) Marcus Vinícius", tel: "(11) 98914-7549" }
+            ]
+          },
+          {
+            foto: "tonini.png",
+            autoridade: "C Alte (FN) Alexandre Vasconcelos Tonini",
+            cargo: "Comandante da Força Aeronaval",
+            esposa: "Sra. Érica Affonso Peixoto Tonini",
+            chegada: "06/10/2026 (Voo GOL 2006 às 12:00)",
+            partida: "12/10/2026 (Voo G32011 às 17:00)",
+            estadia: "Hotel de Trânsito do Veleiro",
+            viatura: "Nissan Sentra",
+            placa: "RWY-6D47",
+            motorista: "3°SG-FN ESTHEFAN",
+            telMotorista: "(21) 96722-1244",
+            assistentes: [
+              { cargo: "Assistente", nome: "CT (FN) Felipe Rodrigues", tel: "(22) 98802-5514" }
+            ]
+          },
+          {
+            foto: "monica-luna.png",
+            autoridade: "C Alte (Md) Mônica Medeiros Luna",
+            cargo: "Diretora do Centro de Perícias Médicas da Marinha",
+            esposa: "-",
+            chegada: "09/10/2026 (Voo LATAM 4596 às 13:20)",
+            partida: "11/10/2026 (Voo LA3231 às 11:40)",
+            estadia: "Acomodação Extra-MB",
+            viatura: "Fiat Cronos",
+            placa: "TVY 2A35",
+            motorista: "CB FRANCO",
+            telMotorista: "(91) 98292-2334",
+            assistentes: [
+              { cargo: "Assistente", nome: "CC (AA) Gil", tel: "(21) 98866-4896" }
+            ]
+          },
+          {
+            foto: "jose-fabio.png",
+            autoridade: "C Alte José Fabio Carneiro da Silva",
+            cargo: "Chefe do Estado-Maior do Comando do 4º Distrito Naval",
+            esposa: "Sra. Dária Gláucia Bezerra Jales",
+            chegada: "Residente / Sede",
+            partida: "-",
+            estadia: "Residência Funcional CEM-Com4°DN",
+            viatura: "Fiat Cronos",
+            placa: "TVT-1C26",
+            motorista: "SO-CP Rafael Lima",
+            telMotorista: "(91) 98329-3991",
+            assistentes: [
+              { cargo: "Assistente", nome: "1º Ten (AA) Renato Mendes", tel: "(91) 98266-0275" }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const logistics = {
+      hospedagem: [
+        { autoridade: "Alte Esq OLSEN", estadias: [{ cidade: "Belém-PA", local: "Hotel de Trânsito do Espadarte - Suíte 1", periodo: "08 a 13OUT" }] },
+        { autoridade: "Alte Esq(FN) CARLOS CHAGAS", estadias: [{ cidade: "Santarém-PA", local: "Hotel Universal", periodo: "03 a 05OUT" }, { cidade: "Belém-PA", local: "Residência Funcional do Com4ºDN", periodo: "05 a 08OUT e 09 a 12OUT" }, { cidade: "Macapá-AP", local: "Hotel do Forte", periodo: "08 a 09OUT" }] },
+        { autoridade: "Alte Esq VAZQUEZ", estadias: [{ cidade: "Belém-PA", local: "Residência Funcional do Com4ºDN", periodo: "07 a 12OUT" }] },
+        { autoridade: "Alte Esq SÍLVIO LUÍS", estadias: [{ cidade: "Belém-PA", local: "Hotel de Trânsito do Espadarte", periodo: "07 a 08OUT e 09 a 12OUT" }, { cidade: "Macapá-AP", local: "Hotel do Forte", periodo: "08 a 09OUT" }] },
+        { autoridade: "Alte Esq PAULO FERREIRA", estadias: [{ cidade: "Belém-PA", local: "Residência Funcional do CEM-Com4ºDN", periodo: "07 a 11OUT" }] },
+        { autoridade: "V Alte BATISTA", estadias: [{ cidade: "Santarém-PA", local: "Hotel Universal", periodo: "02 a 05OUT" }] },
+        { autoridade: "C Alte JOSÉ FABIO", estadias: [{ cidade: "Macapá-AP", local: "Hotel do Forte", periodo: "08 a 09OUT" }] }
+      ],
+      uniformes: [
+        { nome: "OP3", file: "op3.png" }, { nome: "6.6", file: "6.6.png" }, { nome: "Passeio", file: "passeio.png" },
+        { nome: "TFM", file: "tfm.png" }, { nome: "Casual", file: "casual.png" }, { nome: "5.5", file: "5.5.png" },
+        { nome: "Esporte Amazônico", file: "esporte-amazonico.png" }
+      ],
+      telefonesUteis: [
+        {
+          categoria: "COMANDO DO 4º DISTRITO NAVAL",
+          itens: [
+            { nome: "V Alte ADRIANO MARCELINO BATISTA", cargo: "Comandante do 4º Distrito Naval", tel: "(91) 98266-0201" },
+            { nome: "C Alte JOSÉ FABIO CARNEIRO DA SILVA", cargo: "Chefe do Estado-Maior do Com4ºDN", tel: "(91) 98266-0233" }
+          ]
+        },
+        {
+          categoria: "TITULARES DE OM",
+          itens: [
+            { nome: "CMG MERCÊS", cargo: "Capitania dos Portos do Amapá (CPAP)", tel: "(96) 99114-1071" },
+            { nome: "CF CHARLES AMORIM", cargo: "Capitania Fluvial de Santarém (CFS)", tel: "(93) 99122-5501" },
+            { nome: "CT (AA) ALEX", cargo: "Agência Fluvial de Oiapoque (AgOiapoque)", tel: "(96) 98400-6686" }
+          ]
+        },
+        {
+          categoria: "ASSISTENTES E AJUDANTE DE ORDENS",
+          itens: [
+            { nome: "CT CURA", cargo: "Assistente do Com4ºDN", tel: "(91) 98125-0005" },
+            { nome: "CT (AA) FRANCO", cargo: "Ajudante de Ordens do Com4ºDN", tel: "(91) 98266-0283" },
+            { nome: "1T (AA) MENDES", cargo: "Assistente do Chefe do Estado-Maior do Com4ºDN", tel: "(91) 98266-0275" }
+          ]
+        }
+      ]
+    };
+
+    let selectedDayIndex = 0;
+    let activeCityFilter = "";
+    let activeParticipantFilter = "";
+    let activeUniformFilter = "";
+
+    function cleanPhone(p) { return p ? p.replace(/\D/g, '') : ''; }
+    function getMapsLink(loc) {
+      if (!loc || loc === "-") return "#";
+      const cleanLoc = loc.toLowerCase().includes("belém") || loc.toLowerCase().includes("santarém") || loc.toLowerCase().includes("macapá") || loc.toLowerCase().includes("oiapoque") || loc.toLowerCase().includes("barcarena") || loc.toLowerCase().includes("icoaraci") ? loc : `${loc}, Pará - Brasil`;
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanLoc)}`;
+    }
+    function getFlightTrackerLink(flightCode) {
+      if (!flightCode) return "#";
+      return `https://flightaware.com/live/flight/${encodeURIComponent(flightCode.replace(/\s+/g, ''))}`;
+    }
+
+    function autoSelectToday() {
+      const today = new Date();
+      const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      const foundIndex = schedule.findIndex(item => item.date === todayISO);
+      selectedDayIndex = foundIndex !== -1 ? foundIndex : 0;
+    }
+
+    function autoSelectFlightFilterDate() {
+      const today = new Date();
+      const todayFormatted = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+      const filterSelect = document.getElementById('flightFilterDate');
+      if (filterSelect) {
+        const optionExists = Array.from(filterSelect.options).some(opt => opt.value === todayFormatted);
+        if (optionExists) {
+          filterSelect.value = todayFormatted;
+        }
+      }
+    }
+
+    function openPhotoViewer(photoPath, name, role) {
+      const modal = document.getElementById('modalPhotoViewer');
+      const img = document.getElementById('modalPhotoViewerImg');
+      const nameEl = document.getElementById('modalPhotoViewerName');
+      const roleEl = document.getElementById('modalPhotoViewerRole');
+      
+      if (!modal || !img) return;
+
+      img.src = photoPath;
+      img.onerror = function() {
+        this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23002D5E' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
+      };
+
+      if (nameEl) nameEl.innerText = name || '';
+      if (roleEl) roleEl.innerText = role || '';
+
+      openModal('modalPhotoViewer');
+    }
+
+    function formatAcompanhanteAutoridade(esposa) {
+      if (!esposa || esposa === '-') return '';
+      const text = esposa.trim();
+      const cleanName = text.replace(/^(sra\.|sra|dona)\s*/i, '');
+      return `<p class="text-[16px] sm:text-[18px] font-black text-navy leading-snug"><i class="fa-solid fa-user-group text-gold-dark mr-1.5 text-xs"></i>Acompanhado da Sra. ${cleanName}</p>`;
+    }
+
+    function formatAcompanhanteVoo(acompanhante) {
+      if (!acompanhante || acompanhante === '-') return '';
+      const text = acompanhante.trim();
+      const isFemale = text.toLowerCase().startsWith('sra.') || text.toLowerCase().startsWith('sra ') || text.toLowerCase().startsWith('dona ');
+      
+      if (isFemale) {
+        const cleanName = text.replace(/^(sra\.|sra|dona)\s*/i, '');
+        return `<h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">Acompanhado da Sra. ${cleanName}</h4>`;
+      }
+      
+      return `<h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">Acompanhante: ${text}</h4>`;
+    }
+
+    function matchEventFilter(evt) {
+      if (activeCityFilter && (!evt.city || !evt.city.toLowerCase().includes(activeCityFilter.toLowerCase()))) return false;
+      if (activeParticipantFilter) {
+        const parts = evt.participants ? evt.participants.toLowerCase() : '';
+        const filterLower = activeParticipantFilter.toLowerCase();
+        if (filterLower === 'dn-01' && !parts.includes('dn-01') && !parts.includes('almirantes')) return false;
+        if (filterLower === 'dn-02' && !parts.includes('dn-02') && !parts.includes('almirantes')) return false;
+        if (filterLower === 'almirantes' && !parts.includes('almirantes')) return false;
+      }
+      if (activeUniformFilter) {
+        const uniformStr = evt.uniform ? evt.uniform.toLowerCase() : '';
+        if (!uniformStr.includes(activeUniformFilter.toLowerCase())) return false;
+      }
+      return true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      autoSelectToday();
+      renderTabs();
+      renderTimeline();
+      renderModalsData();
+      autoSelectFlightFilterDate();
+      renderVoosModal();
+      renderViaturasModal();
+      setInterval(renderTimeline, 60000);
+    });
+
+    function applyFilters() {
+      activeCityFilter = document.getElementById('filterCity').value;
+      activeParticipantFilter = document.getElementById('filterParticipant').value;
+      activeUniformFilter = document.getElementById('filterUniform').value;
+      const currentDayEvents = schedule[selectedDayIndex].events.filter(matchEventFilter);
+      if (currentDayEvents.length === 0) {
+        const firstAvailableIndex = schedule.findIndex(day => day.events.some(matchEventFilter));
+        if (firstAvailableIndex !== -1) selectedDayIndex = firstAvailableIndex;
+      }
+      renderTabs();
+      renderTimeline();
+    }
+
+    function clearFilters() {
+      document.getElementById('filterCity').value = "";
+      document.getElementById('filterParticipant').value = "";
+      document.getElementById('filterUniform').value = "";
+      activeCityFilter = ""; activeParticipantFilter = ""; activeUniformFilter = "";
+      renderTabs(); renderTimeline();
+    }
+
+    function renderTabs() {
+      const tabContainer = document.getElementById('daysTabContainer');
+      if (!tabContainer) return;
+      tabContainer.innerHTML = schedule.map((day, idx) => {
+        const hasMatchingEvents = day.events.some(matchEventFilter);
+        const isActive = idx === selectedDayIndex && hasMatchingEvents;
+        if (!hasMatchingEvents) {
+          return `
+            <button disabled class="flex-1 min-w-[120px] px-3.5 py-2.5 rounded-xl font-black text-xs sm:text-sm text-center flex flex-col items-center justify-center border bg-slate-800/40 text-slate-500 border-slate-700/30 cursor-not-allowed opacity-50">
+              <span class="text-[10px] tracking-wider uppercase font-bold text-slate-500">${day.weekDay}</span>
+              <span class="text-sm sm:text-base font-black">${day.dayLabel}</span>
+            </button>
+          `;
+        }
+        return `
+          <button onclick="switchDay(${idx})" class="flex-1 min-w-[120px] px-3.5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all text-center flex flex-col items-center justify-center border ${
+            isActive ? 'bg-gold text-navy-dark border-gold shadow-md font-extrabold scale-100' : 'bg-white/10 text-slate-200 border-white/10 hover:bg-white/20'
+          }">
+            <span class="text-[10px] tracking-wider uppercase font-extrabold ${isActive ? 'text-navy-dark/80' : 'text-slate-300'}">${day.weekDay}</span>
+            <span class="text-sm sm:text-base font-black">${day.dayLabel}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function switchDay(index) {
+      selectedDayIndex = index;
+      renderTabs();
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const dayData = schedule[selectedDayIndex];
+      const container = document.getElementById('timelineContainer');
+      const titleEl = document.getElementById('currentDayTitle');
+      const countEl = document.getElementById('eventCountBadge');
+
+      if (!container || !dayData) return;
+      if (titleEl) titleEl.innerText = `${dayData.weekDay.toUpperCase()} — ${dayData.dayLabel}`;
+
+      const now = new Date();
+      const currentHours = now.getHours() + (now.getMinutes() / 60);
+      const isToday = now.toISOString().split('T')[0] === dayData.date;
+      const filteredEvents = dayData.events.filter(matchEventFilter);
+
+      if (countEl) countEl.innerText = `${filteredEvents.length} Atividades`;
+
+      if (filteredEvents.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 border border-slate-200 rounded-2xl text-slate-500 font-bold text-xs sm:text-sm">
+            <i class="fa-solid fa-filter-circle-xmark text-2xl text-slate-400 mb-2 block"></i>
+            Nenhum evento encontrado para os filtros selecionados neste dia.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filteredEvents.map((evt) => {
+        const [h, m] = evt.time.split(':').map(Number);
+        const eventStartHour = h + (m / 60);
+        const isCurrent = isToday && currentHours >= eventStartHour && currentHours < evt.endHour;
+
+        return `
+          <div class="group">
+            <div class="p-4 sm:p-5 rounded-2xl border transition-all ${
+              isCurrent ? 'bg-red-50/70 border-red-300 shadow-md ring-2 ring-red-200' : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm'
+            }">
+              <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-base sm:text-lg font-black text-navy font-mono bg-navy/5 px-3 py-1 rounded-lg border border-navy/10">
+                    ${evt.time}
+                  </span>
+                  ${evt.city ? `
+                    <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                      <i class="fa-solid fa-city text-[10px] text-slate-400 mr-1"></i>${evt.city}
+                    </span>
+                  ` : ''}
+                  ${isCurrent ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase bg-red-600 text-white animate-pulse">AGORA</span>` : ''}
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  ${evt.uniform && evt.uniform !== '-' ? `
+                    <button onclick="openModal('modalUniformes')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gold/20 border border-gold/40 text-navy-dark text-xs sm:text-sm font-extrabold hover:bg-gold/30 transition">
+                      <i class="fa-solid fa-shirt text-amber-600 text-xs"></i>
+                      <span>${evt.uniform}</span>
+                    </button>
+                  ` : ''}
+                  <button onclick="showEventDetails('${evt.id}')" title="Mais informações" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-navy hover:text-white text-navy flex items-center justify-center transition active:scale-95 border border-slate-200 shadow-sm">
+                    <i class="fa-solid fa-circle-info text-base"></i>
+                  </button>
+                </div>
+              </div>
+
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug mb-2.5">
+                ${evt.activity}
+              </h3>
+
+              <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-600">
+                ${evt.location ? `
+                  <a href="${getMapsLink(evt.location)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-slate-800 font-bold hover:text-navy hover:underline transition bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200">
+                    <i class="fa-solid fa-location-dot text-red-500"></i>
+                    <span class="truncate max-w-[200px] sm:max-w-xs">${evt.location}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400"></i>
+                  </a>
+                ` : ''}
+
+                ${evt.flight && isCommercialFlight(evt.flight) ? `
+                  <a href="${getFlightTrackerLink(evt.flight)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white font-black text-xs sm:text-sm transition shadow-md hover:shadow-lg ring-2 ring-sky-300 active:scale-95">
+                    <i class="fa-solid ${evt.activity.toLowerCase().includes('chegada') ? 'fa-plane-arrival' : 'fa-plane-departure'} text-amber-300 animate-pulse"></i>
+                    <span>Rastrear Voo (${evt.flight})</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                  </a>
+                ` : ''}
+              </div>
+
+              ${evt.participants ? `
+                <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2 text-xs sm:text-sm text-slate-600">
+                  <i class="fa-solid fa-users text-navy/60"></i>
+                  <span class="font-semibold text-slate-700">Participantes:</span>
+                  <span class="truncate text-slate-600 font-medium">${evt.participants}</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderViaturasModal() {
+      const container = document.getElementById('viaturasListContainer');
+      if (!container) return;
+
+      const filterText = document.getElementById('viaturaFilterInput')?.value.toLowerCase().trim() || '';
+
+      const groupedFiltered = autoridadesHierarquicas.map(cat => {
+        const filteredAuts = cat.autoridades.filter(v => {
+          if (!filterText) return true;
+          return v.autoridade.toLowerCase().includes(filterText) ||
+                 v.cargo.toLowerCase().includes(filterText) ||
+                 v.viatura.toLowerCase().includes(filterText) ||
+                 v.placa.toLowerCase().includes(filterText) ||
+                 v.motorista.toLowerCase().includes(filterText);
+        });
+
+        if (filteredAuts.length === 0) return null;
+
+        return {
+          categoria: cat.categoria,
+          autoridades: filteredAuts
+        };
+      }).filter(Boolean);
+
+      if (groupedFiltered.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 border border-slate-200 rounded-2xl text-slate-500 font-bold text-xs sm:text-sm">
+            <i class="fa-solid fa-car-rear text-2xl text-slate-400 mb-2 block"></i>
+            Nenhuma viatura ou motorista encontrado com os critérios pesquisados.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = groupedFiltered.map(cat => `
+        <div class="space-y-3">
+          <h4 class="text-xs sm:text-sm font-black text-navy uppercase tracking-wider border-b-2 border-gold/40 pb-1">
+            ${cat.categoria}
+          </h4>
+          <div class="space-y-3">
+            ${cat.autoridades.map(v => `
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3 shadow-sm hover:border-slate-300 transition">
+                <div class="border-b border-slate-200 pb-2">
+                  <h5 class="text-base sm:text-lg font-black text-navy">${v.autoridade}</h5>
+                  <p class="text-xs text-slate-600 font-bold">${v.cargo}</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div class="bg-white p-2.5 rounded-xl border border-slate-200/80 space-y-1">
+                    <span class="font-black text-navy uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-car mr-1 text-amber-500"></i>Viatura & Placa</span>
+                    <p class="font-black text-slate-900">${v.viatura}</p>
+                    <p class="font-bold text-slate-600 font-mono">Placa: <span class="text-navy">${v.placa}</span></p>
+                  </div>
+
+                  <div class="bg-white p-2.5 rounded-xl border border-slate-200/80 flex items-center justify-between gap-2">
+                    <div>
+                      <span class="text-[10px] font-black uppercase text-slate-500 block"><i class="fa-solid fa-id-card-clip mr-1 text-sky-600"></i>Motorista</span>
+                      <p class="font-black text-slate-900">${v.motorista}</p>
+                      <span class="text-[11px] font-mono font-bold text-navy block">${v.telMotorista}</span>
+                    </div>
+                    ${v.telMotorista ? `
+                      <div class="flex items-center gap-1">
+                        <a href="tel:${cleanPhone(v.telMotorista)}" class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar para Motorista">
+                          <i class="fa-solid fa-phone text-xs"></i>
+                        </a>
+                        <a href="https://wa.me/55${cleanPhone(v.telMotorista)}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp Motorista">
+                          <i class="fa-brands fa-whatsapp text-sm"></i>
+                        </a>
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderVoosModal() {
+      const container = document.getElementById('voosListContainer');
+      if (!container) return;
+
+      const filterDate = document.getElementById('flightFilterDate')?.value || '';
+      const filterName = document.getElementById('flightFilterName')?.value.toLowerCase().trim() || '';
+
+      const filteredByDay = voosPorDiaEVoo.map(dayObj => {
+        if (filterDate && dayObj.data !== filterDate) return null;
+
+        const matchingVoos = dayObj.voos.filter(v => {
+          if (!filterName) return true;
+          return v.passageiros.some(p => 
+            p.pessoa.toLowerCase().includes(filterName) || 
+            (p.acompanhante && p.acompanhante.toLowerCase().includes(filterName))
+          );
+        });
+
+        if (matchingVoos.length === 0) return null;
+
+        return {
+          data: dayObj.data,
+          voos: matchingVoos
+        };
+      }).filter(Boolean);
+
+      if (filteredByDay.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 border border-slate-200 rounded-2xl text-slate-500 font-bold text-xs sm:text-sm">
+            <i class="fa-solid fa-plane-slash text-2xl text-slate-400 mb-2 block"></i>
+            Nenum voo encontrado com os critérios pesquisados.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filteredByDay.map(dayObj => `
+        <div class="space-y-3">
+          <div class="sticky top-0 z-10 bg-slate-200/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-slate-300 flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-black text-navy uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-regular fa-calendar-days text-gold-dark"></i> DIA ${dayObj.data}
+            </span>
+            <span class="text-[11px] font-bold text-slate-600 bg-white px-2 py-0.5 rounded-md border border-slate-300">
+              ${dayObj.voos.length} Voo(s)
+            </span>
+          </div>
+
+          <div class="space-y-3 pl-1 sm:pl-2">
+            ${dayObj.voos.map(v => {
+              const isArrival = v.tipo === 'Chegada';
+              const flightIcon = isArrival ? 'fa-plane-arrival' : 'fa-plane-departure';
+              const badgeColor = isArrival ? 'bg-emerald-600' : 'bg-amber-600';
+
+              return `
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3 shadow-sm hover:border-slate-300 transition">
+                  <div class="flex items-center justify-between flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-black px-2.5 py-1 rounded ${badgeColor} text-white uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid ${flightIcon}"></i> ${v.tipo}
+                      </span>
+                      <span class="text-xs font-black px-2.5 py-1 rounded bg-sky-700 text-white font-mono">
+                        ${v.cia} ${v.voo}
+                      </span>
+                    </div>
+                    <span class="text-sm sm:text-base font-black text-navy font-mono bg-amber-100 text-navy-dark px-3 py-1 rounded-xl border-2 border-gold shadow-sm flex items-center gap-1.5">
+                      <i class="fa-regular fa-clock text-gold-dark"></i>${v.horario}
+                    </span>
+                  </div>
+
+                  <div class="space-y-2 pt-1 border-t border-slate-200/60">
+                    ${v.passageiros.map(p => `
+                      <div class="bg-white p-3 rounded-xl border border-slate-200/80 space-y-1">
+                        <h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">${p.pessoa}</h4>
+                        ${p.acompanhante && p.acompanhante !== '-' ? `
+                          ${formatAcompanhanteVoo(p.acompanhante)}
+                        ` : ''}
+                      </div>
+                    `).join('')}
+                  </div>
+
+                  ${isCommercialFlight(v.voo) ? `
+                    <a href="${getFlightTrackerLink(v.voo)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white font-black text-xs transition shadow-md active:scale-95">
+                      <i class="fa-solid ${flightIcon} text-amber-300"></i>
+                      <span>Rastrear Voo (${v.voo})</span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderModalsData() {
+      const autoridadesContainer = document.getElementById('autoridadesListContainer');
+      if (autoridadesContainer) {
+        autoridadesContainer.innerHTML = autoridadesHierarquicas.map(cat => `
+          <div class="space-y-3">
+            <h4 class="text-sm sm:text-base font-black text-navy uppercase tracking-wider border-b-2 border-gold/50 pb-1">
+              ${cat.categoria}
+            </h4>
+            <div class="space-y-4">
+              ${cat.autoridades.map(aut => {
+                const photoSrc = aut.foto ? `fotos-autoridades/${aut.foto}` : 'fotos-autoridades/default.png';
+                return `
+                  <div class="bg-white border-2 border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+                    <div class="border-b border-slate-100 pb-3 flex items-center gap-3.5 sm:gap-4">
+                      <button onclick="openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md flex-shrink-0 bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10">
+                        <img src="${photoSrc}" alt="${aut.autoridade}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+                      </button>
+
+                      <div class="flex-grow min-w-0">
+                        <h5 class="text-[18px] sm:text-[20px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
+                        <p class="text-xs sm:text-sm text-slate-600 font-semibold mb-1">${aut.cargo}</p>
+                        ${aut.esposa && aut.esposa !== '-' ? `
+                          <div class="mt-1">
+                            ${formatAcompanhanteAutoridade(aut.esposa)}
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="font-black text-sky-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-arrival mr-1"></i>Informações de Chegada</span>
+                        <p class="font-bold text-slate-800">${aut.chegada}</p>
+                      </div>
+
+                      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="font-black text-amber-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-departure mr-1"></i>Informações de Partida</span>
+                        <p class="font-bold text-slate-800">${aut.partida}</p>
+                      </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
+                      <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
+                        <i class="fa-solid fa-hotel text-amber-500"></i>
+                        <span>Estadia / Hospedagem</span>
+                      </div>
+                      <p class="font-bold text-slate-800">${aut.estadia}</p>
+                    </div>
+
+                    ${aut.assistentes && aut.assistentes.length > 0 ? `
+                      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
+                        <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
+                          <i class="fa-solid fa-user-tie text-sky-600"></i>
+                          <span>Assistentes & Ajudantes de Ordens</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          ${aut.assistentes.map(ast => `
+                            <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between gap-2">
+                              <div>
+                                <span class="text-[10px] font-black uppercase text-slate-500 block">${ast.cargo}</span>
+                                <p class="font-bold text-slate-900">${ast.nome}</p>
+                                <span class="text-[11px] font-mono font-bold text-navy block">${ast.tel || 'Contato N/I'}</span>
+                              </div>
+                              ${ast.tel ? `
+                                <div class="flex items-center gap-1">
+                                  <a href="tel:${cleanPhone(ast.tel)}" class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar">
+                                    <i class="fa-solid fa-phone text-[10px]"></i>
+                                  </a>
+                                  <a href="https://wa.me/55${cleanPhone(ast.tel)}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp">
+                                    <i class="fa-brands fa-whatsapp text-xs"></i>
+                                  </a>
+                                </div>
+                              ` : ''}
+                            </div>
+                          `).join('')}
+                        </div>
+                      </div>
+                    ` : ''}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const hospedagemContainer = document.getElementById('hospedagemListContainer');
+      if (hospedagemContainer) {
+        hospedagemContainer.innerHTML = logistics.hospedagem.map(h => `
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2 shadow-sm">
+            <h4 class="text-base sm:text-lg font-black text-navy border-b border-slate-200 pb-1">${h.autoridade}</h4>
+            <ul class="space-y-2 pt-1">
+              ${h.estadias.map(est => `
+                <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
+                  <span class="text-navy font-black text-base leading-none mt-0.5">•</span>
+                  <div>
+                    <span class="font-extrabold text-navy">${est.cidade}:</span>
+                    <span class="font-bold text-slate-800">${est.local}</span>
+                    <span class="text-slate-600 font-medium block sm:inline sm:ml-1">(Período: <strong class="text-slate-900 font-bold">${est.periodo}</strong>)</span>
+                  </div>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `).join('');
+      }
+
+      const uniformesContainer = document.getElementById('uniformesGridContainer');
+      if (uniformesContainer) {
+        uniformesContainer.innerHTML = logistics.uniformes.map(u => `
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3 shadow-sm flex flex-col items-center text-center">
+            <h4 class="text-base sm:text-lg font-black text-navy uppercase tracking-wider">${u.nome}</h4>
+            <div class="w-full h-48 bg-white rounded-xl overflow-hidden border border-slate-300 flex items-center justify-center relative">
+              <img src="uniformes/${u.file}" alt="${u.nome}" class="w-full h-full object-contain p-2" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+              <div class="hidden w-full h-full bg-white flex flex-col items-center justify-center p-4 text-center text-slate-400 font-bold text-xs">
+                <i class="fa-solid fa-shirt text-3xl mb-2 text-slate-300 block"></i>
+                <span>Imagem (uniformes/${u.file})</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const contatosContainer = document.getElementById('contatosListContainer');
+      if (contatosContainer) {
+        contatosContainer.innerHTML = logistics.telefonesUteis.map(cat => `
+          <div class="space-y-3">
+            <h4 class="text-xs sm:text-sm font-black text-navy uppercase tracking-wider border-b-2 border-gold/40 pb-1">${cat.categoria}</h4>
+            <div class="space-y-2">
+              ${cat.itens.map(item => `
+                <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between gap-3">
+                  <div>
+                    <h5 class="text-xs sm:text-sm font-black text-slate-900">${item.nome}</h5>
+                    <p class="text-[11px] sm:text-xs text-slate-600 font-medium">${item.cargo}</p>
+                    <span class="text-xs font-mono font-bold text-navy block mt-0.5">${item.tel}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 flex-shrink-0">
+                    <a href="tel:${cleanPhone(item.tel)}" class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar">
+                      <i class="fa-solid fa-phone text-xs"></i>
+                    </a>
+                    <a href="https://wa.me/55${cleanPhone(item.tel)}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp">
+                      <i class="fa-brands fa-whatsapp text-sm"></i>
+                    </a>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function openModal(id) {
+      const m = document.getElementById(id);
+      if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+    }
+
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      if (m) { m.classList.add('hidden'); document.body.style.overflow = ''; }
+    }
+
+    function showEventDetails(eventId) {
+      const modal = document.getElementById('modalEvent');
+      const container = document.getElementById('modalEventContent');
+      if (!modal || !container) return;
+
+      let evtData = null;
+      for (const day of schedule) {
+        const found = day.events.find(e => e.id === eventId);
+        if (found) { evtData = found; break; }
+      }
+      if (!evtData) return;
+
+      container.innerHTML = `
+        <div class="space-y-3.5 text-xs sm:text-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-base sm:text-lg font-black font-mono text-navy bg-navy/10 px-3 py-1 rounded-lg">${evtData.time}</span>
+            ${evtData.uniform && evtData.uniform !== '-' ? `<span class="px-3 py-1 rounded-lg bg-gold/20 text-navy-dark font-extrabold border border-gold/40">${evtData.uniform}</span>` : ''}
+          </div>
+
+          <h3 class="text-lg font-black text-slate-900 leading-snug">${evtData.activity}</h3>
+
+          ${evtData.location ? `
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+              <div class="flex items-center gap-2 font-bold text-slate-800">
+                <i class="fa-solid fa-location-dot text-red-500"></i>
+                <span>${evtData.location}</span>
+              </div>
+              <a href="${getMapsLink(evtData.location)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-navy font-bold hover:underline">
+                <span>Abrir no Google Maps</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+            </div>
+          ` : ''}
+
+          ${evtData.flight ? `
+            <div class="p-3 bg-sky-50 rounded-xl border border-sky-200 flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold text-sky-800">Código do Voo:</span>
+                <p class="font-black text-sky-900 font-mono text-base">${evtData.flight}</p>
+              </div>
+              ${isCommercialFlight(evtData.flight) ? `
+                <a href="${getFlightTrackerLink(evtData.flight)}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-black transition">
+                  Rastrear Voo
+                </a>
+              ` : ''}
+            </div>
+          ` : ''}
+
+          ${evtData.participants ? `
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="font-extrabold text-navy">Participantes:</span>
+              <p class="text-slate-700 font-medium mt-0.5">${evtData.participants}</p>
+            </div>
+          ` : ''}
+
+          ${evtData.notes ? `
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200/80 text-amber-900">
+              <span class="font-extrabold flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-info text-amber-600"></i> Observações:
+              </span>
+              <p class="font-medium mt-0.5">${evtData.notes}</p>
+            </div>
+          ` : ''}
+        </div>
+      `;
+
+      openModal('modalEvent');
+    }
+  </script>
+</body>
+</html>
