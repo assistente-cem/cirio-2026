@@ -34,15 +34,14 @@
   <style>
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .glass-header { background: rgba(0, 29, 61, 0.96); backdrop-filter: blur(12px); }
   </style>
 </head>
 <body class="h-full bg-slate-50 font-sans text-slate-800 antialiased pb-16">
 
-  <!-- HEADER FIXO COM NAVEGAÇÃO E FILTROS -->
-  <header class="sticky top-0 z-30 glass-header border-b-2 border-gold text-white shadow-lg relative">
+  <!-- HEADER FIXO COMPLETO (INCLUINDO LOGOS, TÍTULO, ABAS E FILTROS) -->
+  <header class="sticky top-0 z-30 bg-white border-b-2 border-gold shadow-lg relative">
     <div class="absolute top-2 right-3 z-40">
-      <span class="text-[10px] font-mono font-bold text-sky-300/80 bg-white/10 backdrop-blur-sm px-2 py-0.5 rounded-md border border-sky-400/20 shadow-xs">
+      <span class="text-[10px] font-mono font-bold text-sky-700/80 bg-slate-100 backdrop-blur-sm px-2 py-0.5 rounded-md border border-slate-300 shadow-xs">
         v1.0
       </span>
     </div>
@@ -54,10 +53,10 @@
             <img src="brasao-4dn.png" alt="Brasão 4ºDN" class="w-full h-full object-contain">
           </div>
           <div>
-            <span class="text-[11px] tracking-widest font-black uppercase text-gold block leading-tight">Marinha do Brasil</span>
-            <h1 class="text-xl sm:text-3xl font-cursive text-gold tracking-wide leading-tight">Círio de Nazaré 2026</h1>
-            <p class="text-xs sm:text-sm text-slate-200 font-semibold truncate max-w-[250px] sm:max-w-none">
-              Comando do 4º Distrito Naval - Círio de Nazaré 2026
+            <span class="text-[11px] tracking-widest font-black uppercase text-slate-600 block leading-tight">Marinha do Brasil</span>
+            <h1 class="text-xl sm:text-3xl font-cursive text-gold-dark tracking-wide leading-tight">Círio de Nazaré 2026</h1>
+            <p class="text-xs sm:text-sm text-slate-600 font-bold truncate max-w-[250px] sm:max-w-none">
+              Comando do 4º Distrito Naval
             </p>
           </div>
         </div>
@@ -127,7 +126,7 @@
 
   <!-- MAIN CONTENT -->
   <main class="max-w-5xl mx-auto px-3 sm:px-4 pt-4">
-    <section class="mb-5 bg-white rounded-2xl shadow-sm border border-slate-200/80 p-2.5 sm:p-4">
+    <section class="mb-5 bg-white rounded-2xl shadow-sm border-2 border-[#ffbd26] p-2.5 sm:p-4">
       <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 text-center">
         <button onclick="openModal('modalAutoridades')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
           <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
@@ -373,7 +372,7 @@
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
       <div class="w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-navy shadow-xl mb-4 bg-slate-100 flex items-center justify-center">
-        <img id="modalPhotoViewerImg" src="" alt="Foto Autoridade" class="w-full h-full object-cover">
+        <img id="modalPhotoViewerImg" src="" alt="Foto" class="w-full h-full object-cover">
       </div>
       <h3 id="modalPhotoViewerName" class="text-lg sm:text-xl font-black text-navy text-center leading-tight"></h3>
       <p id="modalPhotoViewerRole" class="text-xs sm:text-sm text-slate-600 font-bold text-center mt-1"></p>
@@ -782,6 +781,7 @@
             autoridade: "Alte Esq Marcos Sampaio Olsen",
             cargo: "Comandante da Marinha",
             esposa: "Sra. Rosaly Marcella Hage Chahine",
+            fotoEsposa: "rosaly.png",
             chegada: "08/10/2026 (Voo TAP47 às 21:55)",
             partida: "13/10/2026 (Voo LA3212 às 17:20)",
             estadia: "Hotel de Trânsito do Espadarte - Suíte 1",
@@ -803,6 +803,7 @@
             autoridade: "Alte Esq Arthur Fernando Bettega Corrêa",
             cargo: "Chefe do Estado-Maior da Armada",
             esposa: "Sra. Suzeli Sampaio Porto",
+            fotoEsposa: "suzeli.png",
             chegada: "09/10/2026 (Voo LATAM 3877 às 10:50)",
             partida: "13/10/2026 (Voo LA3705 às 04:25)",
             estadia: "Residência Funcional do Com4°DN",
@@ -819,6 +820,7 @@
             autoridade: "Alte Esq (FN) Carlos Chagas Vianna Braga",
             cargo: "Comandante-Geral do Corpo de Fuzileiros Navais",
             esposa: "Sra. Carla Principe Pires Chagas Vianna Braga",
+            fotoEsposa: "carla.png",
             chegada: "05/10/2026 (Voo GOL 1731 às 15:20)",
             partida: "12/10/2026 (Voo G32007 às 17:05)",
             estadia: "Residência Funcional do Com4°DN",
@@ -835,6 +837,7 @@
             autoridade: "Alte Esq Eduardo Machado Vazquez",
             cargo: "Comandante de Operações Navais",
             esposa: "Sra. Anna Paula de Araújo Martins dos Santos",
+            fotoEsposa: "anna-paula.png",
             chegada: "07/10/2026 (Voo GOL 2006 às 12:00)",
             partida: "12/10/2026 (Voo G39236 às 10:45)",
             estadia: "Residência Funcional do Com4°DN",
@@ -851,6 +854,7 @@
             autoridade: "Alte Esq Edgar Luiz Siqueira Barbosa",
             cargo: "Diretor-Geral do Material da Marinha",
             esposa: "Sra. Geórgia Paula Reis González Barbosa",
+            fotoEsposa: "georgia.png",
             chegada: "08/10/2026 (Voo LATAM 3706 às 23:35)",
             partida: "12/10/2026 (Voo G32011 às 17:00)",
             estadia: "Acomodação Extra-MB",
@@ -867,6 +871,7 @@
             autoridade: "Alte Esq Sílvio Luís dos Santos",
             cargo: "Diretor-Geral de Navegação",
             esposa: "Sra. Ana Cristina Joaquim dos Santos",
+            fotoEsposa: "ana-cristina.png",
             chegada: "07/10/2026 (Voo LATAM 3706 às 23:35)",
             partida: "12/10/2026 (Voo G32009 às 03:00)",
             estadia: "Hotel de Trânsito do Espadarte - Suíte 3",
@@ -883,6 +888,7 @@
             autoridade: "Alte Esq Paulo César Bittencourt Ferreira",
             cargo: "Chefe de Operações Conjuntas do EMCFA",
             esposa: "Sra. Cristina Maria Loureiro Aguiar Henriques",
+            fotoEsposa: "cristina.png",
             chegada: "07/10/2026 (Voo GOL 1730 às 11:45)",
             partida: "11/10/2026 (Voo G31731 às 17:05)",
             estadia: "Residência Funcional do CEM-Com4°DN",
@@ -899,6 +905,7 @@
             autoridade: "Alte Esq (RM1) Alípio Jorge Rodrigues da Silva",
             cargo: "Ex-Comandante do 4º Distrito Naval",
             esposa: "Sra. Maria Teresa Couto Silva",
+            fotoEsposa: "maria-teresa.png",
             chegada: "06/10/2026 (Voo GOL 2006 às 12:00)",
             partida: "15/10/2026 (Voo GOL às 17:00)",
             estadia: "Acomodação Extra-MB",
@@ -918,6 +925,7 @@
             autoridade: "V Alte (FN) Pedro Luiz Gueiros Taulois",
             cargo: "Comandante da Força de Fuzileiros da Esquadra",
             esposa: "Sra. Mirza Barros Pereira",
+            fotoEsposa: "mirza.png",
             chegada: "09/10/2026 (Voo LATAM 3232 às 00:15)",
             partida: "11/10/2026 (Voo LA3212 às 17:15)",
             estadia: "Residência Funcional do CEM-Com4°DN",
@@ -934,6 +942,7 @@
             autoridade: "V Alte Adriano Marcelino Batista",
             cargo: "Comandante do 4º Distrito Naval",
             esposa: "Sra. Cinthia Serrano Marino",
+            fotoEsposa: "cinthia.png",
             chegada: "Residente / Anfitrião",
             partida: "-",
             estadia: "Residência Funcional do Com4°DN",
@@ -950,6 +959,7 @@
             autoridade: "V Alte (FN) Elson Luiz de Oliveira Góis",
             cargo: "Assessor Especial Militar do Ministério da Defesa",
             esposa: "Sra. Ângela dos Santos Côrtes Góis",
+            fotoEsposa: "angela.png",
             chegada: "A confirmar",
             partida: "A confirmar",
             estadia: "Hotel de Trânsito do Veleiro",
@@ -966,6 +976,7 @@
             autoridade: "V Alte (RM1) Wilson Pereira de Lima Filho",
             cargo: "Diretor da Agência Nacional de Transportes Aquaviários (ANTAQ)",
             esposa: "Sra. Valéria Pereira de Lima",
+            fotoEsposa: "valeria-lima.png",
             chegada: "08/10/2026 (Voo LATAM 3706 às 23:35)",
             partida: "13/10/2026 (Voo G39202 às 22:25)",
             estadia: "Hotel de Trânsito do Espadarte - Suíte 4",
@@ -987,6 +998,7 @@
             autoridade: "C Alte Sérgio Blanco Ozório",
             cargo: "Chefe do Gabinete do Comandante da Marinha",
             esposa: "Sra. Valéria Lourdes de Brito Ozório",
+            fotoEsposa: "valeria-ozorio.png",
             chegada: "07/10/2026 (Voo LATAM 3706 às 23:35)",
             partida: "13/10/2026 (Voo LA3212 às 17:20)",
             estadia: "Hotel de Trânsito do Espadarte - Suíte 2",
@@ -1003,6 +1015,7 @@
             autoridade: "C Alte (EN) Mauro Nicoloso Bonotto",
             cargo: "Coordenador do Projeto Nuclear da Marinha",
             esposa: "-",
+            fotoEsposa: "",
             chegada: "09/10/2026 (Voo AZUL 4840 às 11:55)",
             partida: "11/10/2026 (Voo LA3231 às 11:40)",
             estadia: "Acomodação Extra-MB",
@@ -1019,6 +1032,7 @@
             autoridade: "C Alte (FN) Alexandre Vasconcelos Tonini",
             cargo: "Comandante da Força Aeronaval",
             esposa: "Sra. Érica Affonso Peixoto Tonini",
+            fotoEsposa: "erica.png",
             chegada: "06/10/2026 (Voo GOL 2006 às 12:00)",
             partida: "12/10/2026 (Voo G32011 às 17:00)",
             estadia: "Hotel de Trânsito do Veleiro",
@@ -1035,6 +1049,7 @@
             autoridade: "C Alte (Md) Mônica Medeiros Luna",
             cargo: "Diretora do Centro de Perícias Médicas da Marinha",
             esposa: "-",
+            fotoEsposa: "",
             chegada: "09/10/2026 (Voo LATAM 4596 às 13:20)",
             partida: "11/10/2026 (Voo LA3231 às 11:40)",
             estadia: "Acomodação Extra-MB",
@@ -1051,6 +1066,7 @@
             autoridade: "C Alte José Fabio Carneiro da Silva",
             cargo: "Chefe do Estado-Maior do Comando do 4º Distrito Naval",
             esposa: "Sra. Dária Gláucia Bezerra Jales",
+            fotoEsposa: "daria.png",
             chegada: "Residente / Sede",
             partida: "-",
             estadia: "Residência Funcional CEM-Com4°DN",
@@ -1166,7 +1182,7 @@
       if (!esposa || esposa === '-') return '';
       const text = esposa.trim();
       const cleanName = text.replace(/^(sra\.|sra|dona)\s*/i, '');
-      return `<p class="text-[16px] sm:text-[18px] font-black text-navy leading-snug"><i class="fa-solid fa-user-group text-gold-dark mr-1.5 text-xs"></i>Acompanhado da Sra. ${cleanName}</p>`;
+      return `<p class="text-[16px] sm:text-[18px] font-black text-navy leading-snug"><i class="fa-solid fa-user-group text-gold-dark mr-1.5 text-xs"></i>Sra. ${cleanName}</p>`;
     }
 
     function formatAcompanhanteVoo(acompanhante) {
@@ -1176,10 +1192,10 @@
       
       if (isFemale) {
         const cleanName = text.replace(/^(sra\.|sra|dona)\s*/i, '');
-        return `<h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">Acompanhado da Sra. ${cleanName}</h4>`;
+        return `<h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">Sra. ${cleanName}</h4>`;
       }
       
-      return `<h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">Acompanhante: ${text}</h4>`;
+      return `<h4 class="text-base sm:text-lg font-black text-slate-900 leading-tight">${text}</h4>`;
     }
 
     function matchEventFilter(evt) {
@@ -1312,12 +1328,12 @@
                 
                 <div class="flex items-center gap-2">
                   ${evt.uniform && evt.uniform !== '-' ? `
-                    <button onclick="openModal('modalUniformes')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gold/20 border border-gold/40 text-navy-dark text-xs sm:text-sm font-extrabold hover:bg-gold/30 transition">
-                      <i class="fa-solid fa-shirt text-amber-600 text-xs"></i>
+                    <button onclick="openModal('modalUniformes')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-navy text-white text-xs sm:text-sm font-extrabold hover:bg-navy-light transition shadow-xs">
+                      <i class="fa-solid fa-shirt text-amber-400 text-xs"></i>
                       <span>${evt.uniform}</span>
                     </button>
                   ` : ''}
-                  <button onclick="showEventDetails('${evt.id}')" title="Mais informações" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-navy hover:text-white text-navy flex items-center justify-center transition active:scale-95 border border-slate-200 shadow-sm">
+                  <button onclick="showEventDetails('${evt.id}')" title="Mais informações" class="w-9 h-9 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-700 flex items-center justify-center transition active:scale-95 border border-amber-300 shadow-sm">
                     <i class="fa-solid fa-circle-info text-base"></i>
                   </button>
                 </div>
@@ -1543,22 +1559,37 @@
             <div class="space-y-4">
               ${cat.autoridades.map(aut => {
                 const photoSrc = aut.foto ? `fotos-autoridades/${aut.foto}` : 'fotos-autoridades/default.png';
+                const wifePhotoSrc = aut.fotoEsposa ? `fotos-autoridades/${aut.fotoEsposa}` : '';
+                const cleanWifeName = aut.esposa && aut.esposa !== '-' ? aut.esposa.replace(/^(sra\.|sra|dona)\s*/i, '') : '';
+                const esposaRoleText = `Esposa do ${aut.autoridade}`;
+
                 return `
                   <div class="bg-white border-2 border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
-                    <div class="border-b border-slate-100 pb-3 flex items-center gap-3.5 sm:gap-4">
-                      <button onclick="openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md flex-shrink-0 bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10">
-                        <img src="${photoSrc}" alt="${aut.autoridade}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                      </button>
+                    <div class="border-b border-slate-100 pb-3 space-y-3">
+                      
+                      <!-- LINHA DA AUTORIDADE (FOTO E NOME/CARGO ALINHADOS) -->
+                      <div class="flex items-center gap-3.5 sm:gap-4">
+                        <button onclick="openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0">
+                          <img src="${photoSrc}" alt="${aut.autoridade}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+                        </button>
+                        <div class="flex-grow min-w-0">
+                          <h5 class="text-[18px] sm:text-[20px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
+                          <p class="text-xs sm:text-sm text-slate-600 font-semibold">${aut.cargo}</p>
+                        </div>
+                      </div>
 
-                      <div class="flex-grow min-w-0">
-                        <h5 class="text-[18px] sm:text-[20px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
-                        <p class="text-xs sm:text-sm text-slate-600 font-semibold mb-1">${aut.cargo}</p>
-                        ${aut.esposa && aut.esposa !== '-' ? `
-                          <div class="mt-1">
+                      <!-- LINHA DA ESPOSA (FOTO ABAIXO 10% MENOR, ALINHADA COM O NOME DA ESPOSA) -->
+                      ${wifePhotoSrc && aut.esposa && aut.esposa !== '-' ? `
+                        <div class="flex items-center gap-3.5 sm:gap-4 pt-1">
+                          <button onclick="openPhotoViewer('fotos-autoridades/${aut.fotoEsposa}', 'Sra. ${cleanWifeName.replace(/'/g, "\\'")}', '${esposaRoleText.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] rounded-full overflow-hidden border-2 border-gold/70 shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0">
+                            <img src="fotos-autoridades/${aut.fotoEsposa}" alt="Sra. ${cleanWifeName}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+                          </button>
+                          <div class="flex-grow min-w-0">
                             ${formatAcompanhanteAutoridade(aut.esposa)}
                           </div>
-                        ` : ''}
-                      </div>
+                        </div>
+                      ` : ''}
+
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
