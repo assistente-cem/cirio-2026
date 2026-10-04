@@ -38,7 +38,7 @@
 </head>
 <body class="h-full bg-slate-50 font-sans text-slate-800 antialiased pb-16">
 
-  <!-- HEADER FIXO COMPLETO (INCLUINDO LOGOS, TÍTULO, ABAS E FILTROS) -->
+  <!-- HEADER FIXO COMPLETO -->
   <header class="sticky top-0 z-30 bg-white border-b-2 border-gold shadow-lg relative">
     <div class="absolute top-2 right-3 z-40">
       <span class="text-[10px] font-mono font-bold text-sky-700/80 bg-slate-100 backdrop-blur-sm px-2 py-0.5 rounded-md border border-slate-300 shadow-xs">
@@ -132,14 +132,14 @@
           <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
             <i class="fa-solid fa-user-shield text-lg"></i>
           </div>
-          <span class="text-xs sm:text-sm font-bold leading-tight">Autoridades</span>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Autoridades e Convidados</span>
         </button>
         
         <button onclick="openModal('modalAcomodacao')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
           <div class="w-9 h-9 rounded-xl bg-navy/10 flex items-center justify-center text-navy mb-1.5">
             <i class="fa-solid fa-hotel text-lg"></i>
           </div>
-          <span class="text-xs sm:text-sm font-bold leading-tight">Acomodação</span>
+          <span class="text-xs sm:text-sm font-bold leading-tight">Hospedagem das Comitivas</span>
         </button>
 
         <button onclick="openModal('modalUniformes')" class="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-slate-100 text-navy transition active:scale-95 min-h-[60px] border border-transparent hover:border-slate-200">
@@ -290,7 +290,7 @@
       <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-user-shield text-gold text-xl"></i>
-          <h3 class="font-black text-lg">Autoridades</h3>
+          <h3 class="font-black text-lg">Autoridades e Convidados</h3>
         </div>
         <button onclick="closeModal('modalAutoridades')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
           <i class="fa-solid fa-xmark"></i>
@@ -306,17 +306,32 @@
   </div>
 
   <div id="modalAcomodacao" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white w-full sm:max-w-xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[85vh] flex flex-col">
+    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
       <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-hotel text-gold text-lg"></i>
-          <h3 class="font-extrabold text-lg">Controle de Hospedagem</h3>
+          <h3 class="font-extrabold text-lg">Hospedagem das Comitivas</h3>
         </div>
         <button onclick="closeModal('modalAcomodacao')" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div class="p-4 sm:p-5 overflow-y-auto space-y-3" id="hospedagemListContainer"></div>
+
+      <div class="p-3 bg-slate-100 border-b border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+        <div class="relative flex-grow">
+          <select id="hospedagemFilterSelect" onchange="renderHospedagemModal()" class="w-full bg-white text-slate-800 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-navy appearance-none">
+            <option value="">Filtrar por Local de Hospedagem (Todos)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+        </div>
+        <button onclick="clearHospedagemFilter()" class="px-3 py-2 bg-white hover:bg-red-50 hover:text-red-600 border border-slate-300 text-slate-700 font-extrabold text-xs rounded-xl transition flex items-center justify-center gap-1.5 active:scale-95">
+          <i class="fa-solid fa-rotate-left text-[10px]"></i>
+          <span>Remover Filtro</span>
+        </button>
+      </div>
+
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-4" id="hospedagemListContainer"></div>
+
       <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
         <button onclick="closeModal('modalAcomodacao')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
           Fechar
@@ -391,15 +406,15 @@
         dayLabel: "05 OUT",
         weekDay: "Segunda-feira",
         events: [
-          { id: "05.01", time: "07:00", endHour: 8.0, activity: "Café da manhã", location: "Hotel Universal - Santarém", city: "Santarém", uniform: "-", participants: "ComGer e Sra Carla, DN-01, CFS-01 e comitiva", notes: "Café da manhã." },
+          { id: "05.01", time: "07:00", endHour: 8.0, activity: "Café da manhã", location: "Base Naval de Val-de-Cães - Santarém", city: "Santarém", uniform: "-", participants: "ComGer e Sra Carla, DN-01, CFS-01 e comitiva", notes: "Café da manhã." },
           { id: "05.02", time: "08:00", endHour: 8.08, activity: "Deslocamento para a CFS", location: "Capitania dos Portos de Santarém", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Deslocamento." },
           { id: "05.03", time: "08:05", endHour: 8.25, activity: "Honras de recepção", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Recepção." },
           { id: "05.04", time: "08:15", endHour: 9.25, activity: "Apresentação sobre o Com4°DN e temas da VAP", location: "CFS - Gabinete", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "O Com4°DN fará a apresentação." },
           { id: "05.05", time: "09:20", endHour: 9.66, activity: "Visita às instalações da CFS", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Roteiro: Gabinete, Departamento STA, CCCAM e EPM." },
           { id: "05.06", time: "09:40", endHour: 10.0, activity: "Honras de despedida e deslocamento para Cargill", location: "CFS para Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Despedida." },
           { id: "05.07", time: "10:00", endHour: 11.5, activity: "Visita às instalações da Cargill", location: "Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Visita Cargill." },
-          { id: "05.08", time: "11:35", endHour: 12.33, activity: "Deslocamento para o hotel Universal", location: "Cargill para Hotel Universal", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Retorno." },
-          { id: "05.09", time: "12:20", endHour: 12.5, activity: "Check-out e deslocamento para o almoço", location: "Hotel Universal - Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Check-out." },
+          { id: "05.08", time: "11:35", endHour: 12.33, activity: "Deslocamento para o hotel Universal", location: "Cargill para Base Naval de Val-de-Cães", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Retorno." },
+          { id: "05.09", time: "12:20", endHour: 12.5, activity: "Check-out e deslocamento para o almoço", location: "Base Naval de Val-de-Cães - Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Check-out." },
           { id: "05.10", time: "12:30", endHour: 13.5, activity: "Almoço e deslocamento para o aeroporto", location: "Churrascaria Dois Irmãos", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Almoço." },
           { id: "05.11", time: "15:20", endHour: 16.75, activity: "Regresso do AE (FN) Carlos Chagas (ComGer) para Belém (Voo GOL 1731)", location: "Aeroporto de Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, comitiva", flight: "G31731", notes: "Voo GOL 1731." },
           { id: "05.12", time: "20:00", endHour: 22.0, activity: "Jantar", location: "Estação das Docas", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar." }
@@ -1083,14 +1098,81 @@
     ];
 
     const logistics = {
-      hospedagem: [
-        { autoridade: "Alte Esq OLSEN", estadias: [{ cidade: "Belém-PA", local: "Hotel de Trânsito do Espadarte - Suíte 1", periodo: "08 a 13OUT" }] },
-        { autoridade: "Alte Esq(FN) CARLOS CHAGAS", estadias: [{ cidade: "Santarém-PA", local: "Hotel Universal", periodo: "03 a 05OUT" }, { cidade: "Belém-PA", local: "Residência Funcional do Com4ºDN", periodo: "05 a 08OUT e 09 a 12OUT" }, { cidade: "Macapá-AP", local: "Hotel do Forte", periodo: "08 a 09OUT" }] },
-        { autoridade: "Alte Esq VAZQUEZ", estadias: [{ cidade: "Belém-PA", local: "Residência Funcional do Com4ºDN", periodo: "07 a 12OUT" }] },
-        { autoridade: "Alte Esq SÍLVIO LUÍS", estadias: [{ cidade: "Belém-PA", local: "Hotel de Trânsito do Espadarte", periodo: "07 a 08OUT e 09 a 12OUT" }, { cidade: "Macapá-AP", local: "Hotel do Forte", periodo: "08 a 09OUT" }] },
-        { autoridade: "Alte Esq PAULO FERREIRA", estadias: [{ cidade: "Belém-PA", local: "Residência Funcional do CEM-Com4ºDN", periodo: "07 a 11OUT" }] },
-        { autoridade: "V Alte BATISTA", estadias: [{ cidade: "Santarém-PA", local: "Hotel Universal", periodo: "02 a 05OUT" }] },
-        { autoridade: "C Alte JOSÉ FABIO", estadias: [{ cidade: "Macapá-AP", local: "Hotel do Forte", periodo: "08 a 09OUT" }] }
+      hospedagemLocais: [
+        {
+          local: "Hotel de Trânsito do Espadarte",
+          hospedes: [
+            { nome: "Alte Esq OLSEN", detalhes: "Suíte 1 — Período: 08 a 13OUT" },
+            { nome: "Alte Esq SÍLVIO LUÍS", detalhes: "Suíte 3 — Período: 07 a 08OUT e 09 a 12OUT" },
+            { nome: "V Alte (RM1) LIMA FILHO", detalhes: "Suíte 4 — Período: 08 a 13OUT" },
+            { nome: "C Alte OZÓRIO", detalhes: "Suíte 2 — Período: 07 a 13OUT" }
+          ]
+        },
+        {
+          local: "Residência Funcional do Com4ºDN",
+          hospedes: [
+            { nome: "Alte Esq (FN) CARLOS CHAGAS", detalhes: "Período: 05 a 08OUT e 09 a 12OUT" },
+            { nome: "Alte Esq VAZQUEZ", detalhes: "Período: 07 a 12OUT" },
+            { nome: "Alte Esq BETTEGA", detalhes: "Período: 09 a 13OUT" }
+          ]
+        },
+        {
+          local: "Residência Funcional do CEM-Com4ºDN",
+          hospedes: [
+            { nome: "Alte Esq PAULO FERREIRA", detalhes: "Período: 07 a 11OUT" },
+            { nome: "V Alte (FN) TAULOIS", detalhes: "Período: 09 a 11OUT" },
+            { nome: "C Alte JOSÉ FABIO", detalhes: "Residente / Sede" }
+          ]
+        },
+        {
+          local: "Hotel de Trânsito do Veleiro",
+          hospedes: [
+            { nome: "V Alte (FN) GÓIS", detalhes: "Período: A confirmar" },
+            { nome: "C Alte (FN) TONINI", detalhes: "Período: 06 a 12OUT" },
+            { nome: "CMG (FN) Glaucio Rodrigues Junior", detalhes: "Imediato do Comando-Geral do Corpo de Fuzileiros Navais" },
+            { nome: "CMG Bruno Vieira dos Santos Almeida", detalhes: "Secretário Militar" },
+            { nome: "CMG (FN) Maximiliano Pinheiro De Oliveira", detalhes: "Chefe do Departamento de Doutrina do ComGeralCFN" },
+            { nome: "CF (FN) Saulo Xavier de Pina Filho", detalhes: "Oficial Hospedado" },
+            { nome: "CC (FN) Franco de Marquet Freitas", detalhes: "Assistente do Comandante-Geral do Corpo de Fuzileiros Navais" },
+            { nome: "CC (T) Caroline Corrêa Branco Moreira", detalhes: "Assistente do Comandante da Marinha" }
+          ]
+        },
+        {
+          local: "Centro de Hidrografia do Norte - CHN-4",
+          hospedes: [
+            { nome: "CC (T) Thaís de Souza Carvalho", detalhes: "Ajudante de Ordens do Comandante da Marinha" },
+            { nome: "CC (T) Ana Cristina Costa Da Silva", detalhes: "Oficial de Gabinete do Comandante da Marinha" },
+            { nome: "CT (T) Elisiane Miréia de Melo Macêdo", detalhes: "Assistente do Diretor-Geral de Navegação" },
+            { nome: "CC (T) Adilene Cunegundes da Silva", detalhes: "Oficial de Gabinete do Comandante da Marinha" }
+          ]
+        },
+        {
+          local: "Base Naval de Val-de-Cães",
+          hospedes: [
+            { nome: "CC (FN) Danilo de Andrade Cabral", detalhes: "Ajudante de Ordens do Comandante da Marinha" },
+            { nome: "CC (AA) Nilton César Ramos De Oliveira", detalhes: "Assistente do Chefe do Gabinete do Comandante da Marinha" },
+            { nome: "CC José Viana da Silva Neto", detalhes: "Assistente do Comandante da Marinha" },
+            { nome: "CT (IM) Rodolfo Jerônimo Freire Sousa", detalhes: "Ajudante de Ordens do Comandante da Marinha" },
+            { nome: "SO-FN-IF Agildo Cerqueira Azevedo", detalhes: "Suboficial Mor do Comando-Geral do Corpo de Fuzileiros Navais" },
+            { nome: "3SG-AR Lúcio Flávio Guimarães da Silva", detalhes: "Militar Hospedado" }
+          ]
+        },
+        {
+          local: "Hotel de Trânsito do Comando do 4º Distrito Naval",
+          hospedes: [
+            { nome: "CC (AA) Amaro José dos Santos Júnior", detalhes: "Assistente do Chefe do Estado-Maior da Armada e Sra. Ingrid" },
+            { nome: "SO-MO Júlio Cesar Pereira", detalhes: "Suboficial-Mor do Comando da Marinha" }
+          ]
+        },
+        {
+          local: "Acomodação Extra-MB",
+          hospedes: [
+            { nome: "Alte Esq EDGAR", detalhes: "Período: 08 a 12OUT" },
+            { nome: "Alte Esq (RM1) ALÍPIO JORGE", detalhes: "Período: 06 a 15OUT" },
+            { nome: "C Alte (EN) BONOTTO", detalhes: "Período: 09 a 11OUT" },
+            { nome: "C Alte (Md) MÔNICA LUNA", detalhes: "Período: 09 a 11OUT" }
+          ]
+        }
       ],
       uniformes: [
         { nome: "OP3", file: "op3.png" }, { nome: "6.6", file: "6.6.png" }, { nome: "Passeio", file: "passeio.png" },
@@ -1102,7 +1184,7 @@
           categoria: "COMANDO DO 4º DISTRITO NAVAL",
           itens: [
             { nome: "V Alte ADRIANO MARCELINO BATISTA", cargo: "Comandante do 4º Distrito Naval", tel: "(91) 98266-0201" },
-            { nome: "C Alte JOSÉ FABIO CARNEIRO DA SILVA", cargo: "Chefe do Estado-Maior do Com4ºDN", tel: "(91) 98266-0233" }
+            { nome: "C Alte JOSÉ FABIO CARNEIRO DA SILVA", cargo: "Chefe do Estado-Mior do Com4ºDN", tel: "(91) 98266-0233" }
           ]
         },
         {
@@ -1178,11 +1260,27 @@
       openModal('modalPhotoViewer');
     }
 
+    function toggleAutoridadeAccordion(id) {
+      const contentEl = document.getElementById(`acc-content-${id}`);
+      const iconEl = document.getElementById(`acc-icon-${id}`);
+      if (!contentEl || !iconEl) return;
+
+      if (contentEl.classList.contains('hidden')) {
+        contentEl.classList.remove('hidden');
+        iconEl.classList.remove('fa-chevron-down');
+        iconEl.classList.add('fa-chevron-up', 'rotate-180');
+      } else {
+        contentEl.classList.add('hidden');
+        iconEl.classList.remove('fa-chevron-up', 'rotate-180');
+        iconEl.classList.add('fa-chevron-down');
+      }
+    }
+
     function formatAcompanhanteAutoridade(esposa) {
       if (!esposa || esposa === '-') return '';
       const text = esposa.trim();
       const cleanName = text.replace(/^(sra\.|sra|dona)\s*/i, '');
-      return `<p class="text-[16px] sm:text-[18px] font-black text-navy leading-snug"><i class="fa-solid fa-user-group text-gold-dark mr-1.5 text-xs"></i>Sra. ${cleanName}</p>`;
+      return `<p class="text-[15px] sm:text-[17px] font-black text-navy leading-snug"><i class="fa-solid fa-user-group text-gold-dark mr-1.5 text-xs"></i>Sra. ${cleanName}</p>`;
     }
 
     function formatAcompanhanteVoo(acompanhante) {
@@ -1548,99 +1646,165 @@
       `).join('');
     }
 
+    function renderHospedagemModal() {
+      const container = document.getElementById('hospedagemListContainer');
+      const selectEl = document.getElementById('hospedagemFilterSelect');
+      if (!container || !selectEl) return;
+
+      const selectedLocal = selectEl.value;
+
+      // Populate select options if empty
+      if (selectEl.options.length <= 1) {
+        logistics.hospedagemLocais.forEach(item => {
+          const opt = document.createElement('option');
+          opt.value = item.local;
+          opt.textContent = item.local;
+          selectEl.appendChild(opt);
+        });
+      }
+
+      const filteredLocais = logistics.hospedagemLocais.filter(item => {
+        if (!selectedLocal) return true;
+        return item.local === selectedLocal;
+      });
+
+      if (filteredLocais.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 border border-slate-200 rounded-2xl text-slate-500 font-bold text-xs sm:text-sm">
+            <i class="fa-solid fa-hotel text-2xl text-slate-400 mb-2 block"></i>
+            Nenhuma hospedagem encontrada para este local.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filteredLocais.map(item => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3 shadow-sm">
+          <h4 class="text-base sm:text-lg font-black text-navy border-b border-slate-200 pb-1.5 flex items-center gap-2">
+            <i class="fa-solid fa-building text-gold-dark"></i> ${item.local}
+          </h4>
+          <div class="space-y-2 pt-1">
+            ${item.hospedes.map(h => `
+              <div class="p-3 bg-white border border-slate-200/80 rounded-xl space-y-0.5 shadow-xs">
+                <h5 class="text-sm sm:text-base font-black text-slate-900">${h.nome}</h5>
+                <p class="text-xs text-slate-600 font-bold"><i class="fa-regular fa-calendar-days text-navy mr-1"></i>${h.detalhes}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearHospedagemFilter() {
+      const selectEl = document.getElementById('hospedagemFilterSelect');
+      if (selectEl) {
+        selectEl.value = "";
+        renderHospedagemModal();
+      }
+    }
+
     function renderModalsData() {
       const autoridadesContainer = document.getElementById('autoridadesListContainer');
       if (autoridadesContainer) {
-        autoridadesContainer.innerHTML = autoridadesHierarquicas.map(cat => `
+        autoridadesContainer.innerHTML = autoridadesHierarquicas.map((cat, catIdx) => `
           <div class="space-y-3">
             <h4 class="text-sm sm:text-base font-black text-navy uppercase tracking-wider border-b-2 border-gold/50 pb-1">
               ${cat.categoria}
             </h4>
-            <div class="space-y-4">
-              ${cat.autoridades.map(aut => {
+            <div class="space-y-3">
+              ${cat.autoridades.map((aut, autIdx) => {
+                const uniqueId = `${catIdx}-${autIdx}`;
                 const photoSrc = aut.foto ? `fotos-autoridades/${aut.foto}` : 'fotos-autoridades/default.png';
                 const wifePhotoSrc = aut.fotoEsposa ? `fotos-autoridades/${aut.fotoEsposa}` : '';
                 const cleanWifeName = aut.esposa && aut.esposa !== '-' ? aut.esposa.replace(/^(sra\.|sra|dona)\s*/i, '') : '';
                 const esposaRoleText = `Esposa do ${aut.autoridade}`;
 
                 return `
-                  <div class="bg-white border-2 border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
-                    <div class="border-b border-slate-100 pb-3 space-y-3">
-                      
-                      <!-- LINHA DA AUTORIDADE (FOTO E NOME/CARGO ALINHADOS) -->
-                      <div class="flex items-center gap-3.5 sm:gap-4">
-                        <button onclick="openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0">
+                  <div class="bg-white border-2 border-slate-200 rounded-2xl shadow-sm overflow-hidden transition hover:border-slate-300">
+                    
+                    <!-- CABEÇALHO CLICÁVEL DO ACORDEÃO -->
+                    <div onclick="toggleAutoridadeAccordion('${uniqueId}')" class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer bg-slate-50 hover:bg-slate-100/80 transition select-none">
+                      <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                        <div onclick="event.stopPropagation(); openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0 cursor-pointer">
                           <img src="${photoSrc}" alt="${aut.autoridade}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                        </button>
-                        <div class="flex-grow min-w-0">
-                          <h5 class="text-[18px] sm:text-[20px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
-                          <p class="text-xs sm:text-sm text-slate-600 font-semibold">${aut.cargo}</p>
+                        </div>
+                        
+                        <div class="min-w-0">
+                          <h5 class="text-[16px] sm:text-[18px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
+                          <p class="text-xs sm:text-sm text-slate-600 font-semibold truncate">${aut.cargo}</p>
                         </div>
                       </div>
 
-                      <!-- LINHA DA ESPOSA (FOTO ABAIXO 10% MENOR, ALINHADA COM O NOME DA ESPOSA) -->
+                      <div class="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-navy flex-shrink-0 transition-transform">
+                        <i id="acc-icon-${uniqueId}" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                      </div>
+                    </div>
+
+                    <!-- CONTEÚDO OCULTO -->
+                    <div id="acc-content-${uniqueId}" class="hidden p-4 sm:p-5 border-t border-slate-100 space-y-4 bg-white">
+                      
                       ${wifePhotoSrc && aut.esposa && aut.esposa !== '-' ? `
-                        <div class="flex items-center gap-3.5 sm:gap-4 pt-1">
-                          <button onclick="openPhotoViewer('fotos-autoridades/${aut.fotoEsposa}', 'Sra. ${cleanWifeName.replace(/'/g, "\\'")}', '${esposaRoleText.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] rounded-full overflow-hidden border-2 border-gold/70 shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0">
-                            <img src="fotos-autoridades/${aut.fotoEsposa}" alt="Sra. ${cleanWifeName}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                          </button>
+                        <div class="flex items-center gap-3.5 sm:gap-4 pb-3 border-b border-slate-100">
+                          <div onclick="openPhotoViewer('fotos-autoridades/${aut.fotoEsposa}', 'Sra. ${cleanWifeName.replace(/'/g, "\\'")}', '${esposaRoleText.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-[45px] h-[45px] sm:w-[52px] sm:h-[52px] rounded-full overflow-hidden border-2 border-gold/70 shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0 cursor-pointer">
+                            <img src="fotos-autoridades/${aut.fotoEsposa}" alt="Sra. ${cleanWifeName}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4 z\'/></svg>';">
+                          </div>
                           <div class="flex-grow min-w-0">
                             ${formatAcompanhanteAutoridade(aut.esposa)}
                           </div>
                         </div>
                       ` : ''}
 
-                    </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+                          <span class="font-black text-sky-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-arrival mr-1"></i>Informações de Chegada</span>
+                          <p class="font-bold text-slate-800">${aut.chegada}</p>
+                        </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
-                        <span class="font-black text-sky-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-arrival mr-1"></i>Informações de Chegada</span>
-                        <p class="font-bold text-slate-800">${aut.chegada}</p>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+                          <span class="font-black text-amber-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-departure mr-1"></i>Informações de Partida</span>
+                          <p class="font-bold text-slate-800">${aut.partida}</p>
+                        </div>
                       </div>
 
-                      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
-                        <span class="font-black text-amber-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-departure mr-1"></i>Informações de Partida</span>
-                        <p class="font-bold text-slate-800">${aut.partida}</p>
-                      </div>
-                    </div>
-
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
-                      <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
-                        <i class="fa-solid fa-hotel text-amber-500"></i>
-                        <span>Estadia / Hospedagem</span>
-                      </div>
-                      <p class="font-bold text-slate-800">${aut.estadia}</p>
-                    </div>
-
-                    ${aut.assistentes && aut.assistentes.length > 0 ? `
                       <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
                         <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
-                          <i class="fa-solid fa-user-tie text-sky-600"></i>
-                          <span>Assistentes & Ajudantes de Ordens</span>
+                          <i class="fa-solid fa-hotel text-amber-500"></i>
+                          <span>Estadia / Hospedagem</span>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          ${aut.assistentes.map(ast => `
-                            <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between gap-2">
-                              <div>
-                                <span class="text-[10px] font-black uppercase text-slate-500 block">${ast.cargo}</span>
-                                <p class="font-bold text-slate-900">${ast.nome}</p>
-                                <span class="text-[11px] font-mono font-bold text-navy block">${ast.tel || 'Contato N/I'}</span>
-                              </div>
-                              ${ast.tel ? `
-                                <div class="flex items-center gap-1">
-                                  <a href="tel:${cleanPhone(ast.tel)}" class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar">
-                                    <i class="fa-solid fa-phone text-[10px]"></i>
-                                  </a>
-                                  <a href="https://wa.me/55${cleanPhone(ast.tel)}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp">
-                                    <i class="fa-brands fa-whatsapp text-xs"></i>
-                                  </a>
-                                </div>
-                              ` : ''}
-                            </div>
-                          `).join('')}
-                        </div>
+                        <p class="font-bold text-slate-800">${aut.estadia}</p>
                       </div>
-                    ` : ''}
+
+                      ${aut.assistentes && aut.assistentes.length > 0 ? `
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
+                          <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
+                            <i class="fa-solid fa-user-tie text-sky-600"></i>
+                            <span>Assistentes & Ajudantes de Ordens</span>
+                          </div>
+                          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            ${aut.assistentes.map(ast => `
+                              <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between gap-2">
+                                <div>
+                                  <span class="text-[10px] font-black uppercase text-slate-500 block">${ast.cargo}</span>
+                                  <p class="font-bold text-slate-900">${ast.nome}</p>
+                                  <span class="text-[11px] font-mono font-bold text-navy block">${ast.tel || 'Contato N/I'}</span>
+                                </div>
+                                ${ast.tel ? `
+                                  <div class="flex items-center gap-1">
+                                    <a href="tel:${cleanPhone(ast.tel)}" class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar">
+                                      <i class="fa-solid fa-phone text-[10px]"></i>
+                                    </a>
+                                    <a href="https://wa.me/55${cleanPhone(ast.tel)}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp">
+                                      <i class="fa-brands fa-whatsapp text-xs"></i>
+                                    </a>
+                                  </div>
+                                ` : ''}
+                              </div>
+                            `).join('')}
+                          </div>
+                        </div>
+                      ` : ''}
+
+                    </div>
                   </div>
                 `;
               }).join('')}
@@ -1649,26 +1813,7 @@
         `).join('');
       }
 
-      const hospedagemContainer = document.getElementById('hospedagemListContainer');
-      if (hospedagemContainer) {
-        hospedagemContainer.innerHTML = logistics.hospedagem.map(h => `
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2 shadow-sm">
-            <h4 class="text-base sm:text-lg font-black text-navy border-b border-slate-200 pb-1">${h.autoridade}</h4>
-            <ul class="space-y-2 pt-1">
-              ${h.estadias.map(est => `
-                <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
-                  <span class="text-navy font-black text-base leading-none mt-0.5">•</span>
-                  <div>
-                    <span class="font-extrabold text-navy">${est.cidade}:</span>
-                    <span class="font-bold text-slate-800">${est.local}</span>
-                    <span class="text-slate-600 font-medium block sm:inline sm:ml-1">(Período: <strong class="text-slate-900 font-bold">${est.periodo}</strong>)</span>
-                  </div>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        `).join('');
-      }
+      renderHospedagemModal();
 
       const uniformesContainer = document.getElementById('uniformesGridContainer');
       if (uniformesContainer) {
