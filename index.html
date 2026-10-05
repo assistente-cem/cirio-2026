@@ -71,34 +71,40 @@
           <span>FILTRAR ATIVIDADES POR:</span>
         </div>
         
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 flex-grow max-w-3xl">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 flex-grow max-w-3xl">
           <div class="relative">
-            <select id="filterCity" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
-              <option value="">Cidades</option>
+            <select id="filterTipoEvento" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Tipo de Evento (Todos)</option>
+              <option value="VAP">VAP</option>
+              <option value="Círio">Círio</option>
+              <option value="Cerimônia">Cerimônia</option>
+              <option value="Almoço">Almoço</option>
+              <option value="Jantar">Jantar</option>
+              <option value="Deslocamento">Deslocamento</option>
             </select>
             <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
           </div>
 
           <div class="relative">
-            <select id="filterParticipant" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
-              <option value="">Participantes</option>
-              <option value="DN-01">DN-01</option>
-              <option value="DN-02">DN-02</option>
-              <option value="Almirantes">Apenas Almirantes</option>
+            <select id="filterParticipantes" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Participantes (Todos)</option>
+              <option value="V Alte Batista">V Alte Batista</option>
+              <option value="C Alte José Fabio">C Alte José Fabio</option>
+              <option value="Almirantes">Almirantes</option>
+              <option value="Esposas">Esposas</option>
             </select>
             <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
           </div>
 
           <div class="relative">
-            <select id="filterUniform" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
-              <option value="">Uniforme</option>
-              <option value="OP3">OP3</option>
-              <option value="6.6">6.6</option>
-              <option value="5.5">5.5</option>
-              <option value="Passeio">Passeio</option>
-              <option value="TFM">TFM</option>
-              <option value="Casual">Casual</option>
-              <option value="Esporte Amazônico">Esporte Amazônico</option>
+            <select id="filterLocalCategoria" onchange="applyFilters()" class="w-full bg-slate-900/90 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Local (Todos)</option>
+              <option value="OM">OM</option>
+              <option value="Navios">Navios</option>
+              <option value="Residência do Com4DN">Residência do Com4DN</option>
+              <option value="Clube Espadarte">Clube Espadarte</option>
+              <option value="Restaurantes">Restaurantes</option>
+              <option value="Aeroporto">Aeroporto</option>
             </select>
             <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
           </div>
@@ -274,7 +280,7 @@
   </div>
 
   <div id="modalAutoridades" class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white w-full sm:max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
+    <div class="bg-white w-full sm:max-w-3xl rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
       <div class="p-4 bg-navy text-white flex items-center justify-between border-b border-gold/30">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-user-shield text-gold text-xl"></i>
@@ -284,7 +290,62 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div class="p-4 sm:p-6 overflow-y-auto space-y-6" id="autoridadesListContainer"></div>
+
+      <!-- BARRA DE FILTROS DO MENU DE AUTORIDADES -->
+      <div class="bg-navy-dark/95 p-3 border-b border-gold/30 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black text-gold uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-filter text-gold text-xs"></i> Filtrar Autoridades:
+          </span>
+          <button onclick="clearAutoridadesFilters()" class="text-[11px] font-extrabold text-slate-300 hover:text-white underline transition">
+            Limpar Filtros
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-2">
+          <!-- Autoridade -->
+          <div class="relative">
+            <select id="authFilterNome" onchange="renderAutoridadesModal()" class="w-full bg-slate-900 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Autoridade (Todas)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <!-- Esposas -->
+          <div class="relative">
+            <select id="authFilterEsposa" onchange="renderAutoridadesModal()" class="w-full bg-slate-900 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Esposas (Todas)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <!-- Hospedagem -->
+          <div class="relative">
+            <select id="authFilterHospedagem" onchange="renderAutoridadesModal()" class="w-full bg-slate-900 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Hospedagem (Todas)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <!-- Assistente -->
+          <div class="relative">
+            <select id="authFilterAssistente" onchange="renderAutoridadesModal()" class="w-full bg-slate-900 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Assistente (Todos)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+
+          <!-- Motorista -->
+          <div class="relative">
+            <select id="authFilterMotorista" onchange="renderAutoridadesModal()" class="w-full bg-slate-900 text-white border border-white/20 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-gold appearance-none">
+              <option value="">Motorista (Todos)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-6 flex-grow" id="autoridadesListContainer"></div>
       <div class="p-3 bg-slate-50 border-t border-slate-100 text-right">
         <button onclick="closeModal('modalAutoridades')" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-xl hover:bg-navy-dark transition">
           Fechar
@@ -394,18 +455,18 @@
         dayLabel: "05 OUT",
         weekDay: "Segunda-feira",
         events: [
-          { id: "05.01", time: "07:00", endHour: 8.0, activity: "Café da manhã", location: "Base Naval de Val-de-Cães - Santarém", city: "Santarém", uniform: "-", participants: "ComGer e Sra Carla, DN-01, CFS-01 e comitiva", notes: "Café da manhã." },
-          { id: "05.02", time: "08:00", endHour: 8.08, activity: "Deslocamento para a CFS", location: "Capitania dos Portos de Santarém", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Deslocamento." },
-          { id: "05.03", time: "08:05", endHour: 8.25, activity: "Honras de recepção", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Recepção." },
-          { id: "05.04", time: "08:15", endHour: 9.25, activity: "Apresentação sobre o Com4°DN e temas da VAP", location: "CFS - Gabinete", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "O Com4°DN fará a apresentação." },
-          { id: "05.05", time: "09:20", endHour: 9.66, activity: "Visita às instalações da CFS", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Roteiro: Gabinete, Departamento STA, CCCAM e EPM." },
-          { id: "05.06", time: "09:40", endHour: 10.0, activity: "Honras de despedida e deslocamento para Cargill", location: "CFS para Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Despedida." },
-          { id: "05.07", time: "10:00", endHour: 11.5, activity: "Visita às instalações da Cargill", location: "Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Visita Cargill." },
-          { id: "05.08", time: "11:35", endHour: 12.33, activity: "Deslocamento para o hotel Universal", location: "Cargill para Base Naval de Val-de-Cães", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Retorno." },
-          { id: "05.09", time: "12:20", endHour: 12.5, activity: "Check-out e deslocamento para o almoço", location: "Base Naval de Val-de-Cães - Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Check-out." },
-          { id: "05.10", time: "12:30", endHour: 13.5, activity: "Almoço e deslocamento para o aeroporto", location: "Churrascaria Dois Irmãos", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Almoço." },
-          { id: "05.11", time: "16:40", endHour: 17.75, activity: "Regresso do AE (FN) Carlos Chagas (ComGer) para Belém (Voo GOL 1731)", location: "Aeroporto de Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, comitiva", flight: "G31731", notes: "Voo GOL 1731." },
-          { id: "05.12", time: "20:00", endHour: 22.0, activity: "Jantar", location: "Estação das Docas", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar." }
+          { id: "05.01", time: "07:00", endHour: 8.0, activity: "Café da manhã", location: "Base Naval de Val-de-Cães - Santarém", city: "Santarém", uniform: "-", participants: "ComGer e Sra Carla, DN-01, CFS-01 e comitiva", notes: "Café da manhã.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "05.02", time: "08:00", endHour: 8.08, activity: "Deslocamento para a CFS", location: "Capitania dos Portos de Santarém", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "05.03", time: "08:05", endHour: 8.25, activity: "Honras de recepção", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Recepção.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "05.04", time: "08:15", endHour: 9.25, activity: "Apresentação sobre o Com4°DN e temas da VAP", location: "CFS - Gabinete", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "O Com4°DN fará a apresentação.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "05.05", time: "09:20", endHour: 9.66, activity: "Visita às instalações da CFS", location: "CFS", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Roteiro: Gabinete, Departamento STA, CCCAM e EPM.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "05.06", time: "09:40", endHour: 10.0, activity: "Honras de despedida e deslocamento para Cargill", location: "CFS para Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Despedida.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "05.07", time: "10:00", endHour: 11.5, activity: "Visita às instalações da Cargill", location: "Cargill", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Visita Cargill.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "05.08", time: "11:35", endHour: 12.33, activity: "Deslocamento para o hotel Universal", location: "Cargill para Base Naval de Val-de-Cães", city: "Santarém", uniform: "OP3/6.6", participants: "ComGer, DN-01, CFS-01 e comitiva", notes: "Retorno.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "05.09", time: "12:20", endHour: 12.5, activity: "Check-out e deslocamento para o almoço", location: "Base Naval de Val-de-Cães - Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Check-out.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "05.10", time: "12:30", endHour: 13.5, activity: "Almoço e deslocamento para o aeroporto", location: "Churrascaria Dois Irmãos", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, CFS-01 e Sra Hellen Caroline, comitiva", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "Restaurantes" },
+          { id: "05.11", time: "16:40", endHour: 17.75, activity: "Regresso do AE (FN) Carlos Chagas (ComGer) para Belém (Voo GOL 1731)", location: "Aeroporto de Santarém", city: "Santarém", uniform: "Passeio", participants: "ComGer e Sra Carla, DN-01, comitiva", flight: "G31731", notes: "Voo GOL 1731.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "05.12", time: "20:00", endHour: 22.0, activity: "Jantar", location: "Estação das Docas", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e Esposas", notes: "Jantar.", tipoEvento: "Jantar", localCategoria: "Restaurantes" }
         ]
       },
       {
@@ -413,20 +474,20 @@
         dayLabel: "06 OUT",
         weekDay: "Terça-feira",
         events: [
-          { id: "06.01", time: "06:00", endHour: 7.0, activity: "Corrida com a tripulação do 2º Batalhão de Operações Ribeirinhas", location: "Rua da Marinha", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02 e tripulação", notes: "Corrida de 5/10 Km na nova Rua da Marinha." },
-          { id: "06.02", time: "07:40", endHour: 8.5, activity: "Café da manhã", location: "Rancho do 2º Batalhão de Operações Ribeirinhas", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02, Tripulação do 2ºBtlOpRib e comitiva", notes: "Café." },
-          { id: "06.03", time: "08:30", endHour: 9.0, activity: "Deslocamento para residência", location: "2ºBtlOpRib para Residência Funcional", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
-          { id: "06.04", time: "09:20", endHour: 9.75, activity: "Deslocamento terrestre para o Terminal Hidroviário de Icoaraci", location: "Residência para Terminal de Icoaraci", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento terrestre." },
-          { id: "06.05", time: "09:45", endHour: 10.16, activity: "Chegada no Terminal de Icoaraci e embarque na LOpRib", location: "Terminal Hidroviário Turístico De Icoaraci", city: "Icoaraci", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN, 2ºBtlOpRib e comitiva", notes: "Embarque LOpRib." },
-          { id: "06.06", time: "10:10", endHour: 12.0, activity: "Embarque no NA PARÁ e início da Demonstração Operativa", location: "Outeiro/PA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Haverá participação do HE." },
-          { id: "06.07", time: "12:00", endHour: 13.5, activity: "Almoço a bordo do NA PARÁ", location: "Baía do Guajará", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN, 2ºBtlOpRib e comitiva", notes: "Regresso para BNVC a bordo do NA PARÁ durante o almoço." },
-          { id: "06.08", time: "12:00", endHour: 12.5, activity: "Chegada do AE Alipio Jorge e CA(FN) Tonini (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "-", participants: "CF Rafael Peixoto", flight: "G32006", notes: "Voo GOL 2006." },
-          { id: "06.09", time: "14:00", endHour: 14.66, activity: "Visita ao NASH Anna Nery", location: "GPNN", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN e comitiva", notes: "Anna Nery." },
-          { id: "06.10", time: "14:50", endHour: 15.83, activity: "Visita às instalações do Centro de Intendência da Marinha em Belém e área de cessão de uso onerosa da BNVC", location: "CeIMBe/BNVC", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Sede Administrativa, PDU, Purificatta e Rancho." },
-          { id: "06.11", time: "16:00", endHour: 17.0, activity: "Deslocamento para a residência", location: "CeIMBe para Residência Funcional", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
-          { id: "06.12", time: "17:20", endHour: 18.0, activity: "Deslocamento para Basílica Santuário de Nossa Senhora de Nazaré", location: "Residência para Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
-          { id: "06.13", time: "18:00", endHour: 20.0, activity: "Missa e cerimônia de abertura do Círio", location: "Basílica de Nazaré / Casa de Plácido", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
-          { id: "06.14", time: "20:30", endHour: 22.5, activity: "Jantar", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Jantar." }
+          { id: "06.01", time: "06:00", endHour: 7.0, activity: "Corrida com a tripulação do 2º Batalhão de Operações Ribeirinhas", location: "Rua da Marinha", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02 e tripulação", notes: "Corrida de 5/10 Km na nova Rua da Marinha.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "06.02", time: "07:40", endHour: 8.5, activity: "Café da manhã", location: "Rancho do 2º Batalhão de Operações Ribeirinhas", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02, Tripulação do 2ºBtlOpRib e comitiva", notes: "Café.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "06.03", time: "08:30", endHour: 9.0, activity: "Deslocamento para residência", location: "2ºBtlOpRib para Residência Funcional", city: "Belém", uniform: "TFM", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "06.04", time: "09:20", endHour: 9.75, activity: "Deslocamento terrestre para o Terminal Hidroviário de Icoaraci", location: "Residência para Terminal de Icoaraci", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento terrestre.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "06.05", time: "09:45", endHour: 10.16, activity: "Chegada no Terminal de Icoaraci e embarque na LOpRib", location: "Terminal Hidroviário Turístico De Icoaraci", city: "Icoaraci", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN, 2ºBtlOpRib e comitiva", notes: "Embarque LOpRib.", tipoEvento: "VAP", localCategoria: "Navios" },
+          { id: "06.06", time: "10:10", endHour: 12.0, activity: "Embarque no NA PARÁ e início da Demonstração Operativa", location: "Outeiro/PA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Haverá participação do HE.", tipoEvento: "VAP", localCategoria: "Navios" },
+          { id: "06.07", time: "12:00", endHour: 13.5, activity: "Almoço a bordo do NA PARÁ", location: "Baía do Guajará", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN, 2ºBtlOpRib e comitiva", notes: "Regresso para BNVC a bordo do NA PARÁ durante o almoço.", tipoEvento: "Almoço", localCategoria: "Navios" },
+          { id: "06.08", time: "12:00", endHour: 12.5, activity: "Chegada do AE Alipio Jorge e CA(FN) Tonini (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "-", participants: "CF Rafael Peixoto", flight: "G32006", notes: "Voo GOL 2006.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "06.09", time: "14:00", endHour: 14.66, activity: "Visita ao NASH Anna Nery", location: "GPNN", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02, GPNN e comitiva", notes: "Anna Nery.", tipoEvento: "VAP", localCategoria: "Navios" },
+          { id: "06.10", time: "14:50", endHour: 15.83, activity: "Visita às instalações do Centro de Intendência da Marinha em Belém e área de cessão de uso onerosa da BNVC", location: "CeIMBe/BNVC", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Sede Administrativa, PDU, Purificatta e Rancho.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "06.11", time: "16:00", endHour: 17.0, activity: "Deslocamento para a residência", location: "CeIMBe para Residência Funcional", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "06.12", time: "17:20", endHour: 18.0, activity: "Deslocamento para Basílica Santuário de Nossa Senhora de Nazaré", location: "Residência para Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e Esposas", notes: "Evento facultativo.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "06.13", time: "18:00", endHour: 20.0, activity: "Missa e cerimônia de abertura do Círio", location: "Basílica de Nazaré / Casa de Plácido", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e Esposas", notes: "Evento facultativo.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "06.14", time: "20:30", endHour: 22.5, activity: "Jantar", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Jantar.", tipoEvento: "Jantar", localCategoria: "Residência do Com4DN" }
         ]
       },
       {
@@ -434,18 +495,18 @@
         dayLabel: "07 OUT",
         weekDay: "Quarta-feira",
         events: [
-          { id: "07.01", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
-          { id: "07.02", time: "07:30", endHour: 8.25, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
-          { id: "07.03", time: "08:15", endHour: 8.5, activity: "Deslocamento para o CIABA", location: "Residência para CIABA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
-          { id: "07.04", time: "08:30", endHour: 10.5, activity: "Honras de recepção e visita às instalações do CIABA", location: "CIABA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Laboratórios, Galpão de Máquinas, Diesel-Elétrica, CBINC/CAV e Simuladores." },
-          { id: "07.05", time: "10:40", endHour: 10.83, activity: "Deslocamento para o CHN-4", location: "CIABA para CHN-4", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento." },
-          { id: "07.06", time: "11:45", endHour: 12.3, activity: "Chegada do AE Paulo Ferreira (CHOC) (Voo GOL 1730)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "G31730", notes: "Voo GOL 1730." },
-          { id: "07.07", time: "12:00", endHour: 12.5, activity: "Chegada do AE Vazquez (CON) e Sra Anna Paula (Voo LATAM 3228)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "LA3228", notes: "Voo LATAM 3228." },
-          { id: "07.08", time: "12:40", endHour: 14.0, activity: "Almoço", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Almoço." },
-          { id: "07.09", time: "14:00", endHour: 18.0, activity: "Tarde Livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
-          { id: "07.10", time: "18:30", endHour: 19.0, activity: "Deslocamento para o Com4°DN", location: "Residência para Com4ºDN", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Deslocamento." },
-          { id: "07.11", time: "19:00", endHour: 21.5, activity: "Cerimônia do Sesquicentenário da sede do Comando do 4º Distrito Naval", location: "Comando do 4° Distrito Naval", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Sesquicentenário." },
-          { id: "07.12", time: "23:35", endHour: 24.2, activity: "Chegada do AE Sílvio Luís e C Alte Ozório (Voo GOL 1736)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G31736", notes: "Voo GOL 1736." }
+          { id: "07.01", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "07.02", time: "07:30", endHour: 8.25, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Café.", tipoEvento: "VAP", localCategoria: "Residência do Com4DN" },
+          { id: "07.03", time: "08:15", endHour: 8.5, activity: "Deslocamento para o CIABA", location: "Residência para CIABA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "07.04", time: "08:30", endHour: 10.5, activity: "Honras de recepção e visita às instalações do CIABA", location: "CIABA", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Roteiro: Laboratórios, Galpão de Máquinas, Diesel-Elétrica, CBINC/CAV e Simuladores.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "07.05", time: "10:40", endHour: 10.83, activity: "Deslocamento para o CHN-4", location: "CIABA para CHN-4", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DN-01, DN-02 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "07.06", time: "11:45", endHour: 12.3, activity: "Chegada do AE Paulo Ferreira (CHOC) (Voo GOL 1730)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "G31730", notes: "Voo GOL 1730.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "07.07", time: "12:00", endHour: 12.5, activity: "Chegada do AE Vazquez (CON) e Sra Anna Paula (Voo LATAM 3228)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, Esposas", flight: "LA3228", notes: "Voo LATAM 3228.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "07.08", time: "12:40", endHour: 14.0, activity: "Almoço", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "Residência do Com4DN" },
+          { id: "07.09", time: "14:00", endHour: 18.0, activity: "Tarde Livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "07.10", time: "18:30", endHour: 19.0, activity: "Deslocamento para o Com4°DN", location: "Residência para Com4ºDN", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "07.11", time: "19:00", endHour: 21.5, activity: "Cerimônia do Sesquicentenário da sede do Comando do 4º Distrito Naval", location: "Comando do 4° Distrito Naval", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Sesquicentenário.", tipoEvento: "Cerimônia", localCategoria: "OM" },
+          { id: "07.12", time: "23:35", endHour: 24.2, activity: "Chegada do AE Sílvio Luís e C Alte Ozório (Voo GOL 1736)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G31736", notes: "Voo GOL 1736.", tipoEvento: "Círio", localCategoria: "Aeroporto" }
         ]
       },
       {
@@ -453,21 +514,21 @@
         dayLabel: "08 OUT",
         weekDay: "Quinta-feira",
         events: [
-          { id: "08.01", time: "02:15", endHour: 3.0, activity: "Chegada da Sra Ana (Esposa do AE Sílvio Luís) (Voo GOL 2008)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "OP3", participants: "DGN e DN-01", flight: "G32008", notes: "Voo GOL 2008." },
-          { id: "08.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
-          { id: "08.03", time: "07:30", endHour: 8.33, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
-          { id: "08.04", time: "08:20", endHour: 10.0, activity: "VAP: Viagem a Macapá", location: "Base Aérea de Belém", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DGN, DN-02 e comitiva", notes: "Viagem." },
-          { id: "08.05", time: "08:20", endHour: 8.5, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Deslocamento." },
-          { id: "08.06", time: "08:30", endHour: 9.5, activity: "Embarque na lancha e deslocamento fluvial para Barcarena", location: "GPNN", city: "Belém", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Deslocamento fluvial." },
-          { id: "08.07", time: "09:30", endHour: 11.5, activity: "Visita ao Porto de Vila do Conde e às instalações da Hidrovias do Brasil", location: "Barcarena", city: "Barcarena", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Barcarena." },
-          { id: "08.08", time: "11:30", endHour: 12.0, activity: "Retorno para o cais da praticagem", location: "Barcarena para Praticagem", city: "Barcarena", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Retorno." },
-          { id: "08.09", time: "12:00", endHour: 12.5, activity: "Chegada da Sra Valeria Ozório (Esposa do C Alte Ozório) (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e CheGab CM", flight: "G32006", notes: "Voo GOL 2006." },
-          { id: "08.10", time: "12:30", endHour: 14.0, activity: "Almoço", location: "Sede da Praticagem Barra do Pará", city: "Belém", uniform: "-", participants: "Almirantes", notes: "Almoço." },
-          { id: "08.11", time: "17:20", endHour: 18.0, activity: "Deslocamento para Basílica Santuário de Nossa Senhora de Nazaré", location: "Residência para Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
-          { id: "08.12", time: "18:00", endHour: 20.0, activity: "Missa de apresentação do Manto de Nossa Senhora de Nazaré", location: "Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e esposas", notes: "Evento facultativo." },
-          { id: "08.13", time: "20:30", endHour: 22.5, activity: "Noite árabe", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Jantar temático." },
-          { id: "08.14", time: "21:55", endHour: 22.5, activity: "Chegada do AE Olsen e Sra Marcela (Voo TAP 47)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01", flight: "TP47", notes: "Voo TAP 47." },
-          { id: "08.15", time: "23:35", endHour: 24.2, activity: "Chegada do AE Edgar e Sra Geórgia (Voo LATAM 3706)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "OP3", participants: "DN-01, CMG Barros", flight: "LA3706", notes: "Voo LATAM 3706." }
+          { id: "08.01", time: "02:15", endHour: 3.0, activity: "Chegada da Sra Ana (Esposa do AE Sílvio Luís) (Voo GOL 2008)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "OP3", participants: "DGN, DN-01, Esposas", flight: "G32008", notes: "Voo GOL 2008.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "08.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "08.03", time: "07:30", endHour: 8.33, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Café.", tipoEvento: "VAP", localCategoria: "Residência do Com4DN" },
+          { id: "08.04", time: "08:20", endHour: 10.0, activity: "VAP: Viagem a Macapá", location: "Base Aérea de Belém", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DGN, DN-02 e comitiva", notes: "Viagem.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "08.05", time: "08:20", endHour: 8.5, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "08.06", time: "08:30", endHour: 9.5, activity: "Embarque na lancha e deslocamento fluvial para Barcarena", location: "GPNN", city: "Belém", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Deslocamento fluvial.", tipoEvento: "VAP", localCategoria: "Navios" },
+          { id: "08.07", time: "09:30", endHour: 11.5, activity: "Visita ao Porto de Vila do Conde e às instalações da Hidrovias do Brasil", location: "Barcarena", city: "Barcarena", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Barcarena.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "08.08", time: "11:30", endHour: 12.0, activity: "Retorno para o cais da praticagem", location: "Barcarena para Praticagem", city: "Barcarena", uniform: "OP3", participants: "CON, CHOC, DN-01 e comitiva", notes: "Retorno.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "08.09", time: "12:00", endHour: 12.5, activity: "Chegada da Sra Valeria Ozório (Esposa do C Alte Ozório) (Voo GOL 2006)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, CheGab CM, Esposas", flight: "G32006", notes: "Voo GOL 2006.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "08.10", time: "12:30", endHour: 14.0, activity: "Almoço", location: "Sede da Praticagem Barra do Pará", city: "Belém", uniform: "-", participants: "Almirantes", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "Restaurantes" },
+          { id: "08.11", time: "17:20", endHour: 18.0, activity: "Deslocamento para Basílica Santuário de Nossa Senhora de Nazaré", location: "Residência para Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e Esposas", notes: "Evento facultativo.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "08.12", time: "18:00", endHour: 20.0, activity: "Missa de apresentação do Manto de Nossa Senhora de Nazaré", location: "Basílica de Nazaré", city: "Belém", uniform: "5.5 sem cobertura", participants: "Almirantes e Esposas", notes: "Evento facultativo.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "08.13", time: "20:30", endHour: 22.5, activity: "Noite árabe", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Jantar temático.", tipoEvento: "Jantar", localCategoria: "Residência do Com4DN" },
+          { id: "08.14", time: "21:55", endHour: 22.5, activity: "Chegada do AE Olsen e Sra Marcela (Voo TAP 47)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, Esposas", flight: "TP47", notes: "Voo TAP 47.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "08.15", time: "23:35", endHour: 24.2, activity: "Chegada do AE Edgar e Sra Geórgia (Voo LATAM 3706)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "OP3", participants: "DN-01, CMG Barros, Esposas", flight: "LA3706", notes: "Voo LATAM 3706.", tipoEvento: "Círio", localCategoria: "Aeroporto" }
         ]
       },
       {
@@ -475,19 +536,19 @@
         dayLabel: "09 OUT",
         weekDay: "Sexta-feira",
         events: [
-          { id: "09.01", time: "00:15", endHour: 1.0, activity: "Chegada do V Alte Lima Filho, V Alte Taulois e esposas (Voo LATAM 3232)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01 e BtlOpRib-01", flight: "LA3232", notes: "Voo LATAM 3232." },
-          { id: "09.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
-          { id: "09.03", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
-          { id: "09.04", time: "10:00", endHour: 10.33, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Deslocamento." },
-          { id: "09.05", time: "10:20", endHour: 11.0, activity: "Embarque na lancha e deslocamento fluvial para o restaurante Porto Combu", location: "GPNN", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Embarque lancha." },
-          { id: "09.06", time: "10:50", endHour: 11.3, activity: "Chegada do AE Bettega e Sra Suzeli (Voo LATAM 3877)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01", flight: "LA3877", notes: "Voo LATAM 3877." },
-          { id: "09.07", time: "11:00", endHour: 16.0, activity: "Almoço", location: "Porto Combu", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Porto Combu." },
-          { id: "09.08", time: "11:55", endHour: 12.5, activity: "Chegada do C Alte Bonotto (Voo AZUL 4840)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "AD4840", notes: "Voo AZUL 4840." },
-          { id: "09.09", time: "13:20", endHour: 14.0, activity: "Chegada da C Alte (Md) Mônica Luna (Voo LATAM 4596)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "LA4596", notes: "Voo LATAM 4596." },
-          { id: "09.10", time: "16:30", endHour: 17.0, activity: "Embarque na lancha e regresso para a residência funcional e HT", location: "Porto Combu", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Regresso Combu." },
-          { id: "09.11", time: "17:00", endHour: 17.5, activity: "VAP: Pouso em Belém e deslocamento para residência funcional do Com4°DN", location: "Oiapoque x Belém", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DGN, DN-02 e comitiva", notes: "Regresso e encerramento da VAP." },
-          { id: "09.12", time: "17:30", endHour: 18.0, activity: "Chegada na residência funcional e HT", location: "Vila Naval Espadarte", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Acomodação." },
-          { id: "09.13", time: "19:30", endHour: 22.0, activity: "Noite Paraense", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+          { id: "09.01", time: "00:15", endHour: 1.0, activity: "Chegada do V Alte Lima Filho, V Alte Taulois e esposas (Voo LATAM 3232)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01, BtlOpRib-01, Esposas", flight: "LA3232", notes: "Voo LATAM 3232.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "09.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo.", tipoEvento: "VAP", localCategoria: "OM" },
+          { id: "09.03", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Café.", tipoEvento: "VAP", localCategoria: "Residência do Com4DN" },
+          { id: "09.04", time: "10:00", endHour: 10.33, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "Casual", participants: "Almirantes e Esposas", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "09.05", time: "10:20", endHour: 11.0, activity: "Embarque na lancha e deslocamento fluvial para o restaurante Porto Combu", location: "GPNN", city: "Belém", uniform: "Casual", participants: "Almirantes e Esposas", notes: "Embarque lancha.", tipoEvento: "VAP", localCategoria: "Navios" },
+          { id: "09.06", time: "10:50", endHour: 11.3, activity: "Chegada do AE Bettega e Sra Suzeli (Voo LATAM 3877)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01, Esposas", flight: "LA3877", notes: "Voo LATAM 3877.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "09.07", time: "11:00", endHour: 16.0, activity: "Almoço", location: "Porto Combu", city: "Belém", uniform: "Casual", participants: "Almirantes e Esposas", notes: "Porto Combu.", tipoEvento: "Almoço", localCategoria: "Restaurantes" },
+          { id: "09.08", time: "11:55", endHour: 12.5, activity: "Chegada do C Alte Bonotto (Voo AZUL 4840)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "AD4840", notes: "Voo AZUL 4840.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "09.09", time: "13:20", endHour: 14.0, activity: "Chegada da C Alte (Md) Mônica Luna (Voo LATAM 4596)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "LA4596", notes: "Voo LATAM 4596.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "09.10", time: "16:30", endHour: 17.0, activity: "Embarque na lancha e regresso para a residência funcional e HT", location: "Porto Combu", city: "Belém", uniform: "Casual", participants: "Almirantes e Esposas", notes: "Regresso Combu.", tipoEvento: "Deslocamento", localCategoria: "Navios" },
+          { id: "09.11", time: "17:00", endHour: 17.5, activity: "VAP: Pouso em Belém e deslocamento para residência funcional do Com4°DN", location: "Oiapoque x Belém", city: "Belém", uniform: "OP3/6.6", participants: "ComGer, DGN, DN-02 e comitiva", notes: "Regresso e encerramento da VAP.", tipoEvento: "VAP", localCategoria: "Aeroporto" },
+          { id: "09.12", time: "17:30", endHour: 18.0, activity: "Chegada na residência funcional e HT", location: "Vila Naval Espadarte", city: "Belém", uniform: "Casual", participants: "Almirantes e Esposas", notes: "Acomodação.", tipoEvento: "VAP", localCategoria: "Residência do Com4DN" },
+          { id: "09.13", time: "19:30", endHour: 22.0, activity: "Noite Paraense", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e Esposas", notes: "Jantar temático.", tipoEvento: "Jantar", localCategoria: "Residência do Com4DN" }
         ]
       },
       {
@@ -495,16 +556,16 @@
         dayLabel: "10 OUT",
         weekDay: "Sábado",
         events: [
-          { id: "10.01", time: "06:30", endHour: 6.75, activity: "Embarque no NHo Garnier Sampaio", location: "Base Naval de Val de Cães", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Embarque." },
-          { id: "10.02", time: "06:45", endHour: 7.75, activity: "Suspender do NHo Garnier Sampaio", location: "Base Naval de Val de Cães", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Navegação." },
-          { id: "10.03", time: "07:45", endHour: 8.5, activity: "Atracação em Icoaraci", location: "Icoaraci", city: "Icoaraci", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Icoaraci." },
-          { id: "10.04", time: "08:30", endHour: 9.0, activity: "Chegada da Imagem Peregrina de Nossa Senhora de Nazaré", location: "NHo Garnier Sampaio", city: "Icoaraci", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Recepção Imagem." },
-          { id: "10.05", time: "09:00", endHour: 11.0, activity: "Desatracação e Início da Romaria Fluvial", location: "NHo Garnier Sampaio", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Romaria Fluvial." },
-          { id: "10.06", time: "11:00", endHour: 12.5, activity: "Atracação do NHo Garnier Sampaio", location: "Escadinha do Cais do Porto", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Escadinha." },
-          { id: "10.07", time: "12:30", endHour: 13.5, activity: "Atracação do NHo Garnier Sampaio", location: "BNVC", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e esposas", notes: "Retorno BNVC." },
-          { id: "10.08", time: "13:30", endHour: 16.0, activity: "Almoço na Residência do Sr. Carlos Nascimento", location: "Edifício Premium 92 - Apt 1201", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Almoço." },
-          { id: "10.09", time: "17:00", endHour: 19.5, activity: "Transladação do Círio de Nazaré", location: "Prédio da Diretoria do Paysandu Sport Club", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Evento facultativo." },
-          { id: "10.10", time: "20:00", endHour: 22.5, activity: "Noite italiana", location: "Clube Naval Espadarte", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+          { id: "10.01", time: "06:30", endHour: 6.75, activity: "Embarque no NHo Garnier Sampaio", location: "Base Naval de Val de Cães", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Embarque.", tipoEvento: "Deslocamento", localCategoria: "Navios" },
+          { id: "10.02", time: "06:45", endHour: 7.75, activity: "Suspender do NHo Garnier Sampaio", location: "Base Naval de Val de Cães", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Navegação.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "10.03", time: "07:45", endHour: 8.5, activity: "Atracação em Icoaraci", location: "Icoaraci", city: "Icoaraci", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Icoaraci.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "10.04", time: "08:30", endHour: 9.0, activity: "Chegada da Imagem Peregrina de Nossa Senhora de Nazaré", location: "NHo Garnier Sampaio", city: "Icoaraci", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Recepção Imagem.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "10.05", time: "09:00", endHour: 11.0, activity: "Desatracação e Início da Romaria Fluvial", location: "NHo Garnier Sampaio", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Romaria Fluvial.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "10.06", time: "11:00", endHour: 12.5, activity: "Atracação do NHo Garnier Sampaio", location: "Escadinha do Cais do Porto", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Escadinha.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "10.07", time: "12:30", endHour: 13.5, activity: "Atracação do NHo Garnier Sampaio", location: "BNVC", city: "Belém", uniform: "5.5 com boné de viagem", participants: "Almirantes e Esposas", notes: "Retorno BNVC.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "10.08", time: "13:30", endHour: 16.0, activity: "Almoço na Residência do Sr. Carlos Nascimento", location: "Edifício Premium 92 - Apt 1201", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "Restaurantes" },
+          { id: "10.09", time: "17:00", endHour: 19.5, activity: "Transladação do Círio de Nazaré", location: "Prédio da Diretoria do Paysandu Sport Club", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Evento facultativo.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "10.10", time: "20:00", endHour: 22.5, activity: "Noite italiana", location: "Clube Naval Espadarte", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e Esposas", notes: "Jantar temático.", tipoEvento: "Jantar", localCategoria: "Clube Espadarte" }
         ]
       },
       {
@@ -512,16 +573,16 @@
         dayLabel: "11 OUT",
         weekDay: "Domingo",
         events: [
-          { id: "11.01", time: "06:20", endHour: 6.83, activity: "Deslocamento fluvial para a CDP", location: "Trânsito Fluvial", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Deslocamento." },
-          { id: "11.02", time: "06:50", endHour: 7.0, activity: "Chegada na CDP", location: "CDP", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Chegada CDP." },
-          { id: "11.03", time: "07:00", endHour: 11.66, activity: "Círio Terrestre", location: "CDP", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Procissão do Círio." },
-          { id: "11.04", time: "11:40", endHour: 12.3, activity: "Regresso do C Alte Bonotto e C Alte Mônica Luna (Voo LATAM 3231)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "LA3231", notes: "Voo LATAM 3231." },
-          { id: "11.05", time: "12:00", endHour: 12.83, activity: "Deslocamento fluvial para a Residência", location: "CDP para Residência", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e esposas", notes: "Retorno." },
-          { id: "11.06", time: "13:30", endHour: 16.0, activity: "Almoço na Residência do Sr. Kleber Menezes", location: "Edifício Premium 92 - Apt 1501", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Almoço." },
-          { id: "11.07", time: "16:00", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
-          { id: "11.08", time: "17:05", endHour: 17.75, activity: "Regresso do AE Paulo Ferreira e Sra Cristina (Voo GOL 1731)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01 e DN-02", flight: "G31731", notes: "Voo GOL 1731." },
-          { id: "11.09", time: "17:15", endHour: 17.9, activity: "Regresso do V Alte Taulois e Sra Mirza (Voo LATAM 3212)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3212", notes: "Voo LATAM 3212." },
-          { id: "11.10", time: "19:30", endHour: 22.0, activity: "Comida de boteco", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+          { id: "11.01", time: "06:20", endHour: 6.83, activity: "Deslocamento fluvial para a CDP", location: "Trânsito Fluvial", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e Esposas", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "Navios" },
+          { id: "11.02", time: "06:50", endHour: 7.0, activity: "Chegada na CDP", location: "CDP", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e Esposas", notes: "Chegada CDP.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "11.03", time: "07:00", endHour: 11.66, activity: "Círio Terrestre", location: "CDP", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e Esposas", notes: "Procissão do Círio.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "11.04", time: "11:40", endHour: 12.3, activity: "Regresso do C Alte Bonotto e C Alte Mônica Luna (Voo LATAM 3231)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "HNBe-01", flight: "LA3231", notes: "Voo LATAM 3231.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "11.05", time: "12:00", endHour: 12.83, activity: "Deslocamento fluvial para a Residência", location: "CDP para Residência", city: "Belém", uniform: "Esporte Amazônico (Camisa do Círio)", participants: "Almirantes e Esposas", notes: "Retorno.", tipoEvento: "Deslocamento", localCategoria: "Navios" },
+          { id: "11.06", time: "13:30", endHour: 16.0, activity: "Almoço na Residência do Sr. Kleber Menezes", location: "Edifício Premium 92 - Apt 1501", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "Restaurantes" },
+          { id: "11.07", time: "16:00", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "11.08", time: "17:05", endHour: 17.75, activity: "Regresso do AE Paulo Ferreira e Sra Cristina (Voo GOL 1731)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01, DN-02, Esposas", flight: "G31731", notes: "Voo GOL 1731.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "11.09", time: "17:15", endHour: 17.9, activity: "Regresso do V Alte Taulois e Sra Mirza (Voo LATAM 3212)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", flight: "LA3212", notes: "Voo LATAM 3212.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "11.10", time: "19:30", endHour: 22.0, activity: "Comida de boteco", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e Esposas", notes: "Jantar temático.", tipoEvento: "Jantar", localCategoria: "Residência do Com4DN" }
         ]
       },
       {
@@ -529,14 +590,14 @@
         dayLabel: "12 OUT",
         weekDay: "Segunda-feira",
         events: [
-          { id: "12.01", time: "03:00", endHour: 3.8, activity: "Regresso do AE Sílvio Luís e Sra Ana (Voo GOL 2009)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G32009", notes: "Voo GOL 2009." },
-          { id: "12.02", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
-          { id: "12.03", time: "10:45", endHour: 11.5, activity: "Regresso do AE Vazquez e Sra Anna Paula (Voo GOL 9236)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G39236", notes: "Voo GOL 9236." },
-          { id: "12.04", time: "12:00", endHour: 14.0, activity: "Almoço", location: "Clube Naval Espadarte", city: "Belém", uniform: "Casual", participants: "Almirantes e esposas", notes: "Almoço." },
-          { id: "12.05", time: "14:00", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
-          { id: "12.06", time: "17:00", endHour: 17.75, activity: "Regresso do AE Edgar, C Alte Tonini e esposas (Voo GOL 2011)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01 e DN-02", flight: "G32011", notes: "Voo GOL 2011." },
-          { id: "12.07", time: "17:05", endHour: 17.8, activity: "Regresso do AE Carlos Chagas (Voo GOL 2007)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G32007", notes: "Voo GOL 2007." },
-          { id: "12.08", time: "19:30", endHour: 22.0, activity: "Noite da Brasa", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e esposas", notes: "Jantar temático." }
+          { id: "12.01", time: "03:00", endHour: 3.8, activity: "Regresso do AE Sílvio Luís e Sra Ana (Voo GOL 2009)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", flight: "G32009", notes: "Voo GOL 2009.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "12.02", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Café.", tipoEvento: "Círio", localCategoria: "Residência do Com4DN" },
+          { id: "12.03", time: "10:45", endHour: 11.5, activity: "Regresso do AE Vazquez e Sra Anna Paula (Voo GOL 9236)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", flight: "G39236", notes: "Voo GOL 9236.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "12.04", time: "12:00", endHour: 14.0, activity: "Almoço", location: "Clube Naval Espadarte", city: "Belém", uniform: "Casual", participants: "Almirantes e Esposas", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "Clube Espadarte" },
+          { id: "12.05", time: "14:00", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "12.06", time: "17:00", endHour: 17.75, activity: "Regresso do AE Edgar, C Alte Tonini e esposas (Voo GOL 2011)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio / OP3", participants: "DN-01, DN-02, Esposas", flight: "G32011", notes: "Voo GOL 2011.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "12.07", time: "17:05", endHour: 17.8, activity: "Regresso do AE Carlos Chagas (Voo GOL 2007)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G32007", notes: "Voo GOL 2007.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "12.08", time: "19:30", endHour: 22.0, activity: "Noite da Brasa", location: "Residência funcional do Com4°DN", city: "Belém", uniform: "Esporte Amazônico", participants: "Almirantes e Esposas", notes: "Jantar temático.", tipoEvento: "Jantar", localCategoria: "Residência do Com4DN" }
         ]
       },
       {
@@ -544,15 +605,15 @@
         dayLabel: "13 OUT",
         weekDay: "Terça-feira",
         events: [
-          { id: "13.01", time: "04:25", endHour: 5.2, activity: "Regresso do AE Bettega e Sra Suzeli (Voo LATAM 3705)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3705", notes: "Voo LATAM 3705." },
-          { id: "13.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo." },
-          { id: "13.03", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e esposas", notes: "Café." },
-          { id: "13.04", time: "10:30", endHour: 10.66, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02 e comitiva", notes: "Deslocamento." },
-          { id: "13.05", time: "10:40", endHour: 11.66, activity: "Visita ao NASH Anna Nery", location: "Grupamento de Patrulha Naval do Norte", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02, GPNN e comitiva", notes: "Anna Nery." },
-          { id: "13.06", time: "12:00", endHour: 13.5, activity: "Almoço", location: "Grupamento de Patrulha Naval do Norte", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02, GPNN e comitiva", notes: "Almoço." },
-          { id: "13.07", time: "13:30", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre." },
-          { id: "13.08", time: "17:20", endHour: 18.0, activity: "Regresso do AE Olsen, C Alte Ozório e esposas (Voo LATAM 3212)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "LA3212", notes: "Voo LATAM 3212." },
-          { id: "13.09", time: "22:25", endHour: 23.2, activity: "Regresso do V Alte Lima Filho e Sra Valéria (Voo GOL 9202)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", flight: "G39202", notes: "Voo GOL 9202." }
+          { id: "13.01", time: "04:25", endHour: 5.2, activity: "Regresso do AE Bettega e Sra Suzeli (Voo LATAM 3705)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", flight: "LA3705", notes: "Voo LATAM 3705.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "13.02", time: "06:00", endHour: 7.0, activity: "TFM", location: "Vila Naval Espadarte ou Parque da Cidade", city: "Belém", uniform: "TFM", participants: "Comitiva", notes: "Evento facultativo.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "13.03", time: "08:00", endHour: 9.0, activity: "Café da manhã", location: "Residência funcional do Com4°DN e HT", city: "Belém", uniform: "-", participants: "Almirantes e Esposas", notes: "Café.", tipoEvento: "Círio", localCategoria: "Residência do Com4DN" },
+          { id: "13.04", time: "10:30", endHour: 10.66, activity: "Deslocamento para o Grupamento de Patrulha Naval do Norte", location: "Residência para GPNN", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02 e comitiva", notes: "Deslocamento.", tipoEvento: "Deslocamento", localCategoria: "OM" },
+          { id: "13.05", time: "10:40", endHour: 11.66, activity: "Visita ao NASH Anna Nery", location: "Grupamento de Patrulha Naval do Norte", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02, GPNN e comitiva", notes: "Anna Nery.", tipoEvento: "Círio", localCategoria: "Navios" },
+          { id: "13.06", time: "12:00", endHour: 13.5, activity: "Almoço", location: "Grupamento de Patrulha Naval do Norte", city: "Belém", uniform: "5.5", participants: "CM, DN-01, CHEGAB, DN-02, GPNN e comitiva", notes: "Almoço.", tipoEvento: "Almoço", localCategoria: "OM" },
+          { id: "13.07", time: "13:30", endHour: 17.0, activity: "Tarde livre", location: "Belém", city: "Belém", uniform: "-", participants: "Comitiva", notes: "Tarde livre.", tipoEvento: "Círio", localCategoria: "OM" },
+          { id: "13.08", time: "17:20", endHour: 18.0, activity: "Regresso do AE Olsen, C Alte Ozório e esposas (Voo LATAM 3212)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", flight: "LA3212", notes: "Voo LATAM 3212.", tipoEvento: "Círio", localCategoria: "Aeroporto" },
+          { id: "13.09", time: "22:25", endHour: 23.2, activity: "Regresso do V Alte Lima Filho e Sra Valéria (Voo GOL 9202)", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", flight: "G39202", notes: "Voo GOL 9202.", tipoEvento: "Círio", localCategoria: "Aeroporto" }
         ]
       },
       {
@@ -560,7 +621,7 @@
         dayLabel: "15 OUT",
         weekDay: "Quinta-feira",
         events: [
-          { id: "15.01", time: "17:00", endHour: 18.0, activity: "Regresso do AE Alípio Jorge e Sra Maria Teresa", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01 e DN-02", notes: "Regresso de voo." }
+          { id: "15.01", time: "17:00", endHour: 18.0, activity: "Regresso do AE Alípio Jorge e Sra Maria Teresa", location: "Aeroporto Internacional de Belém", city: "Belém", uniform: "Passeio/OP3", participants: "DN-01, DN-02, Esposas", notes: "Regresso de voo.", tipoEvento: "Círio", localCategoria: "Aeroporto" }
         ]
       }
     ];
@@ -1195,9 +1256,9 @@
     };
 
     let selectedDayIndex = 0;
-    let activeCityFilter = "";
-    let activeParticipantFilter = "";
-    let activeUniformFilter = "";
+    let activeTipoEventoFilter = "";
+    let activeParticipantesFilter = "";
+    let activeLocalCategoriaFilter = "";
 
     function cleanPhone(p) { return p ? p.replace(/\D/g, '') : ''; }
     function getMapsLink(loc) {
@@ -1227,24 +1288,6 @@
           filterSelect.value = todayFormatted;
         }
       }
-    }
-
-    function populateCityFilter() {
-      const citySelect = document.getElementById('filterCity');
-      if (!citySelect) return;
-
-      const citiesSet = new Set();
-      schedule.forEach(day => {
-        day.events.forEach(evt => {
-          if (evt.city && evt.city.trim() !== "") {
-            citiesSet.add(evt.city.trim());
-          }
-        });
-      });
-
-      const sortedCities = Array.from(citiesSet).sort();
-      citySelect.innerHTML = `<option value="">Cidades</option>` + 
-        sortedCities.map(city => `<option value="${city}">${city}</option>`).join('');
     }
 
     function openPhotoViewer(photoPath, name, role) {
@@ -1303,24 +1346,21 @@
     }
 
     function matchEventFilter(evt) {
-      if (activeCityFilter && (!evt.city || !evt.city.toLowerCase().includes(activeCityFilter.toLowerCase()))) return false;
-      if (activeParticipantFilter) {
+      if (activeTipoEventoFilter && evt.tipoEvento !== activeTipoEventoFilter) return false;
+      if (activeParticipantesFilter) {
         const parts = evt.participants ? evt.participants.toLowerCase() : '';
-        const filterLower = activeParticipantFilter.toLowerCase();
-        if (filterLower === 'dn-01' && !parts.includes('dn-01') && !parts.includes('almirantes')) return false;
-        if (filterLower === 'dn-02' && !parts.includes('dn-02') && !parts.includes('almirantes')) return false;
-        if (filterLower === 'almirantes' && !parts.includes('almirantes')) return false;
+        const filterLower = activeParticipantesFilter.toLowerCase();
+        if (filterLower === 'v alte batista' && !parts.includes('batista') && !parts.includes('comger')) return false;
+        if (filterLower === 'c alte josé fabio' && !parts.includes('josé fabio') && !parts.includes('fabio')) return false;
+        if (filterLower === 'almirantes' && !parts.includes('almirantes') && !parts.includes('alte') && !parts.includes('comger') && !parts.includes('dgn') && !parts.includes('con') && !parts.includes('choc')) return false;
+        if (filterLower === 'esposas' && !parts.includes('esposas') && !parts.includes('sra') && !parts.includes('carla')) return false;
       }
-      if (activeUniformFilter) {
-        const uniformStr = evt.uniform ? evt.uniform.toLowerCase() : '';
-        if (!uniformStr.includes(activeUniformFilter.toLowerCase())) return false;
-      }
+      if (activeLocalCategoriaFilter && evt.localCategoria !== activeLocalCategoriaFilter) return false;
       return true;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       autoSelectToday();
-      populateCityFilter();
       renderTabs();
       renderTimeline();
       renderModalsData();
@@ -1331,9 +1371,10 @@
     });
 
     function applyFilters() {
-      activeCityFilter = document.getElementById('filterCity').value;
-      activeParticipantFilter = document.getElementById('filterParticipant').value;
-      activeUniformFilter = document.getElementById('filterUniform').value;
+      activeTipoEventoFilter = document.getElementById('filterTipoEvento').value;
+      activeParticipantesFilter = document.getElementById('filterParticipantes').value;
+      activeLocalCategoriaFilter = document.getElementById('filterLocalCategoria').value;
+      
       const currentDayEvents = schedule[selectedDayIndex].events.filter(matchEventFilter);
       if (currentDayEvents.length === 0) {
         const firstAvailableIndex = schedule.findIndex(day => day.events.some(matchEventFilter));
@@ -1344,11 +1385,14 @@
     }
 
     function clearFilters() {
-      document.getElementById('filterCity').value = "";
-      document.getElementById('filterParticipant').value = "";
-      document.getElementById('filterUniform').value = "";
-      activeCityFilter = ""; activeParticipantFilter = ""; activeUniformFilter = "";
-      renderTabs(); renderTimeline();
+      document.getElementById('filterTipoEvento').value = "";
+      document.getElementById('filterParticipantes').value = "";
+      document.getElementById('filterLocalCategoria').value = "";
+      activeTipoEventoFilter = ""; 
+      activeParticipantesFilter = ""; 
+      activeLocalCategoriaFilter = "";
+      renderTabs(); 
+      renderTimeline();
     }
 
     function renderTabs() {
@@ -1423,21 +1467,15 @@
                   <span class="text-base sm:text-lg font-black text-navy font-mono bg-navy/5 px-3 py-1 rounded-lg border border-navy/10">
                     ${evt.time}
                   </span>
-                  ${evt.city ? `
-                    <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
-                      <i class="fa-solid fa-city text-[10px] text-slate-400 mr-1"></i>${evt.city}
+                  ${evt.tipoEvento ? `
+                    <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-amber-100 text-amber-900 border border-amber-300">
+                      ${evt.tipoEvento}
                     </span>
                   ` : ''}
                   ${isCurrent ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase bg-red-600 text-white animate-pulse">AGORA</span>` : ''}
                 </div>
                 
                 <div class="flex items-center gap-2">
-                  ${evt.uniform && evt.uniform !== '-' ? `
-                    <button onclick="openModal('modalUniformes')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-navy text-white text-xs sm:text-sm font-extrabold hover:bg-navy-light transition shadow-xs">
-                      <i class="fa-solid fa-shirt text-amber-400 text-xs"></i>
-                      <span>${evt.uniform}</span>
-                    </button>
-                  ` : ''}
                   <button onclick="showEventDetails('${evt.id}')" title="Mais informações" class="w-9 h-9 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-700 flex items-center justify-center transition active:scale-95 border border-amber-300 shadow-sm">
                     <i class="fa-solid fa-circle-info text-base"></i>
                   </button>
@@ -1709,116 +1747,221 @@
       }
     }
 
-    function renderModalsData() {
+    function populateAutoridadesFilters() {
+      const nomeSelect = document.getElementById('authFilterNome');
+      const esposaSelect = document.getElementById('authFilterEsposa');
+      const hospedagemSelect = document.getElementById('authFilterHospedagem');
+      const assistenteSelect = document.getElementById('authFilterAssistente');
+      const motoristaSelect = document.getElementById('authFilterMotorista');
+
+      if (!nomeSelect || !esposaSelect || !hospedagemSelect || !assistenteSelect || !motoristaSelect) return;
+
+      const nomesSet = new Set();
+      const esposasSet = new Set();
+      const hospedagensSet = new Set();
+      const assistentesSet = new Set();
+      const motoristasSet = new Set();
+
+      autoridadesHierarquicas.forEach(cat => {
+        cat.autoridades.forEach(aut => {
+          if (aut.autoridade) nomesSet.add(aut.autoridade);
+          if (aut.esposa && aut.esposa !== '-') esposasSet.add(aut.esposa);
+          if (aut.estadia && aut.estadia !== '-') hospedagensSet.add(aut.estadia);
+          if (aut.motorista && aut.motorista !== '-') motoristasSet.add(aut.motorista);
+          if (aut.assistentes) {
+            aut.assistentes.forEach(ast => {
+              if (ast.nome && ast.nome !== '-') assistentesSet.add(ast.nome);
+            });
+          }
+        });
+      });
+
+      const fillSelect = (selectEl, setValues, defaultText) => {
+        const currentVal = selectEl.value;
+        selectEl.innerHTML = `<option value="">${defaultText}</option>`;
+        Array.from(setValues).sort().forEach(val => {
+          const opt = document.createElement('option');
+          opt.value = val;
+          opt.textContent = val;
+          selectEl.appendChild(opt);
+        });
+        selectEl.value = currentVal;
+      };
+
+      fillSelect(nomeSelect, nomesSet, "Autoridade (Todas)");
+      fillSelect(esposaSelect, esposasSet, "Esposas (Todas)");
+      fillSelect(hospedagemSelect, hospedagensSet, "Hospedagem (Todas)");
+      fillSelect(assistenteSelect, assistentesSet, "Assistente (Todos)");
+      fillSelect(motoristaSelect, motoristasSet, "Motorista (Todos)");
+    }
+
+    function clearAutoridadesFilters() {
+      const nomeSelect = document.getElementById('authFilterNome');
+      const esposaSelect = document.getElementById('authFilterEsposa');
+      const hospedagemSelect = document.getElementById('authFilterHospedagem');
+      const assistenteSelect = document.getElementById('authFilterAssistente');
+      const motoristaSelect = document.getElementById('authFilterMotorista');
+
+      if (nomeSelect) nomeSelect.value = "";
+      if (esposaSelect) esposaSelect.value = "";
+      if (hospedagemSelect) hospedagemSelect.value = "";
+      if (assistenteSelect) assistenteSelect.value = "";
+      if (motoristaSelect) motoristaSelect.value = "";
+
+      renderAutoridadesModal();
+    }
+
+    function renderAutoridadesModal() {
       const autoridadesContainer = document.getElementById('autoridadesListContainer');
-      if (autoridadesContainer) {
-        autoridadesContainer.innerHTML = autoridadesHierarquicas.map((cat, catIdx) => `
-          <div class="space-y-3">
-            <h4 class="text-sm sm:text-base font-black text-navy uppercase tracking-wider border-b-2 border-gold/50 pb-1">
-              ${cat.categoria}
-            </h4>
-            <div class="space-y-3">
-              ${cat.autoridades.map((aut, autIdx) => {
-                const uniqueId = `${catIdx}-${autIdx}`;
-                const photoSrc = aut.foto ? `fotos-autoridades/${aut.foto}` : 'fotos-autoridades/default.png';
-                const wifePhotoSrc = aut.fotoEsposa ? `fotos-autoridades/${aut.fotoEsposa}` : '';
-                const cleanWifeName = aut.esposa && aut.esposa !== '-' ? aut.esposa.replace(/^(sra\.|sra|dona)\s*/i, '') : '';
-                const esposaRoleText = `Esposa do ${aut.autoridade}`;
+      if (!autoridadesContainer) return;
 
-                return `
-                  <div class="bg-white border-2 border-slate-200 rounded-2xl shadow-sm overflow-hidden transition hover:border-slate-300">
-                    
-                    <!-- CABEÇALHO CLICÁVEL DO ACORDEÃO -->
-                    <div onclick="toggleAutoridadeAccordion('${uniqueId}')" class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer bg-slate-50 hover:bg-slate-100/80 transition select-none">
-                      <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                        <div onclick="event.stopPropagation(); openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0 cursor-pointer">
-                          <img src="${photoSrc}" alt="${aut.autoridade}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                        </div>
-                        
-                        <div class="min-w-0">
-                          <h5 class="text-[16px] sm:text-[18px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
-                          <p class="text-xs sm:text-sm text-slate-600 font-semibold truncate">${aut.cargo}</p>
-                        </div>
-                      </div>
+      const filterNome = document.getElementById('authFilterNome')?.value || "";
+      const filterEsposa = document.getElementById('authFilterEsposa')?.value || "";
+      const filterHospedagem = document.getElementById('authFilterHospedagem')?.value || "";
+      const filterAssistente = document.getElementById('authFilterAssistente')?.value || "";
+      const filterMotorista = document.getElementById('authFilterMotorista')?.value || "";
 
-                      <div class="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-navy flex-shrink-0 transition-transform">
-                        <i id="acc-icon-${uniqueId}" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
-                      </div>
-                    </div>
+      const filteredCategories = autoridadesHierarquicas.map(cat => {
+        const filteredAuts = cat.autoridades.filter(aut => {
+          if (filterNome && aut.autoridade !== filterNome) return false;
+          if (filterEsposa && aut.esposa !== filterEsposa) return false;
+          if (filterHospedagem && aut.estadia !== filterHospedagem) return false;
+          if (filterMotorista && aut.motorista !== filterMotorista) return false;
+          if (filterAssistente) {
+            const hasAst = aut.assistentes && aut.assistentes.some(ast => ast.nome === filterAssistente);
+            if (!hasAst) return false;
+          }
+          return true;
+        });
 
-                    <!-- CONTEÚDO OCULTO -->
-                    <div id="acc-content-${uniqueId}" class="hidden p-4 sm:p-5 border-t border-slate-100 space-y-4 bg-white">
-                      
-                      ${wifePhotoSrc && aut.esposa && aut.esposa !== '-' ? `
-                        <div class="flex items-center gap-3.5 sm:gap-4 pb-3 border-b border-slate-100">
-                          <div onclick="openPhotoViewer('fotos-autoridades/${aut.fotoEsposa}', 'Sra. ${cleanWifeName.replace(/'/g, "\\'")}', '${esposaRoleText.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-[45px] h-[45px] sm:w-[52px] sm:h-[52px] rounded-full overflow-hidden border-2 border-gold/70 shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0 cursor-pointer">
-                            <img src="fotos-autoridades/${aut.fotoEsposa}" alt="Sra. ${cleanWifeName}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4 z\'/></svg>';">
-                          </div>
-                          <div class="flex-grow min-w-0">
-                            ${formatAcompanhanteAutoridade(aut.esposa)}
-                          </div>
-                        </div>
-                      ` : ''}
+        if (filteredAuts.length === 0) return null;
 
-                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
-                          <span class="font-black text-sky-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-arrival mr-1"></i>Informações de Chegada</span>
-                          <p class="font-bold text-slate-800">${aut.chegada}</p>
-                        </div>
+        return {
+          categoria: cat.categoria,
+          autoridades: filteredAuts
+        };
+      }).filter(Boolean);
 
-                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
-                          <span class="font-black text-amber-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-departure mr-1"></i>Informações de Partida</span>
-                          <p class="font-bold text-slate-800">${aut.partida}</p>
-                        </div>
-                      </div>
-
-                      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
-                        <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
-                          <i class="fa-solid fa-hotel text-amber-500"></i>
-                          <span>Estadia / Hospedagem</span>
-                        </div>
-                        <p class="font-bold text-slate-800">${aut.estadia}</p>
-                      </div>
-
-                      ${aut.assistentes && aut.assistentes.length > 0 ? `
-                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
-                          <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
-                            <i class="fa-solid fa-user-tie text-sky-600"></i>
-                            <span>Assistentes & Ajudantes de Ordens</span>
-                          </div>
-                          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            ${aut.assistentes.map(ast => `
-                              <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between gap-2">
-                                <div>
-                                  <span class="text-[10px] font-black uppercase text-slate-500 block">${ast.cargo}</span>
-                                  <p class="font-bold text-slate-900">${ast.nome}</p>
-                                  <span class="text-[11px] font-mono font-bold text-navy block">${ast.tel || 'Contato N/I'}</span>
-                                </div>
-                                ${ast.tel ? `
-                                  <div class="flex items-center gap-1">
-                                    <a href="tel:${cleanPhone(ast.tel)}" class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar">
-                                      <i class="fa-solid fa-phone text-[10px]"></i>
-                                    </a>
-                                    <a href="https://wa.me/55${cleanPhone(ast.tel)}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp">
-                                      <i class="fa-brands fa-whatsapp text-xs"></i>
-                                    </a>
-                                  </div>
-                                ` : ''}
-                              </div>
-                            `).join('')}
-                          </div>
-                        </div>
-                      ` : ''}
-
-                    </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
+      if (filteredCategories.length === 0) {
+        autoridadesContainer.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 border border-slate-200 rounded-2xl text-slate-500 font-bold text-xs sm:text-sm">
+            <i class="fa-solid fa-user-slash text-2xl text-slate-400 mb-2 block"></i>
+            Nenhuma autoridade encontrada para os filtros selecionados.
           </div>
-        `).join('');
+        `;
+        return;
       }
 
+      autoridadesContainer.innerHTML = filteredCategories.map((cat, catIdx) => `
+        <div class="space-y-3">
+          <h4 class="text-sm sm:text-base font-black text-navy uppercase tracking-wider border-b-2 border-gold/50 pb-1">
+            ${cat.categoria}
+          </h4>
+          <div class="space-y-3">
+            ${cat.autoridades.map((aut, autIdx) => {
+              const uniqueId = `${catIdx}-${autIdx}`;
+              const photoSrc = aut.foto ? `fotos-autoridades/${aut.foto}` : 'fotos-autoridades/default.png';
+              const wifePhotoSrc = aut.fotoEsposa ? `fotos-autoridades/${aut.fotoEsposa}` : '';
+              const cleanWifeName = aut.esposa && aut.esposa !== '-' ? aut.esposa.replace(/^(sra\.|sra|dona)\s*/i, '') : '';
+              const esposaRoleText = `Esposa do ${aut.autoridade}`;
+
+              return `
+                <div class="bg-white border-2 border-slate-200 rounded-2xl shadow-sm overflow-hidden transition hover:border-slate-300">
+                  
+                  <!-- CABEÇALHO CLICÁVEL DO ACORDEÃO -->
+                  <div onclick="toggleAutoridadeAccordion('${uniqueId}')" class="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer bg-slate-50 hover:bg-slate-100/80 transition select-none">
+                    <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                      <div onclick="event.stopPropagation(); openPhotoViewer('${photoSrc}', '${aut.autoridade.replace(/'/g, "\\'")}', '${aut.cargo.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-gold shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0 cursor-pointer">
+                        <img src="${photoSrc}" alt="${aut.autoridade}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+                      </div>
+                      
+                      <div class="min-w-0">
+                        <h5 class="text-[16px] sm:text-[18px] font-black text-navy leading-snug truncate">${aut.autoridade}</h5>
+                        <p class="text-xs sm:text-sm text-slate-600 font-semibold truncate">${aut.cargo}</p>
+                      </div>
+                    </div>
+
+                    <div class="w-8 h-8 rounded-full bg-navy/10 flex items-center justify-center text-navy flex-shrink-0 transition-transform">
+                      <i id="acc-icon-${uniqueId}" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </div>
+                  </div>
+
+                  <!-- CONTEÚDO OCULTO -->
+                  <div id="acc-content-${uniqueId}" class="hidden p-4 sm:p-5 border-t border-slate-100 space-y-4 bg-white">
+                    
+                    ${wifePhotoSrc && aut.esposa && aut.esposa !== '-' ? `
+                      <div class="flex items-center gap-3.5 sm:gap-4 pb-3 border-b border-slate-100">
+                        <div onclick="openPhotoViewer('fotos-autoridades/${aut.fotoEsposa}', 'Sra. ${cleanWifeName.replace(/'/g, "\\'")}', '${esposaRoleText.replace(/'/g, "\\'")}')" title="Clique para ampliar a foto" class="w-[45px] h-[45px] sm:w-[52px] sm:h-[52px] rounded-full overflow-hidden border-2 border-gold/70 shadow-md bg-slate-100 transition hover:scale-105 active:scale-95 group focus:outline-none ring-2 ring-navy/10 flex items-center justify-center flex-shrink-0 cursor-pointer">
+                          <img src="fotos-autoridades/${aut.fotoEsposa}" alt="Sra. ${cleanWifeName}" class="w-full h-full object-cover group-hover:opacity-90 transition" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23002D5E\' viewBox=\'0 0 24 24\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4 z\'/></svg>';">
+                        </div>
+                        <div class="flex-grow min-w-0">
+                          ${formatAcompanhanteAutoridade(aut.esposa)}
+                        </div>
+                      </div>
+                    ` : ''}
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="font-black text-sky-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-arrival mr-1"></i>Informações de Chegada</span>
+                        <p class="font-bold text-slate-800">${aut.chegada}</p>
+                      </div>
+
+                      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+                        <span class="font-black text-amber-800 uppercase text-[10px] block tracking-wider"><i class="fa-solid fa-plane-departure mr-1"></i>Informações de Partida</span>
+                        <p class="font-bold text-slate-800">${aut.partida}</p>
+                      </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
+                      <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
+                        <i class="fa-solid fa-hotel text-amber-500"></i>
+                        <span>Estadia / Hospedagem</span>
+                      </div>
+                      <p class="font-bold text-slate-800">${aut.estadia}</p>
+                    </div>
+
+                    ${aut.assistentes && aut.assistentes.length > 0 ? `
+                      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 space-y-2 text-xs">
+                        <div class="flex items-center gap-1.5 font-black text-navy border-b border-slate-200 pb-1">
+                          <i class="fa-solid fa-user-tie text-sky-600"></i>
+                          <span>Assistentes & Ajudantes de Ordens</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          ${aut.assistentes.map(ast => `
+                            <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between gap-2">
+                              <div>
+                                <span class="text-[10px] font-black uppercase text-slate-500 block">${ast.cargo}</span>
+                                <p class="font-bold text-slate-900">${ast.nome}</p>
+                                <span class="text-[11px] font-mono font-bold text-navy block">${ast.tel || 'Contato N/I'}</span>
+                              </div>
+                              ${ast.tel ? `
+                                <div class="flex items-center gap-1">
+                                  <a href="tel:${cleanPhone(ast.tel)}" class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="Ligar">
+                                    <i class="fa-solid fa-phone text-[10px]"></i>
+                                  </a>
+                                  <a href="https://wa.me/55${cleanPhone(ast.tel)}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-lg bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition" title="WhatsApp">
+                                    <i class="fa-brands fa-whatsapp text-xs"></i>
+                                  </a>
+                                </div>
+                              ` : ''}
+                            </div>
+                          `).join('')}
+                        </div>
+                      </div>
+                    ` : ''}
+
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderModalsData() {
+      populateAutoridadesFilters();
+      renderAutoridadesModal();
       renderHospedagemModal();
 
       const uniformesContainer = document.getElementById('uniformesGridContainer');
@@ -1868,7 +2011,14 @@
 
     function openModal(id) {
       const m = document.getElementById(id);
-      if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+      if (m) { 
+        m.classList.remove('hidden'); 
+        document.body.style.overflow = 'hidden';
+        if (id === 'modalAutoridades') {
+          populateAutoridadesFilters();
+          renderAutoridadesModal();
+        }
+      }
     }
 
     function closeModal(id) {
@@ -1892,7 +2042,7 @@
         <div class="space-y-3.5 text-xs sm:text-sm">
           <div class="flex items-center justify-between">
             <span class="text-base sm:text-lg font-black font-mono text-navy bg-navy/10 px-3 py-1 rounded-lg">${evtData.time}</span>
-            ${evtData.uniform && evtData.uniform !== '-' ? `<span class="px-3 py-1 rounded-lg bg-gold/20 text-navy-dark font-extrabold border border-gold/40">${evtData.uniform}</span>` : ''}
+            ${evtData.tipoEvento ? `<span class="px-3 py-1 rounded-lg bg-gold/20 text-navy-dark font-extrabold border border-gold/40">${evtData.tipoEvento}</span>` : ''}
           </div>
 
           <h3 class="text-lg font-black text-slate-900 leading-snug">${evtData.activity}</h3>
